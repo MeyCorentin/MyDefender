@@ -21,8 +21,20 @@ batiment *get_last(global *game, sfVector2f pos)
 void draw_structs(global *game)
 {
     batiment *temp = game->first;
+    sfCircleShape * radius = sfCircleShape_create();
+    sfVector2f radius_pos;
+    sfColor opacity = {255,255,255,150};
 
     while (temp != NULL) {
+        radius_pos = temp->pos;
+        if(temp->type == 1) {
+            sfCircleShape_setRadius(radius , 90);
+            radius_pos.x -= 90/2 - 60/2 + 12;
+            radius_pos.y -= 90/2 - 60/2 + 2;
+        }
+        sfCircleShape_setPosition(radius , radius_pos);
+        sfCircleShape_setFillColor(radius, opacity);
+        (game->rad_god == 0) ? sfRenderWindow_drawCircleShape(game->window, radius, NULL) : 1;
         sfRenderWindow_drawSprite(game->window, temp->bat, sfFalse);
         temp = temp->next;
     }

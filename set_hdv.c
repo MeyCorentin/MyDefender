@@ -16,6 +16,7 @@ batiment *add_bat(global *game, batiment *prev, sfVector2f pos)
     new_bat->next = NULL;
     new_bat->last = NULL;
     new_bat->level = 1;
+    new_bat->type = 1;
     new_bat->bat = sfSprite_create();
     new_bat->t_bat = sfTexture_createFromFile(game->texture, NULL);
     sfSprite_setTexture(new_bat->bat, new_bat->t_bat, sfFalse);

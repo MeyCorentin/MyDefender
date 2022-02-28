@@ -64,11 +64,7 @@ void place_struct(global *game, struct grid_cell *new, shop *my_shop)
     sfCircleShape_setFillColor(new->c_5, sfRed);
     if (pow(abs(pos_mouse.x - 25 - new->p_5.x), 2) + \
     pow(abs(pos_mouse.y - 25 - new->p_5.y), 2) < 900)                         // Test si cliqué.
-    {
-        (sfMouse_isButtonPressed(sfMouseLeft) == sfTrue) ? new->test = 1 : 1;
         sfCircleShape_setFillColor(new->c_5, sfGreen);
-    }
-    (new->test == 1) ? sfCircleShape_setFillColor(new->c_5, sfBlue) : 1;      // Test si cliqué.
     (new->status == 1) ? sfCircleShape_setFillColor(new->c_5, sfGreen) : 1;   // Met en vert si le status de la cellule est 1.
     snap_obj(game, new, my_shop, pos_mouse);                                  // Colle le bâtiment a la grille sur la quelle il est posé.
     if (new->g_pos == 92)                                                     // Place l'hdv sur l'amplacement choisis.
@@ -89,7 +85,12 @@ void start_game(global *game)
 
     set_game(game);                                                           // Init la game.
     grid_cell = init_cell(game, grid_cell, my_shop);                          // Init la première cellule.
-    make_grid(game, &grid_cell, my_shop);                                     // Init la grill de cellules.
+    make_grid(game, &grid_cell, my_shop);
+    ////////////////////////////////////////////////////////////////////////////
+    sfCircleShape * radius = sfCircleShape_create();
+    game->radius = radius;
+    game->rad_god = 1;
+    ////////////////////////////////////////////////////////////////////////////
     while (sfRenderWindow_isOpen(game->window))
     {
         sfRenderWindow_clear(game->window, sfBlack);
@@ -97,9 +98,10 @@ void start_game(global *game)
         draw_game(game, my_shop);                                             // Draw la map.
         add_cell_status(game, grid_cell.next_cell, my_shop);                  // Modifie le status des cellules.
         (game->god == 0) ? draw_cell(game, grid_cell.next_cell, my_shop) : 1; // Affiche les cellules.
+        sfRenderWindow_drawCircleShape(game->window , game->radius , sfFalse);
         place_struct(game, &grid_cell, my_shop);                              // Place tous les bâtiments.
         draw_structs(game);                                                   // Draw les bâtiments.
-        (game->shop_is_open == 0) ? open_shop(game, my_shop) : 1;             // Draw les shops;
+        (game->shop_is_open == 0) ? open_shop(game, my_shop) : 1;
         sfRenderWindow_display(game->window);
         check_game_event(game, my_shop);                                      // Regarde les inputs.
     }

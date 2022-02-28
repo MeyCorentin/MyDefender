@@ -53,6 +53,7 @@ typedef struct batiment {
     struct batiment *next;
     struct batiment *prev;
     struct batiment *last;
+    int type;
     int status;
     int pv;
     int level;
@@ -152,6 +153,7 @@ typedef struct menu_pause {
 
 typedef struct global {
     sfRenderWindow *window;
+    sfCircleShape * radius;
     sfEvent event;
     int shop_is_open;
     int pause_is_open;
@@ -163,6 +165,7 @@ typedef struct global {
     menu_pause *pause;
     menu *menus;
     int god;
+    int rad_god;
     sfClock *clock;
     sfTime time;
     int secs;
