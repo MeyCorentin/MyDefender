@@ -15,13 +15,15 @@ void drop_cannon(global *game, shop *my_shop)
     sfSprite_setColor(my_shop->s_cannon, opacity_up);
     sfSprite_setTexture(my_shop->s_cannon,my_shop->t_cannon, sfFalse);
     sfCircleShape_setFillColor(game->radius, opacity_none);
-    if (game->on_map == 0)
+    if (game->on_map == 0 && game->first->gold >= 10 && my_shop->pos_cannon.x == game->pos_free.x && my_shop->pos_cannon.y == game->pos_free.y) {
         get_last(game, my_shop->pos_cannon);
+        game->first->gold -= 10;
+        sfSound_play(game->sounds->anvil);
+    }
     my_shop->pos_cannon.x = 0;
     my_shop->pos_cannon.y = 150;
     sfSprite_setPosition(my_shop->s_cannon, my_shop->pos_cannon);
     game->take = 1;
-    sfSound_play(game->sounds->anvil);
 }
 
 void shop_event(global *game, shop *my_shop)

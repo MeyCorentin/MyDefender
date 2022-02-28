@@ -175,6 +175,7 @@ typedef struct global {
     int is_sounds;
     int is_music;
     int on_map;
+    sfVector2f pos_free;
 } global;
 
 void open_shop(global *game, shop *my_shop);

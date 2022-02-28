@@ -51,6 +51,8 @@ void snap_obj(global *game, struct grid_cell *new, shop *my_shop, sfVector2i pos
                 my_shop->pos_cannon.x = new->p_3.x - 60;
                 my_shop->pos_cannon.y = new->p_3.y -            \
                     (abs(new->dy) + abs(new->dy) + abs(new->dy));
+                game->pos_free.x = my_shop->pos_cannon.x;
+                game->pos_free.y = my_shop->pos_cannon.y;
             }
             sfSprite_setPosition(my_shop->s_cannon, my_shop->pos_cannon);
         }

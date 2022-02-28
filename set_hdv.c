@@ -58,6 +58,7 @@ batiment *create_hdv(global *game)
     hdv->next = NULL;
     hdv->last = NULL;
     hdv->level = game->level;
+    hdv->gold = 50;
     hdv->bat = sfSprite_create();
     set_texture_hdv(game, hdv);
     sfSprite_setTexture(hdv->bat, hdv->t_bat, sfFalse);
