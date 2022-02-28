@@ -40,6 +40,7 @@ void check_game_event(global *game, shop *my_shop)
 
 void snap_obj(global *game, struct grid_cell *new, shop *my_shop, sfVector2i pos_mouse)
 {
+    sfVector2f snap_radius;
     if (game->shop_is_open == 0)
     {
         if (pow(abs(pos_mouse.x - 25 - new->p_5.x), 2) + \
@@ -49,6 +50,8 @@ void snap_obj(global *game, struct grid_cell *new, shop *my_shop, sfVector2i pos
             game->on_map = 0;
             if (new->status == 1) {
                 if (game->take == 0) {
+                    snap_radius.x = new->p_3.x - 60 - 12;
+                    snap_radius.y = new->p_3.y - (abs(new->dy) + abs(new->dy) + abs(new->dy)) - 2;
                     my_shop->pos_cannon.x = new->p_3.x - 60;
                     my_shop->pos_cannon.y = new->p_3.y -                \
                         (abs(new->dy) + abs(new->dy) + abs(new->dy));
@@ -56,6 +59,8 @@ void snap_obj(global *game, struct grid_cell *new, shop *my_shop, sfVector2i pos
                     game->pos_free.y = my_shop->pos_cannon.y;
                 }
                 if (game->take == 2) {
+                    snap_radius.x = new->p_3.x - 110;
+                    snap_radius.y = new->p_3.y - 140;
                     my_shop->pos_archer.x = new->p_3.x - 60;
                     my_shop->pos_archer.y = new->p_3.y -                \
                         (abs(new->dy) + abs(new->dy) + abs(new->dy));
@@ -63,6 +68,8 @@ void snap_obj(global *game, struct grid_cell *new, shop *my_shop, sfVector2i pos
                     game->pos_free.y = my_shop->pos_archer.y;
                 }
                 if (game->take == 3) {
+                    snap_radius.x = new->p_3.x - 140;
+                    snap_radius.y = new->p_3.y - 175;
                     my_shop->pos_mortar.x = new->p_3.x - 60;
                     my_shop->pos_mortar.y = new->p_3.y -                \
                         (abs(new->dy) + abs(new->dy) + abs(new->dy));
@@ -70,6 +77,8 @@ void snap_obj(global *game, struct grid_cell *new, shop *my_shop, sfVector2i pos
                     game->pos_free.y = my_shop->pos_mortar.y;
                 }
                 if (game->take == 4) {
+                    snap_radius.x = new->p_3.x - 140;
+                    snap_radius.y = new->p_3.y - 175;
                     my_shop->pos_air_defence.x = new->p_3.x - 60;
                     my_shop->pos_air_defence.y = new->p_3.y -                \
                         (abs(new->dy) + abs(new->dy) + abs(new->dy));
@@ -77,6 +86,8 @@ void snap_obj(global *game, struct grid_cell *new, shop *my_shop, sfVector2i pos
                     game->pos_free.y = my_shop->pos_air_defence.y;
                 }
                 if (game->take == 5) {
+                    snap_radius.x = new->p_3.x - 200;
+                    snap_radius.y = new->p_3.y - 250;
                     my_shop->pos_xbow.x = new->p_3.x - 60;
                     my_shop->pos_xbow.y = new->p_3.y -                \
                         (abs(new->dy) + abs(new->dy) + abs(new->dy));
@@ -84,6 +95,8 @@ void snap_obj(global *game, struct grid_cell *new, shop *my_shop, sfVector2i pos
                     game->pos_free.y = my_shop->pos_xbow.y;
                 }
                 if (game->take == 6) {
+                    snap_radius.x = new->p_3.x - 90;
+                    snap_radius.y = new->p_3.y - 113;
                     my_shop->pos_wizard.x = new->p_3.x - 60;
                     my_shop->pos_wizard.y = new->p_3.y -                \
                         (abs(new->dy) + abs(new->dy) + abs(new->dy));
@@ -91,6 +104,7 @@ void snap_obj(global *game, struct grid_cell *new, shop *my_shop, sfVector2i pos
                     game->pos_free.y = my_shop->pos_wizard.y;
                 }
             }
+            sfCircleShape_setPosition(game->radius, snap_radius);
             sfSprite_setPosition(my_shop->s_cannon, my_shop->pos_cannon);
             sfSprite_setPosition(my_shop->s_archer, my_shop->pos_archer);
             sfSprite_setPosition(my_shop->s_mortar, my_shop->pos_mortar);

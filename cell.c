@@ -129,7 +129,7 @@ void draw_cell(global *game, grid_cell * new, shop * my_shop)
 
 void add_cell_status(global *game, grid_cell * new, shop * my_shop)
 {
-    if(new->g_pos == 78)
+    if(new->g_pos == 78 || new->g_pos == 92 || new->g_pos == 106 || new->g_pos == 77 || new->g_pos == 91 || new->g_pos == 105 || new->g_pos == 79 || new->g_pos == 93 || new->g_pos == 107 )
         new->status = 1;
     if(new->g_pos != 196)
         add_cell_status(game , new->next_cell, my_shop);

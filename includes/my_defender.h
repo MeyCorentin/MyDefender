@@ -65,6 +65,7 @@ typedef struct batiment {
     sfSprite *bat;
     sfTexture *t_bat;
     sfVector2f pos;
+    int name;
 } batiment;
 
 typedef struct shop {
@@ -193,7 +194,7 @@ void set_minimap(menu *menus);
 batiment *create_hdv(global *game);
 void update_game(global *game);
 void set_texture_map(global *game);
-batiment *add_bat(global *game, batiment *prev, sfVector2f pos);
+batiment *add_bat(global *game, batiment *prev, sfVector2f pos, int name);
 void set_music(global *game);
 void set_sounds_buttons(global *game, menu *menus);
 void check_sounds(global *game, menu *menus, sfVector2i mouse);
@@ -213,7 +214,7 @@ void set_game(global *game);
 void draw_cell(global *game, grid_cell * new, shop * my_shop);
 void draw_game(global *game, shop *my_shop);
 void draw_structs(global *game);
-batiment *get_last(global *game, sfVector2f pos);
+batiment *get_last(global *game, sfVector2f pos, int name);
 void shop_event(global *game, shop *my_shop);
 void click_shop(global *game, shop *my_shop);
 void check_shop(global *game, shop *my_shop);
