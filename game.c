@@ -46,6 +46,7 @@ void snap_obj(global *game, struct grid_cell *new, shop *my_shop, sfVector2i pos
         pow(abs(pos_mouse.y - 25 - new->p_5.y), 2) < 1089 \
             && sfMouse_isButtonPressed(sfMouseLeft) == sfTrue && game->take == 0)
         {
+            game->on_map = 0;
             if (new->status == 1) {
                 my_shop->pos_cannon.x = new->p_3.x - 60;
                 my_shop->pos_cannon.y = new->p_3.y -            \

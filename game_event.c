@@ -13,7 +13,8 @@ void drop_cannon(global *game, shop *my_shop)
 
     sfSprite_setColor(my_shop->s_cannon, opacity_up);
     sfSprite_setTexture(my_shop->s_cannon,my_shop->t_cannon, sfFalse);
-    get_last(game, my_shop->pos_cannon);
+    if (game->on_map == 0)
+        get_last(game, my_shop->pos_cannon);
     my_shop->pos_cannon.x = 0;
     my_shop->pos_cannon.y = 150;
     sfSprite_setPosition(my_shop->s_cannon, my_shop->pos_cannon);
@@ -30,6 +31,7 @@ void shop_event(global *game, shop *my_shop)
 my_shop->pos_cannon.x + 120 && pos_mouse.y >= my_shop->pos_cannon.y && \
 pos_mouse.y <= my_shop->pos_cannon.y + 100 && \
         sfMouse_isButtonPressed(sfMouseLeft) == sfTrue) {
+        game->on_map = 1;
         game->texture = "pictures/defences/cannon/1.png";
         my_shop->cannon = sfTexture_createFromFile(game->texture, sfFalse);
         sfSprite_setTexture(my_shop->s_cannon, my_shop->cannon, sfFalse);
