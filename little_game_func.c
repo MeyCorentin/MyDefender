@@ -34,15 +34,6 @@ void draw_game(global *game, shop *my_shop)
     sfRenderWindow_drawSprite(game->window, my_shop->button, sfFalse);
 }
 
-void draw_point(global *game, grid_cell new, shop * my_shop)
-{
-    sfRenderWindow_drawCircleShape(game->window , new.c_1 , NULL);
-    sfRenderWindow_drawCircleShape(game->window , new.c_2 , NULL);
-    sfRenderWindow_drawCircleShape(game->window , new.c_3 , NULL);
-    sfRenderWindow_drawCircleShape(game->window , new.c_4, NULL);
-    sfRenderWindow_drawCircleShape(game->window , new.c_5, NULL);
-}
-
 void set_game(global *game)
 {
     sfTexture *t_map = sfTexture_createFromFile("pictures/maps/backgrounds/4.png", NULL);

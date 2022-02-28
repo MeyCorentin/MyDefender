@@ -39,6 +39,7 @@ SRC	 =      lib/my/my_revstr.c      \
 		lib/my/my_printf.c	\
 		lib/my/my_printf2.c	\
 		lib/my/new_put_nbr.c	\
+                cell.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -53,7 +54,7 @@ $(NAME): $(OBJ)
 	@gcc -g3 -o ${NAME} main.c shop.c menu.c game.c pause.c buttons.c \
 set_hdv.c map.c clock.c sounds_buttons.c set_pause.c set_window.c event_pause.c\
  little_game_func.c game_event.c -lcsfml-graphics -lcsfml-audio -lcsfml-system\
- -lcsfml-window -Wall -lm -L. libmy.a
+ cell.c -lcsfml-window -Wall -lm -L. libmy.a
 
 clean:
 	@rm -f $(OBJ)

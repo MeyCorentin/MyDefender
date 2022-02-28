@@ -32,6 +32,7 @@ typedef struct grid_cell {
     int g_pos;
     int l_pos;
     int status;
+    int test;
     sfCircleShape * c_1;
     sfCircleShape * c_2;
     sfCircleShape * c_3;
@@ -52,6 +53,7 @@ typedef struct batiment {
     struct batiment *next;
     struct batiment *prev;
     struct batiment *last;
+    int status;
     int pv;
     int level;
     float damage;
@@ -198,12 +200,15 @@ void set_pos_text(global *game);
 void create_window(int level);
 void check_pause_event(global *game);
 void set_game(global *game);
-void draw_point(global *game, grid_cell new, shop * my_shop);
+void draw_cell(global *game, grid_cell * new, shop * my_shop);
 void draw_game(global *game, shop *my_shop);
 void draw_structs(global *game);
 batiment *get_last(global *game, sfVector2f pos);
 void shop_event(global *game, shop *my_shop);
 void click_shop(global *game, shop *my_shop);
 void check_shop(global *game, shop *my_shop);
+grid_cell *make_grid(global *game , grid_cell * grid_cell_ , shop * my_shop);
+grid_cell init_cell(global *game , grid_cell grid_cell_ , shop * my_shop);
+void add_cell_status(global *game, grid_cell * new, shop * my_shop);
 
 #endif /* MY_DEFENDER_H_ */
