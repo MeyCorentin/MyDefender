@@ -44,17 +44,59 @@ void snap_obj(global *game, struct grid_cell *new, shop *my_shop, sfVector2i pos
     {
         if (pow(abs(pos_mouse.x - 25 - new->p_5.x), 2) + \
         pow(abs(pos_mouse.y - 25 - new->p_5.y), 2) < 1089 \
-            && sfMouse_isButtonPressed(sfMouseLeft) == sfTrue && game->take == 0)
+            && sfMouse_isButtonPressed(sfMouseLeft) == sfTrue && game->take != 1)
         {
             game->on_map = 0;
             if (new->status == 1) {
-                my_shop->pos_cannon.x = new->p_3.x - 60;
-                my_shop->pos_cannon.y = new->p_3.y -            \
-                    (abs(new->dy) + abs(new->dy) + abs(new->dy));
-                game->pos_free.x = my_shop->pos_cannon.x;
-                game->pos_free.y = my_shop->pos_cannon.y;
+                if (game->take == 0) {
+                    my_shop->pos_cannon.x = new->p_3.x - 60;
+                    my_shop->pos_cannon.y = new->p_3.y -                \
+                        (abs(new->dy) + abs(new->dy) + abs(new->dy));
+                    game->pos_free.x = my_shop->pos_cannon.x;
+                    game->pos_free.y = my_shop->pos_cannon.y;
+                }
+                if (game->take == 2) {
+                    my_shop->pos_archer.x = new->p_3.x - 60;
+                    my_shop->pos_archer.y = new->p_3.y -                \
+                        (abs(new->dy) + abs(new->dy) + abs(new->dy));
+                    game->pos_free.x = my_shop->pos_archer.x;
+                    game->pos_free.y = my_shop->pos_archer.y;
+                }
+                if (game->take == 3) {
+                    my_shop->pos_mortar.x = new->p_3.x - 60;
+                    my_shop->pos_mortar.y = new->p_3.y -                \
+                        (abs(new->dy) + abs(new->dy) + abs(new->dy));
+                    game->pos_free.x = my_shop->pos_mortar.x;
+                    game->pos_free.y = my_shop->pos_mortar.y;
+                }
+                if (game->take == 4) {
+                    my_shop->pos_air_defence.x = new->p_3.x - 60;
+                    my_shop->pos_air_defence.y = new->p_3.y -                \
+                        (abs(new->dy) + abs(new->dy) + abs(new->dy));
+                    game->pos_free.x = my_shop->pos_air_defence.x;
+                    game->pos_free.y = my_shop->pos_air_defence.y;
+                }
+                if (game->take == 5) {
+                    my_shop->pos_xbow.x = new->p_3.x - 60;
+                    my_shop->pos_xbow.y = new->p_3.y -                \
+                        (abs(new->dy) + abs(new->dy) + abs(new->dy));
+                    game->pos_free.x = my_shop->pos_xbow.x;
+                    game->pos_free.y = my_shop->pos_xbow.y;
+                }
+                if (game->take == 6) {
+                    my_shop->pos_wizard.x = new->p_3.x - 60;
+                    my_shop->pos_wizard.y = new->p_3.y -                \
+                        (abs(new->dy) + abs(new->dy) + abs(new->dy));
+                    game->pos_free.x = my_shop->pos_wizard.x;
+                    game->pos_free.y = my_shop->pos_wizard.y;
+                }
             }
             sfSprite_setPosition(my_shop->s_cannon, my_shop->pos_cannon);
+            sfSprite_setPosition(my_shop->s_archer, my_shop->pos_archer);
+            sfSprite_setPosition(my_shop->s_mortar, my_shop->pos_mortar);
+            sfSprite_setPosition(my_shop->s_air_defence, my_shop->pos_air_defence);
+            sfSprite_setPosition(my_shop->s_xbow, my_shop->pos_xbow);
+            sfSprite_setPosition(my_shop->s_wizard, my_shop->pos_wizard);
         }
     }
 }

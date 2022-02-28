@@ -7,54 +7,26 @@
 
 #include "includes/my_defender.h"
 
-void drop_cannon(global *game, shop *my_shop)
-{
-    sfColor opacity_up = {255 ,255, 255, 255};
-    sfColor opacity_none = {255 ,255, 255, 0};
-
-    sfSprite_setColor(my_shop->s_cannon, opacity_up);
-    sfSprite_setTexture(my_shop->s_cannon,my_shop->t_cannon, sfFalse);
-    sfCircleShape_setFillColor(game->radius, opacity_none);
-    if (game->on_map == 0 && game->first->gold >= 10 && my_shop->pos_cannon.x == game->pos_free.x && my_shop->pos_cannon.y == game->pos_free.y) {
-        get_last(game, my_shop->pos_cannon);
-        game->first->gold -= 10;
-        sfSound_play(game->sounds->anvil);
-    }
-    my_shop->pos_cannon.x = 0;
-    my_shop->pos_cannon.y = 150;
-    sfSprite_setPosition(my_shop->s_cannon, my_shop->pos_cannon);
-    game->take = 1;
-}
-
 void shop_event(global *game, shop *my_shop)
 {
-    sfVector2i pos_mouse = sfMouse_getPosition((sfWindow *) game->window);
-    sfColor opacity_down = {255 ,255, 255, 150};
-    sfVector2f rad_pos;
-
-    if (pos_mouse.x >= my_shop->pos_cannon.x && pos_mouse.x <= \
-my_shop->pos_cannon.x + 120 && pos_mouse.y >= my_shop->pos_cannon.y && \
-pos_mouse.y <= my_shop->pos_cannon.y + 100 && \
-        sfMouse_isButtonPressed(sfMouseLeft) == sfTrue) {
-        ////////////////////////////////////////////////////////////////////////
-        rad_pos.x = pos_mouse.x - 90;
-        rad_pos.y = pos_mouse.y - 90;
-        sfCircleShape_setPosition(game->radius , rad_pos);
-        sfCircleShape_setFillColor(game->radius, opacity_down);
-        sfCircleShape_setRadius(game->radius , 90);
-        ////////////////////////////////////////////////////////////////////////
-        game->on_map = 1;
-        game->texture = "pictures/defences/cannon/1.png";
-        my_shop->cannon = sfTexture_createFromFile(game->texture, sfFalse);
-        sfSprite_setTexture(my_shop->s_cannon, my_shop->cannon, sfFalse);
-        sfSprite_setColor(my_shop->s_cannon, opacity_down);
-        my_shop->pos_cannon.x = pos_mouse.x - 60;
-        my_shop->pos_cannon.y = pos_mouse.y - 60;
-        sfSprite_setPosition(my_shop->s_cannon, my_shop->pos_cannon);
-        game->take = 0;
-    }
+    get_cannon(game, my_shop);
+    get_archer(game, my_shop);
+    get_mortar(game, my_shop);
+    get_air_defence(game, my_shop);
+    get_xbow(game, my_shop);
+    get_wizard(game, my_shop);
     if (game->event.type == sfEvtMouseButtonReleased && game->take == 0)
         drop_cannon(game, my_shop);
+    if (game->event.type == sfEvtMouseButtonReleased && game->take == 2)
+        drop_archer(game, my_shop);
+    if (game->event.type == sfEvtMouseButtonReleased && game->take == 3)
+        drop_mortar(game, my_shop);
+    if (game->event.type == sfEvtMouseButtonReleased && game->take == 4)
+        drop_air_defence(game, my_shop);
+    if (game->event.type == sfEvtMouseButtonReleased && game->take == 5)
+        drop_xbow(game, my_shop);
+    if (game->event.type == sfEvtMouseButtonReleased && game->take == 6)
+        drop_wizard(game, my_shop);
 }
 
 void click_shop(global *game, shop *my_shop)

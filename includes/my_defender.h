@@ -93,6 +93,11 @@ typedef struct shop {
     sfVector2f pos_wizard;
     int snap;
     sfTexture *cannon;
+    sfTexture *archer;
+    sfTexture *mortar;
+    sfTexture *air_defence;
+    sfTexture *xbow;
+    sfTexture *wizard;
 } shop;
 
 typedef struct menu {
@@ -215,5 +220,17 @@ void check_shop(global *game, shop *my_shop);
 grid_cell *make_grid(global *game , grid_cell * grid_cell_ , shop * my_shop);
 grid_cell init_cell(global *game , grid_cell grid_cell_ , shop * my_shop);
 void add_cell_status(global *game, grid_cell * new, shop * my_shop);
+void drop_cannon(global *game, shop *my_shop);
+void drop_archer(global *game, shop *my_shop);
+void drop_mortar(global *game, shop *my_shop);
+void drop_air_defence(global *game, shop *my_shop);
+void drop_xbow(global *game, shop *my_shop);
+void drop_wizard(global *game, shop *my_shop);
+void get_cannon(global *game, shop *my_shop);
+void get_archer(global *game, shop *my_shop);
+void get_mortar(global *game, shop *my_shop);
+void get_air_defence(global *game, shop *my_shop);
+void get_xbow(global *game, shop *my_shop);
+void get_wizard(global *game, shop *my_shop);
 
 #endif /* MY_DEFENDER_H_ */
