@@ -44,11 +44,13 @@ void snap_obj(global *game, struct grid_cell *new, shop *my_shop, sfVector2i pos
     {
         if (pow(abs(pos_mouse.x - 25 - new->p_5.x), 2) + \
         pow(abs(pos_mouse.y - 25 - new->p_5.y), 2) < 1089 \
-        && sfMouse_isButtonPressed(sfMouseLeft) == sfTrue)
+            && sfMouse_isButtonPressed(sfMouseLeft) == sfTrue && game->take == 0)
         {
-            my_shop->pos_cannon.x = new->p_3.x - 60;
-            my_shop->pos_cannon.y = new->p_3.y - \
-            (abs(new->dy) + abs(new->dy) + abs(new->dy));
+            if (new->status == 1) {
+                my_shop->pos_cannon.x = new->p_3.x - 60;
+                my_shop->pos_cannon.y = new->p_3.y -            \
+                    (abs(new->dy) + abs(new->dy) + abs(new->dy));
+            }
             sfSprite_setPosition(my_shop->s_cannon, my_shop->pos_cannon);
         }
     }
