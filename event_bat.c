@@ -7,6 +7,17 @@
 
 #include "includes/my_defender.h"
 
+int is_only(global *game, int num)
+{
+    char *number = "023456";
+
+    for (int cmpt = 0; number[cmpt] != '\0'; cmpt += 1) {
+        if (game->take == number[cmpt] - 48 && game->take != num)
+            return (1);
+    }
+    return (0);
+}
+
 void get_cannon(global *game, shop *my_shop)
 {
     sfVector2i pos_mouse = sfMouse_getPosition((sfWindow *) game->window);
@@ -16,7 +27,7 @@ void get_cannon(global *game, shop *my_shop)
     if (pos_mouse.x >= my_shop->pos_cannon.x && pos_mouse.x <= \
 my_shop->pos_cannon.x + 120 && pos_mouse.y >= my_shop->pos_cannon.y && \
 pos_mouse.y <= my_shop->pos_cannon.y + 100 && \
-        sfMouse_isButtonPressed(sfMouseLeft) == sfTrue) {
+        sfMouse_isButtonPressed(sfMouseLeft) == sfTrue && is_only(game, 0) == 0) {
         rad_pos.x = pos_mouse.x - 90;
         rad_pos.y = pos_mouse.y - 90;
         sfCircleShape_setPosition(game->radius , rad_pos);
@@ -43,7 +54,7 @@ void get_archer(global *game, shop *my_shop)
     if (pos_mouse.x >= my_shop->pos_archer.x && pos_mouse.x <= \
 my_shop->pos_archer.x + 120 && pos_mouse.y >= my_shop->pos_archer.y && \
 pos_mouse.y <= my_shop->pos_archer.y + 100 && \
-	sfMouse_isButtonPressed(sfMouseLeft) == sfTrue) {
+	sfMouse_isButtonPressed(sfMouseLeft) == sfTrue && is_only(game, 2) == 0) {
 	rad_pos.x = pos_mouse.x - 110;
 	rad_pos.y = pos_mouse.y - 110;
 	sfCircleShape_setPosition(game->radius , rad_pos);
@@ -70,7 +81,7 @@ void get_mortar(global *game, shop *my_shop)
     if (pos_mouse.x >= my_shop->pos_mortar.x && pos_mouse.x <= \
 my_shop->pos_mortar.x + 120 && pos_mouse.y >= my_shop->pos_mortar.y && \
 pos_mouse.y <= my_shop->pos_mortar.y + 100 && \
-	sfMouse_isButtonPressed(sfMouseLeft) == sfTrue) {
+	sfMouse_isButtonPressed(sfMouseLeft) == sfTrue && is_only(game, 3) == 0) {
 	rad_pos.x = pos_mouse.x - 140;
 	rad_pos.y = pos_mouse.y - 140;
 	sfCircleShape_setPosition(game->radius , rad_pos);
@@ -97,7 +108,7 @@ void get_air_defence(global *game, shop *my_shop)
     if (pos_mouse.x >= my_shop->pos_air_defence.x && pos_mouse.x <= \
 my_shop->pos_air_defence.x + 120 && pos_mouse.y >= my_shop->pos_air_defence.y && \
 pos_mouse.y <= my_shop->pos_air_defence.y + 100 && \
-	sfMouse_isButtonPressed(sfMouseLeft) == sfTrue) {
+	sfMouse_isButtonPressed(sfMouseLeft) == sfTrue && is_only(game, 4) == 0) {
 	rad_pos.x = pos_mouse.x - 140;
 	rad_pos.y = pos_mouse.y - 140;
 	sfCircleShape_setPosition(game->radius , rad_pos);
@@ -124,7 +135,7 @@ void get_xbow(global *game, shop *my_shop)
     if (pos_mouse.x >= my_shop->pos_xbow.x && pos_mouse.x <= \
 my_shop->pos_xbow.x + 120 && pos_mouse.y >= my_shop->pos_xbow.y && \
 pos_mouse.y <= my_shop->pos_xbow.y + 100 && \
-	sfMouse_isButtonPressed(sfMouseLeft) == sfTrue) {
+	sfMouse_isButtonPressed(sfMouseLeft) == sfTrue && is_only(game, 5) == 0) {
 	rad_pos.x = pos_mouse.x - 200;
 	rad_pos.y = pos_mouse.y - 200;
 	sfCircleShape_setPosition(game->radius , rad_pos);
@@ -151,7 +162,7 @@ void get_wizard(global *game, shop *my_shop)
     if (pos_mouse.x >= my_shop->pos_wizard.x && pos_mouse.x <= \
 my_shop->pos_wizard.x + 120 && pos_mouse.y >= my_shop->pos_wizard.y && \
 pos_mouse.y <= my_shop->pos_wizard.y + 100 && \
-	sfMouse_isButtonPressed(sfMouseLeft) == sfTrue) {
+	sfMouse_isButtonPressed(sfMouseLeft) == sfTrue && is_only(game, 6) == 0) {
 	rad_pos.x = pos_mouse.x - 90;
 	rad_pos.y = pos_mouse.y - 90;
 	sfCircleShape_setPosition(game->radius , rad_pos);

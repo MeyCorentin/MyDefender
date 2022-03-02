@@ -111,6 +111,8 @@ void snap_obj(global *game, struct grid_cell *new, shop *my_shop, sfVector2i pos
             sfSprite_setPosition(my_shop->s_air_defence, my_shop->pos_air_defence);
             sfSprite_setPosition(my_shop->s_xbow, my_shop->pos_xbow);
             sfSprite_setPosition(my_shop->s_wizard, my_shop->pos_wizard);
+            game->click = 1;
+            game->take_pos = new->g_pos;
         }
     }
 }
@@ -177,6 +179,32 @@ void draw_ground(global *game , struct grid_cell *new, shop * my_shop)
         draw_ground(game, new->next_cell, my_shop);
 }
 
+void take_cell(global *game , int pos, struct grid_cell * new , shop * my_shop)
+{
+    if (new->g_pos == pos) {
+        new->status = 3;                                                     // A MODIIFIER
+        add_ground(game, new, my_shop);
+    }
+    if (new->g_pos != 196)
+        take_cell(game ,pos, new->next_cell, my_shop);
+}
+
+void check_click(global * game, struct grid_cell *grid_cell, shop * my_shop)
+{
+    sfVector2i pos_mouse = sfMouse_getPosition((sfWindow *)game->window);
+
+    if (pow(abs(pos_mouse.x - 25 - grid_cell->p_5.x), 2) + \
+    pow(abs(pos_mouse.y - 25 - grid_cell->p_5.y), 2) < 900) {                        // Test si cliqué.
+        if (game->click == 1 && sfMouse_isButtonPressed(sfMouseLeft) == sfFalse) {
+            take_cell(game ,game->take_pos, grid_cell, my_shop);;
+            game->click = 0;
+            game->take_pos = 200;
+        }
+    }
+    if (grid_cell->g_pos != 196)
+        check_click(game, grid_cell->next_cell, my_shop);
+}
+
 void start_game(global *game)
 {
     shop *my_shop = create_shop();
@@ -196,6 +224,7 @@ void start_game(global *game)
     add_ground(game, grid_cell.next_cell, my_shop);
     while (sfRenderWindow_isOpen(game->window))
     {
+        check_click(game, &grid_cell, my_shop);
         sfRenderWindow_clear(game->window, sfBlack);
         update_game(game);                                                    // Met a jour les sprites.
         draw_game(game, my_shop);                                             // Draw la map.

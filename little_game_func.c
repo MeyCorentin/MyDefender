@@ -22,6 +22,17 @@ batiment *get_last(global *game, sfVector2f pos, int name)
     return (temp->next);
 }
 
+void draw_level(global *game, batiment *temp)
+{
+    for (int cmpt = 0; temp->temp[cmpt] != '\0'; cmpt += 1)
+        temp->temp[cmpt] = '\0';
+    temp->pos_level.x = temp->pos.x + 56;
+    temp->pos_level.y = temp->pos.y + 90;
+    sfText_setPosition(temp->level_str, temp->pos_level);
+    sfText_setString(temp->level_str, new_put_nbr_str(temp->level, temp->temp));
+    sfRenderWindow_drawText(game->window, temp->level_str, sfFalse);
+}
+
 void draw_rad(global *game, batiment * bat_)
 {
     sfCircleShape *radius = sfCircleShape_create();
@@ -102,6 +113,7 @@ void check_hit(global *game, batiment * bat_)
 void draw_structs(global *game, batiment *bat_)
 {
     sfRenderWindow_drawSprite(game->window, bat_->bat, sfFalse);
+    draw_level(game, bat_);
     if (bat_->next != NULL)
         draw_structs(game, bat_->next);
 }

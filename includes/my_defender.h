@@ -70,6 +70,9 @@ typedef struct batiment {
     sfTexture *t_bat;
     sfVector2f pos;
     int name;
+    char *temp;
+    sfText * level_str;
+    sfVector2f pos_level;
 } batiment;
 
 typedef struct shop {
@@ -197,6 +200,8 @@ typedef struct global {
     sfVector2f pos_free;
     char **path_way;
     int path_nbr;
+    int click;
+    int take_pos;
 } global;
 
 void open_shop(global *game, shop *my_shop);
@@ -253,5 +258,6 @@ void check_hit(global *game, batiment * bat_);
 void read_path(global *game);
 void update_gold(global *game);
 void create_gold(global *game);
+int is_only(global *game, int num);
 
 #endif /* MY_DEFENDER_H_ */
