@@ -113,7 +113,9 @@ void drop_wizard(global *game, shop *my_shop)
     sfSprite_setColor(my_shop->s_wizard, opacity_up);
     sfSprite_setTexture(my_shop->s_wizard,my_shop->t_wizard, sfFalse);
     sfCircleShape_setFillColor(game->radius, opacity_none);
-    if (game->on_map == 0 && game->first->gold >= 40 && my_shop->pos_wizard.x == game->pos_free.x && my_shop->pos_wizard.y == game->pos_free.y) {
+    sfCircleShape_setRadius(game->radius , 90);
+    if (game->on_map == 0 && game->first->gold >= 40 && my_shop->pos_wizard.x == game->pos_f\
+ree.x && my_shop->pos_wizard.y == game->pos_free.y) {
 	get_last(game, my_shop->pos_wizard, 6);
 	game->first->gold -= 40;
 	sfSound_play(game->sounds->anvil);

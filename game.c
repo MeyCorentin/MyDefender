@@ -97,9 +97,9 @@ void snap_obj(global *game, struct grid_cell *new, shop *my_shop, sfVector2i pos
                 if (game->take == 6) {
                     snap_radius.x = new->p_3.x - 90;
                     snap_radius.y = new->p_3.y - 113;
-                    my_shop->pos_wizard.x = new->p_3.x - 60;
+                    my_shop->pos_wizard.x = new->p_3.x - 55;
                     my_shop->pos_wizard.y = new->p_3.y -                \
-                        (abs(new->dy) + abs(new->dy) + abs(new->dy));
+                        (abs(new->dy) + abs(new->dy) + abs(new->dy) + 15);
                     game->pos_free.x = my_shop->pos_wizard.x;
                     game->pos_free.y = my_shop->pos_wizard.y;
                 }
@@ -141,18 +141,40 @@ void add_ground(global *game , struct grid_cell *new, shop * my_shop)
     if(new->status == 1) {
         sfSprite *ground_struct = sfSprite_create();
         sfTexture *ground_struct_text = sfTexture_createFromFile("pictures/maps/ground/struct_ground.png", sfFalse);
-        sfVector2f ground_size = {0.8, 0.7};
+        sfVector2f ground_size = {0.8, 0.6};
         sfVector2f ground_pos;
 
-        ground_pos.x = new->p_3.x - 60 + 10;
-        ground_pos.y = new->p_3.y - (abs(new->dy) + abs(new->dy) + abs(new->dy)) + 29;
+        ground_pos.x = new->p_3.x - 60 + 7;
+        ground_pos.y = new->p_3.y - (abs(new->dy) + abs(new->dy) + abs(new->dy)) + 40;
         sfSprite_setScale(ground_struct, ground_size);
         sfSprite_setTexture(ground_struct, ground_struct_text, sfFalse);
         sfSprite_setPosition(ground_struct, ground_pos);
-        sfRenderWindow_drawSprite(game->window, ground_struct, sfFalse);
+        new->ground = ground_struct;
+    }
+    if(new->status == 2) {
+        sfSprite *ground_enemy = sfSprite_create();
+        sfTexture *ground_enemy_text = sfTexture_createFromFile("pictures/maps/ground/enemy_ground.png", sfFalse);
+        sfVector2f ground_size = {0.8, 0.6};
+        sfVector2f ground_pos;
+
+        ground_pos.x = new->p_3.x - 60 + 7;
+        ground_pos.y = new->p_3.y - (abs(new->dy) + abs(new->dy) + abs(new->dy)) + 40;
+        sfSprite_setScale(ground_enemy, ground_size);
+        sfSprite_setTexture(ground_enemy, ground_enemy_text, sfFalse);
+        sfSprite_setPosition(ground_enemy, ground_pos);
+        new->ground = ground_enemy;
     }
     if (new->g_pos != 196)
         add_ground(game, new->next_cell, my_shop);
+}
+
+void draw_ground(global *game , struct grid_cell *new, shop * my_shop)
+{
+    if(new->status == 1 || new->status == 2) {
+        sfRenderWindow_drawSprite(game->window, new->ground, sfFalse);
+    }
+    if (new->g_pos != 196)
+        draw_ground(game, new->next_cell, my_shop);
 }
 
 void start_game(global *game)
@@ -168,17 +190,21 @@ void start_game(global *game)
     game->radius = radius;
     game->rad_god = 1;
     ////////////////////////////////////////////////////////////////////////////
+    read_path(game);
+    add_cell_status(game, grid_cell.next_cell, my_shop);                  // Modifie le status des cellules.
+    add_ground(game, grid_cell.next_cell, my_shop);
     while (sfRenderWindow_isOpen(game->window))
     {
         sfRenderWindow_clear(game->window, sfBlack);
         update_game(game);                                                    // Met a jour les sprites.
         draw_game(game, my_shop);                                             // Draw la map.
-        add_cell_status(game, grid_cell.next_cell, my_shop);                  // Modifie le status des cellules.
-        add_ground(game, grid_cell.next_cell, my_shop);
+        draw_ground(game, &grid_cell, my_shop);
         (game->god == 0) ? draw_cell(game, grid_cell.next_cell, my_shop) : 1; // Affiche les cellules.
         sfRenderWindow_drawCircleShape(game->window , game->radius , sfFalse);
         place_struct(game, &grid_cell, my_shop);                              // Place tous les bâtiments.
-        draw_structs(game);                                                   // Draw les bâtiments.
+        draw_rad(game, game->first);                                          // Draw les radius de chaque bâtiments.
+        check_hit(game, game->first);
+        draw_structs(game, game->first);                                      // Draw les bâtiments.
         (game->shop_is_open == 0) ? open_shop(game, my_shop) : 1;
         sfRenderWindow_display(game->window);
         check_game_event(game, my_shop);                                      // Regarde les inputs.

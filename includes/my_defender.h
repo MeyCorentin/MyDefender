@@ -29,6 +29,7 @@ typedef struct sounds {
 } sounds;
 
 typedef struct grid_cell {
+    sfSprite* ground;
     int g_pos;
     int l_pos;
     int status;
@@ -53,6 +54,9 @@ typedef struct batiment {
     struct batiment *next;
     struct batiment *prev;
     struct batiment *last;
+    sfCircleShape *radius;
+    sfVector2f rad_pos;
+    int rad_size;
     int type;
     int status;
     int pv;
@@ -182,6 +186,8 @@ typedef struct global {
     int is_music;
     int on_map;
     sfVector2f pos_free;
+    char **path_way;
+    int path_nbr;
 } global;
 
 void open_shop(global *game, shop *my_shop);
@@ -213,7 +219,7 @@ void check_pause_event(global *game);
 void set_game(global *game);
 void draw_cell(global *game, grid_cell * new, shop * my_shop);
 void draw_game(global *game, shop *my_shop);
-void draw_structs(global *game);
+void draw_structs(global *game, batiment *bat);
 batiment *get_last(global *game, sfVector2f pos, int name);
 void shop_event(global *game, shop *my_shop);
 void click_shop(global *game, shop *my_shop);
@@ -233,5 +239,8 @@ void get_mortar(global *game, shop *my_shop);
 void get_air_defence(global *game, shop *my_shop);
 void get_xbow(global *game, shop *my_shop);
 void get_wizard(global *game, shop *my_shop);
+void draw_rad(global *game, batiment * bat_);
+void check_hit(global *game, batiment * bat_);
+void read_path(global *game);
 
 #endif /* MY_DEFENDER_H_ */

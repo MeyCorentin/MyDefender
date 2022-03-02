@@ -46,5 +46,8 @@ void integer(int nb);
 void int_to_hexa(int nb);
 char new_put_nbr(int nb);
 int my_printf(char *s, ...);
+char **my_split_tab(char * argv, char char_);
+void my_print_tab(char **tab);
+int my_count_split(char *argv, char char_);
 
 #endif /* MY_H_ */

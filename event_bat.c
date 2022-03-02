@@ -156,7 +156,7 @@ pos_mouse.y <= my_shop->pos_wizard.y + 100 && \
 	rad_pos.y = pos_mouse.y - 90;
 	sfCircleShape_setPosition(game->radius , rad_pos);
 	sfCircleShape_setFillColor(game->radius, opacity_down);
-	sfCircleShape_setRadius(game->radius , 0);
+	sfCircleShape_setRadius(game->radius , 90);
 	game->on_map = 1;
 	game->texture = "pictures/defences/wizard_tower/1.png";
 	my_shop->wizard = sfTexture_createFromFile(game->texture, sfFalse);
