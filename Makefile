@@ -53,7 +53,7 @@ $(NAME): $(OBJ)
 	@ar rc libmy.a $(OBJ)
 	@echo ">>> Executable \"${NAME}\" created."
 	@gcc -g3 -o ${NAME} main.c shop.c menu.c game.c pause.c buttons.c \
-set_hdv.c map.c clock.c sounds_buttons.c set_pause.c set_window.c event_pause.c\
+set_hdv.c map.c clock.c gold.c sounds_buttons.c set_pause.c set_window.c event_pause.c\
  little_game_func.c place_bat.c event_bat.c game_event.c -lcsfml-graphics -lcsfml-audio -lcsfml-system\
  cell.c -lcsfml-window -Wall -lm -L. libmy.a
 

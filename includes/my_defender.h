@@ -161,6 +161,14 @@ typedef struct menu_pause {
     sfVector2f pos_text;
 } menu_pause;
 
+typedef struct gold {
+    sfText *money;
+    sfText *number;
+    sfVector2f pos_money;
+    sfVector2f pos_number;
+    char *temp;
+} gold;
+
 typedef struct global {
     sfRenderWindow *window;
     sfCircleShape * radius;
@@ -174,6 +182,7 @@ typedef struct global {
     sounds *sounds;
     menu_pause *pause;
     menu *menus;
+    gold *gold_gestion;
     int god;
     int rad_god;
     sfClock *clock;
@@ -242,5 +251,7 @@ void get_wizard(global *game, shop *my_shop);
 void draw_rad(global *game, batiment * bat_);
 void check_hit(global *game, batiment * bat_);
 void read_path(global *game);
+void update_gold(global *game);
+void create_gold(global *game);
 
 #endif /* MY_DEFENDER_H_ */

@@ -183,6 +183,7 @@ void start_game(global *game)
     struct grid_cell grid_cell;
 
     set_game(game);                                                           // Init la game.
+    create_gold(game);
     grid_cell = init_cell(game, grid_cell, my_shop);                          // Init la première cellule.
     make_grid(game, &grid_cell, my_shop);
     ////////////////////////////////////////////////////////////////////////////
@@ -198,6 +199,7 @@ void start_game(global *game)
         sfRenderWindow_clear(game->window, sfBlack);
         update_game(game);                                                    // Met a jour les sprites.
         draw_game(game, my_shop);                                             // Draw la map.
+        update_gold(game);
         draw_ground(game, &grid_cell, my_shop);
         (game->god == 0) ? draw_cell(game, grid_cell.next_cell, my_shop) : 1; // Affiche les cellules.
         sfRenderWindow_drawCircleShape(game->window , game->radius , sfFalse);
