@@ -24,8 +24,13 @@ batiment *get_last(global *game, sfVector2f pos, int name)
 
 void draw_level(global *game, batiment *temp)
 {
-    temp->temp = malloc(sizeof(char) * 2);
-    temp->temp[1] = '\0';
+    if (temp->level == 10) {
+        temp->temp = malloc(sizeof(char) * 3);
+        temp->temp[2] = '\0';
+    } else {
+        temp->temp = malloc(sizeof(char) * 2);
+        temp->temp[1] = '\0';
+    }
     temp->pos_level.x = temp->pos.x + 56;
     temp->pos_level.y = temp->pos.y + 90;
     sfText_setPosition(temp->level_str, temp->pos_level);

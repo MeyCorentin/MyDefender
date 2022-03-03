@@ -21,6 +21,7 @@ char *calculs_str(int count, int nb, char *resultat, int cmpt_str)
         resultat[cmpt_str] = result + 48;
         cmpt_str += 1;
     }
+    resultat[cmpt_str] = '\0';
     return (resultat);
 }
 
