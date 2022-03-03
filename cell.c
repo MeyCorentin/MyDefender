@@ -54,6 +54,7 @@ grid_cell *make_grid(global *game, grid_cell *grid_cell_, shop *my_shop)
     new->p_5 = p_5;
     new->dx = dx;
     new->dy = dy;
+    new->status = 0;
     new->prev_cell = grid_cell_;
     new->first_cell = grid_cell_->first_cell;
     new->next_cell = NULL;
@@ -108,6 +109,7 @@ grid_cell init_cell(global *game, grid_cell grid_cell_, shop *my_shop)
     grid_cell_.p_5 = p_5;
     grid_cell_.dx = dx;
     grid_cell_.dy = dy;
+    grid_cell_.status = 0;
     grid_cell_.prev_cell = NULL;
     grid_cell_.next_cell = NULL;
     grid_cell_.first_cell = &grid_cell_;
@@ -131,10 +133,11 @@ void draw_cell(global *game, grid_cell *new, shop *my_shop)
 void read_path(global *game)
 {
     int level = game->menus->level;
-    char *buffer = malloc(sizeof(char) * 1000);
+    char *buffer = malloc(sizeof(char) * 136);
     int fd = open("path", O_RDONLY);
 
-    read(fd, buffer, 1000);
+    int test = read(fd, buffer, 136);
+    buffer[test] = '\0';
     close(fd);
     char **temp_split = my_split_tab(buffer, '\n');
     char **split_path = my_split_tab(temp_split[level - 1], '/');

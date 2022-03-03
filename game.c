@@ -141,7 +141,7 @@ void place_struct(global *game, struct grid_cell *new, shop *my_shop)
 
 void add_ground(global *game , struct grid_cell *new, shop * my_shop)
 {
-    if(new->status == 1) {
+    if (new->status == 1) {
         sfSprite *ground_struct = sfSprite_create();
         sfTexture *ground_struct_text = sfTexture_createFromFile("pictures/maps/ground/struct_ground.png", sfFalse);
         sfVector2f ground_size = {0.8, 0.6};
@@ -154,7 +154,7 @@ void add_ground(global *game , struct grid_cell *new, shop * my_shop)
         sfSprite_setPosition(ground_struct, ground_pos);
         new->ground = ground_struct;
     }
-    if(new->status == 2) {
+    if (new->status == 2) {
         sfSprite *ground_enemy = sfSprite_create();
         sfTexture *ground_enemy_text = sfTexture_createFromFile("pictures/maps/ground/enemy_ground.png", sfFalse);
         sfVector2f ground_size = {0.8, 0.6};
@@ -171,9 +171,9 @@ void add_ground(global *game , struct grid_cell *new, shop * my_shop)
         add_ground(game, new->next_cell, my_shop);
 }
 
-void draw_ground(global *game , struct grid_cell *new, shop * my_shop)
+void draw_ground(global *game, struct grid_cell *new, shop * my_shop)
 {
-    if(new->status == 1 || new->status == 2) {
+    if (new->status == 1 || new->status == 2) {
         sfRenderWindow_drawSprite(game->window, new->ground, sfFalse);
     }
     if (new->g_pos != 196)
@@ -194,8 +194,8 @@ void check_click(global * game, struct grid_cell *grid_cell, shop * my_shop)
 {
     sfVector2i pos_mouse = sfMouse_getPosition((sfWindow *)game->window);
 
-    if (pow(abs(pos_mouse.x - 25 - grid_cell->p_5.x), 2) + \
-    pow(abs(pos_mouse.y - 25 - grid_cell->p_5.y), 2) < 900) {                        // Test si cliqué.
+if ((abs(pos_mouse.x - 25 - grid_cell->p_5.x)) * (abs(pos_mouse.x - 25 - grid_cell->p_5.x))  + \
+    (abs(pos_mouse.y - 25 - grid_cell->p_5.y)) * (abs(pos_mouse.y - 25 - grid_cell->p_5.y))  < 900) {                        // Test si cliqué.
         if (game->click == 1 && sfMouse_isButtonPressed(sfMouseLeft) == sfFalse) {
             take_cell(game ,game->take_pos, grid_cell, my_shop);;
             game->click = 0;
@@ -215,6 +215,12 @@ void start_game(global *game)
     create_gold(game);
     grid_cell = init_cell(game, grid_cell, my_shop);                          // Init la première cellule.
     make_grid(game, &grid_cell, my_shop);
+        ////////////////////////////////////////////////////////////////////////////
+    sfCircleShape * radius = sfCircleShape_create();
+    game->radius = radius;
+    game->rad_god = 0;
+    game->click = 0;
+    ////////////////////////////////////////////////////////////////////////////
     read_path(game);
     add_cell_status(game, grid_cell.next_cell, my_shop);                  // Modifie le status des cellules.
     add_ground(game, grid_cell.next_cell, my_shop);

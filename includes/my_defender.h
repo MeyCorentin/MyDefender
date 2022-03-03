@@ -33,7 +33,6 @@ typedef struct grid_cell {
     int g_pos;
     int l_pos;
     int status;
-    int test;
     sfCircleShape * c_1;
     sfCircleShape * c_2;
     sfCircleShape * c_3;
@@ -46,7 +45,6 @@ typedef struct grid_cell {
     struct grid_cell *first_cell;
     struct grid_cell *prev_cell;
     struct grid_cell *next_cell;
-    int count;
 }grid_cell;
 
 typedef struct level_up {

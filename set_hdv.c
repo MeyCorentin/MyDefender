@@ -37,7 +37,7 @@ batiment *add_bat(global *game, batiment *prev, sfVector2f pos, int name)
     sfFont *font = sfFont_createFromFile("pictures/ArialCE.ttf");
 
     new_bat->first = game->first;
-    new_bat->temp = malloc(sizeof(char) * 3);
+    new_bat->temp =  malloc(sizeof(char *));
     new_bat->prev = prev;
     new_bat->next = NULL;
     new_bat->last = NULL;
@@ -51,6 +51,7 @@ batiment *add_bat(global *game, batiment *prev, sfVector2f pos, int name)
     sfSprite_setTexture(new_bat->bat, new_bat->t_bat, sfFalse);
     new_bat->pos.x = pos.x;
     new_bat->pos.y = pos.y;
+    new_bat->name = 1;
     sfSprite_setPosition(new_bat->bat, new_bat->pos);
     sfText_setColor(new_bat->level_str, sfBlue);
     add_bat_buttons(game, new_bat);
@@ -107,8 +108,9 @@ batiment *create_hdv(global *game)
     hdv->level = game->level;
     hdv->gold = 100000;
     hdv->bat = sfSprite_create();
-    hdv->temp = malloc(sizeof(char *));
     hdv->level_str = sfText_create();
+    hdv->type = 9;
+    hdv->rad_size = 0;
     hdv->on_bat = 1;
     hdv->name = -1;
     hdv->rad_size = 0;

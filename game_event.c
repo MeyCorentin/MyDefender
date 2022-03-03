@@ -96,8 +96,6 @@ void struct_event(global *game, batiment *bat_)
     }
     if ((bat_->level < bat_->first->level || bat_->name == -1) && game->first->gold >= bat_->stats->price && pos_mouse.x > bat_->level_up->pos_up.x && pos_mouse.x < bat_->level_up->pos_up.x + 30 && pos_mouse.y > bat_->level_up->pos_up.y && pos_mouse.y < bat_->level_up->pos_up.y + 30 && game->event.type == sfEvtMouseButtonReleased)
         up_struct(game, bat_);
-    if (pos_mouse.x > bat_->level_up->pos_destroy.x && pos_mouse.x < bat_->level_up->pos_destroy.x + 30 && pos_mouse.y > bat_->level_up->pos_destroy.y && pos_mouse.y < bat_->level_up->pos_destroy.y + 30 && game->event.type == sfEvtMouseButtonReleased)
-        destroy_struct(game, bat_);
     if (bat_->next != NULL)
         struct_event(game, bat_->next);
 }

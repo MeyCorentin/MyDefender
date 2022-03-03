@@ -24,15 +24,13 @@ batiment *get_last(global *game, sfVector2f pos, int name)
 
 void draw_level(global *game, batiment *temp)
 {
-    for (int cmpt = 0; temp->temp[cmpt] != '\0'; cmpt += 1)
-        temp->temp[cmpt] = '\0';
+    temp->temp = malloc(sizeof(char) * 2);
+    temp->temp[1] = '\0';
     temp->pos_level.x = temp->pos.x + 56;
     temp->pos_level.y = temp->pos.y + 90;
     sfText_setPosition(temp->level_str, temp->pos_level);
     sfText_setString(temp->level_str, new_put_nbr_str(temp->level, temp->temp));
     sfRenderWindow_drawText(game->window, temp->level_str, sfFalse);
-    for (int cmpt = 0; temp->temp[cmpt] != '\0'; cmpt += 1)
-        temp->temp[cmpt] = '\0';
 }
 
 void draw_rad(global *game, batiment * bat_)
@@ -104,8 +102,10 @@ void check_hit(global *game, batiment * bat_)
 
     if (game->rad_god == 1)
     {
-        if (pow(abs(pos_mouse.x -(bat_->rad_size / 2) -  bat_->pos.x), 2) + pow(abs(pos_mouse.y - (bat_->rad_size / 2) - bat_->pos.y), 2) < pow(bat_->rad_size, 2))                         // Test si cliqué.
-            sfCircleShape_setFillColor(bat_->radius, sfRed);
+        if ((abs(pos_mouse.x -(bat_->rad_size/2) -  bat_->pos.x) * (abs(pos_mouse.x -(bat_->rad_size/2) -  bat_->pos.x)) +
+            abs(pos_mouse.y - (bat_->rad_size/2) - bat_->pos.y)) *(abs(pos_mouse.y - (bat_->rad_size/2) - bat_->pos.y))
+             < (bat_->rad_size)* (bat_->rad_size))                  // Test si cliqué.
+            sfCircleShape_setFillColor(bat_->radius, sfGreen);
         sfRenderWindow_drawCircleShape(game->window, bat_->radius, NULL);
     }
     if (bat_->next != NULL)
@@ -119,13 +119,14 @@ void draw_structs(global *game, batiment *bat_)
         bat_->level_up->pos_up.y = bat_->pos.y + 97;
         sfSprite_setPosition(bat_->level_up->up, bat_->level_up->pos_up);
         sfRenderWindow_drawSprite(game->window, bat_->level_up->up, sfFalse);
-        if (bat_->name != -1)
+        if (bat_->name != -1) {
             sfRenderWindow_drawSprite(game->window, bat_->level_up->destroy, sfFalse);
-        sfText_setString(bat_->level_up->cost, new_put_nbr_str(bat_->stats->price, bat_->temp));
+            sfText_setString(bat_->level_up->cost, new_put_nbr_str(bat_->stats->price, bat_->temp));
+        }
         bat_->level_up->pos_cost.x = bat_->level_up->pos_up.x - 20;
         bat_->level_up->pos_cost.y = bat_->level_up->pos_up.y + 30;
         sfText_setPosition(bat_->level_up->cost, bat_->level_up->pos_cost);
-        sfRenderWindow_drawText(game->window, bat_->level_up->cost, sfFalse);           
+        sfRenderWindow_drawText(game->window, bat_->level_up->cost, sfFalse);
     }
     sfRenderWindow_drawSprite(game->window, bat_->bat, sfFalse);
     draw_level(game, bat_);
