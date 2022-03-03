@@ -14,9 +14,9 @@ void create_gold(global *game)
     game->gold_gestion = malloc(sizeof(gold));
     game->gold_gestion->money = sfText_create();
     game->gold_gestion->number = sfText_create();
-    game->gold_gestion->pos_money.x = 1700;
+    game->gold_gestion->pos_money.x = 1600;
     game->gold_gestion->pos_money.y = 0;
-    game->gold_gestion->pos_number.x = 1810;
+    game->gold_gestion->pos_number.x = 1710;
     game->gold_gestion->pos_number.y = 0;
     sfText_setPosition(game->gold_gestion->money, game->gold_gestion->pos_money);
     sfText_setFont(game->gold_gestion->money, font);

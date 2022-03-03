@@ -11,11 +11,13 @@ int read_level(void)
 {
     char *buffer = malloc(sizeof(char) * 2);
     int fd = open("level", O_RDONLY);
-    char *level = malloc(sizeof(char *));
+    char *level = malloc(sizeof(char) * 3);
+    int cmpt;
 
     read(fd, buffer, 2);
-    for (int cmpt = 0; cmpt != 2; cmpt += 1)
+    for (cmpt = 0; cmpt != 2; cmpt += 1)
         level[cmpt] = buffer[cmpt];
+    level[cmpt] = '\0';
     close(fd);
     return (my_getnbr(level));
 }

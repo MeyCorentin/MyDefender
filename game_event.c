@@ -83,3 +83,21 @@ void check_shop(global *game, shop *my_shop)
         in_pause(game);
     }
 }
+
+void struct_event(global *game, batiment *bat_)
+{
+    sfVector2i pos_mouse = sfMouse_getPosition((sfWindow *)game->window);
+
+    if (pos_mouse.x > bat_->pos.x + 30 && pos_mouse.x < bat_->pos.x + 90 && pos_mouse.y > bat_->pos.y + 30 && pos_mouse.y < bat_->pos.y + 90 && game->event.type == sfEvtMouseButtonReleased) {
+        if (bat_->on_bat == 1)
+            bat_->on_bat = 0;
+        else if (bat_->on_bat == 0)
+            bat_->on_bat = 1;
+    }
+    if ((bat_->level < bat_->first->level || bat_->name == -1) && game->first->gold >= bat_->stats->price && pos_mouse.x > bat_->level_up->pos_up.x && pos_mouse.x < bat_->level_up->pos_up.x + 30 && pos_mouse.y > bat_->level_up->pos_up.y && pos_mouse.y < bat_->level_up->pos_up.y + 30 && game->event.type == sfEvtMouseButtonReleased)
+        up_struct(game, bat_);
+    if (pos_mouse.x > bat_->level_up->pos_destroy.x && pos_mouse.x < bat_->level_up->pos_destroy.x + 30 && pos_mouse.y > bat_->level_up->pos_destroy.y && pos_mouse.y < bat_->level_up->pos_destroy.y + 30 && game->event.type == sfEvtMouseButtonReleased)
+        destroy_struct(game, bat_);
+    if (bat_->next != NULL)
+        struct_event(game, bat_->next);
+}

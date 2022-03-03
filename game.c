@@ -35,6 +35,7 @@ void check_game_event(global *game, shop *my_shop)
             game->secs = 1;
         }
         check_shop(game, my_shop);
+        struct_event(game, game->first);
     }
 }
 
@@ -181,7 +182,7 @@ void draw_ground(global *game , struct grid_cell *new, shop * my_shop)
 
 void take_cell(global *game , int pos, struct grid_cell * new , shop * my_shop)
 {
-    if (new->g_pos == pos) {
+    if (new->g_pos == pos && new->status == 1) {
         new->status = 3;                                                     // A MODIIFIER
         add_ground(game, new, my_shop);
     }
@@ -214,11 +215,6 @@ void start_game(global *game)
     create_gold(game);
     grid_cell = init_cell(game, grid_cell, my_shop);                          // Init la première cellule.
     make_grid(game, &grid_cell, my_shop);
-    ////////////////////////////////////////////////////////////////////////////
-    sfCircleShape * radius = sfCircleShape_create();
-    game->radius = radius;
-    game->rad_god = 1;
-    ////////////////////////////////////////////////////////////////////////////
     read_path(game);
     add_cell_status(game, grid_cell.next_cell, my_shop);                  // Modifie le status des cellules.
     add_ground(game, grid_cell.next_cell, my_shop);
@@ -227,15 +223,7 @@ void start_game(global *game)
         check_click(game, &grid_cell, my_shop);
         sfRenderWindow_clear(game->window, sfBlack);
         update_game(game);                                                    // Met a jour les sprites.
-        draw_game(game, my_shop);                                             // Draw la map.
-        update_gold(game);
-        draw_ground(game, &grid_cell, my_shop);
-        (game->god == 0) ? draw_cell(game, grid_cell.next_cell, my_shop) : 1; // Affiche les cellules.
-        sfRenderWindow_drawCircleShape(game->window , game->radius , sfFalse);
-        place_struct(game, &grid_cell, my_shop);                              // Place tous les bâtiments.
-        draw_rad(game, game->first);                                          // Draw les radius de chaque bâtiments.
-        check_hit(game, game->first);
-        draw_structs(game, game->first);                                      // Draw les bâtiments.
+        draw_game(game, my_shop, grid_cell);                                             // Draw la map.                                   // Draw les bâtiments.
         (game->shop_is_open == 0) ? open_shop(game, my_shop) : 1;
         sfRenderWindow_display(game->window);
         check_game_event(game, my_shop);                                      // Regarde les inputs.

@@ -31,6 +31,8 @@ void draw_level(global *game, batiment *temp)
     sfText_setPosition(temp->level_str, temp->pos_level);
     sfText_setString(temp->level_str, new_put_nbr_str(temp->level, temp->temp));
     sfRenderWindow_drawText(game->window, temp->level_str, sfFalse);
+    for (int cmpt = 0; temp->temp[cmpt] != '\0'; cmpt += 1)
+        temp->temp[cmpt] = '\0';
 }
 
 void draw_rad(global *game, batiment * bat_)
@@ -102,8 +104,8 @@ void check_hit(global *game, batiment * bat_)
 
     if (game->rad_god == 1)
     {
-        if (pow(abs(pos_mouse.x -(bat_->rad_size/2) -  bat_->pos.x), 2) + pow(abs(pos_mouse.y - (bat_->rad_size/2) - bat_->pos.y), 2) < pow(bat_->rad_size, 2))                         // Test si cliqué.
-            sfCircleShape_setFillColor(bat_->radius, sfGreen);
+        if (pow(abs(pos_mouse.x -(bat_->rad_size / 2) -  bat_->pos.x), 2) + pow(abs(pos_mouse.y - (bat_->rad_size / 2) - bat_->pos.y), 2) < pow(bat_->rad_size, 2))                         // Test si cliqué.
+            sfCircleShape_setFillColor(bat_->radius, sfRed);
         sfRenderWindow_drawCircleShape(game->window, bat_->radius, NULL);
     }
     if (bat_->next != NULL)
@@ -112,21 +114,43 @@ void check_hit(global *game, batiment * bat_)
 
 void draw_structs(global *game, batiment *bat_)
 {
+    if (bat_->on_bat == 0) {
+        bat_->level_up->pos_up.x = bat_->pos.x + 15;
+        bat_->level_up->pos_up.y = bat_->pos.y + 97;
+        sfSprite_setPosition(bat_->level_up->up, bat_->level_up->pos_up);
+        sfRenderWindow_drawSprite(game->window, bat_->level_up->up, sfFalse);
+        if (bat_->name != -1)
+            sfRenderWindow_drawSprite(game->window, bat_->level_up->destroy, sfFalse);
+        sfText_setString(bat_->level_up->cost, new_put_nbr_str(bat_->stats->price, bat_->temp));
+        bat_->level_up->pos_cost.x = bat_->level_up->pos_up.x - 20;
+        bat_->level_up->pos_cost.y = bat_->level_up->pos_up.y + 30;
+        sfText_setPosition(bat_->level_up->cost, bat_->level_up->pos_cost);
+        sfRenderWindow_drawText(game->window, bat_->level_up->cost, sfFalse);           
+    }
     sfRenderWindow_drawSprite(game->window, bat_->bat, sfFalse);
     draw_level(game, bat_);
     if (bat_->next != NULL)
         draw_structs(game, bat_->next);
 }
 
-void draw_game(global *game, shop *my_shop)
+void draw_game(global *game, shop *my_shop, grid_cell grid_cell)
 {
     sfRenderWindow_drawSprite(game->window, game->map, sfFalse);
     sfRenderWindow_drawSprite(game->window, my_shop->button, sfFalse);
+    draw_ground(game, &grid_cell, my_shop);
+    (game->god == 0) ? draw_cell(game, grid_cell.next_cell, my_shop) : 1;
+    update_gold(game);
+    draw_rad(game, game->first);
+    sfRenderWindow_drawCircleShape(game->window , game->radius , sfFalse);
+    place_struct(game, &grid_cell, my_shop);
+    check_hit(game, game->first);
+    draw_structs(game, game->first);
 }
 
 void set_game(global *game)
 {
     sfTexture *t_map = sfTexture_createFromFile("pictures/maps/backgrounds/4.png", NULL);
+    sfCircleShape *radius = sfCircleShape_create();
 
     game->first = create_hdv(game);
     game->god = 1;
@@ -137,4 +161,7 @@ void set_game(global *game)
     game->shop_is_open = 1;
     game->take = 1;
     game->pause_is_open = 1;
+    game->on_bat = 1;
+    game->radius = radius;
+    game->rad_god = 1;
 }

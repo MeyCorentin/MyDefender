@@ -64,9 +64,11 @@ void create_window(int level)
 
     game->window = sfRenderWindow_create(mode, "My Defender",           \
                                                    sfResize | sfClose, NULL);
-    sfRenderWindow_setFramerateLimit(game->window, 600);
+    sfRenderWindow_setFramerateLimit(game->window, 240);
     game->level = level;
     game->clock = sfClock_create();
+    game->is_sounds = 1;
+    game->is_music = 1;
     create_sounds(game);
     set_sounds_buttons(game, menus);
     game->menus = menus;

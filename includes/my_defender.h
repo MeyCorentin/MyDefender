@@ -49,30 +49,48 @@ typedef struct grid_cell {
     int count;
 }grid_cell;
 
+typedef struct level_up {
+    sfSprite *up;
+    sfSprite *destroy;
+    sfTexture *t_up;
+    sfTexture *t_destroy;
+    sfVector2f pos_up;
+    sfVector2f pos_destroy;
+    sfText *cost;
+    sfVector2f pos_cost;
+} level_up;
+
+typedef struct stats_bat {
+    int pv;
+    float damage;
+    int price;
+    float attack_speed;
+    char *name;
+} stats_bat;
+
 typedef struct batiment {
     struct batiment *first;
     struct batiment *next;
     struct batiment *prev;
     struct batiment *last;
+    stats_bat *stats;
+    level_up *level_up;
     sfCircleShape *radius;
     sfVector2f rad_pos;
     int rad_size;
     int type;
     int status;
-    int pv;
     int level;
-    float damage;
-    int price;
     float range;
-    float attack_speed;
     int gold;
     sfSprite *bat;
     sfTexture *t_bat;
     sfVector2f pos;
-    int name;
     char *temp;
     sfText * level_str;
     sfVector2f pos_level;
+    int on_bat;
+    int name;
 } batiment;
 
 typedef struct shop {
@@ -202,6 +220,7 @@ typedef struct global {
     int path_nbr;
     int click;
     int take_pos;
+    int on_bat;
 } global;
 
 void open_shop(global *game, shop *my_shop);
@@ -232,7 +251,7 @@ void create_window(int level);
 void check_pause_event(global *game);
 void set_game(global *game);
 void draw_cell(global *game, grid_cell * new, shop * my_shop);
-void draw_game(global *game, shop *my_shop);
+void draw_game(global *game, shop *my_shop, grid_cell grid_cell);
 void draw_structs(global *game, batiment *bat);
 batiment *get_last(global *game, sfVector2f pos, int name);
 void shop_event(global *game, shop *my_shop);
@@ -259,5 +278,12 @@ void read_path(global *game);
 void update_gold(global *game);
 void create_gold(global *game);
 int is_only(global *game, int num);
+void struct_event(global *game, batiment *bat_);
+void check_name(global *game, int name, batiment *bat);
+void set_stats_hdv(global *game, batiment *bat);
+void draw_ground(global *game , struct grid_cell *new, shop * my_shop);
+void place_struct(global *game, struct grid_cell *new, shop *my_shop);
+void up_struct(global *game, batiment *bat);
+void destroy_struct(global *game, batiment *bat);
 
 #endif /* MY_DEFENDER_H_ */
