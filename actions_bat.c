@@ -28,7 +28,6 @@ void up_struct(global *game, batiment *bat)
         bat->stats->damage *= 1.5;
         bat->stats->price *= 1.5;
         bat->stats->pv *= 1.5;
-        bat->on_bat = 1;
         if (bat->name == -1) {
             game->level += 1;
             set_texture_hdv(game, bat);

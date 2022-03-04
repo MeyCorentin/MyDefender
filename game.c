@@ -193,7 +193,7 @@ void take_cell(global *game, int pos, struct grid_cell *new, shop *my_shop)
 {
     if (new->g_pos == pos && new->status == 1)
     {
-        new->status = 3;                                                      // A MODIIFIER
+        new->status = 3; // A MODIIFIER
         add_ground(game, new, my_shop);
     }
     if (new->g_pos != 196)
@@ -204,7 +204,7 @@ void check_click(global *game, struct grid_cell *grid_cell, shop *my_shop)
 {
     sfVector2i pos_mouse = sfMouse_getPosition((sfWindow *)game->window);
 
-if ((abs(pos_mouse.x - 25 - grid_cell->p_5.x)) * (abs(pos_mouse.x - 25 - grid_cell->p_5.x)) +
+    if ((abs(pos_mouse.x - 25 - grid_cell->p_5.x)) * (abs(pos_mouse.x - 25 - grid_cell->p_5.x)) +
             (abs(pos_mouse.y - 25 - grid_cell->p_5.y)) * (abs(pos_mouse.y - 25 - grid_cell->p_5.y)) <
         900)
     { // Test si cliqué.
@@ -305,8 +305,8 @@ void start_game(global *game)
         (game->shop_is_open == 0) ? open_shop(game, my_shop) : 1;
         draw_enemy(game, &enemy_f);
         // sfRenderWindow_drawSprite(game->window, enemy_f.enemy_1, sfFalse);
-        sfRenderWindow_display(game->window);
         check_game_event(game, my_shop);
+        sfRenderWindow_display(game->window);
         check_click(game, &grid_cell, my_shop); // Regarde les inputs.
     }
 }

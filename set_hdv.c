@@ -51,7 +51,7 @@ batiment *add_bat(global *game, batiment *prev, sfVector2f pos, int name)
     sfSprite_setTexture(new_bat->bat, new_bat->t_bat, sfFalse);
     new_bat->pos.x = pos.x;
     new_bat->pos.y = pos.y;
-    new_bat->name = 1;
+    new_bat->name = name;
     sfSprite_setPosition(new_bat->bat, new_bat->pos);
     sfText_setColor(new_bat->level_str, sfBlue);
     add_bat_buttons(game, new_bat);
