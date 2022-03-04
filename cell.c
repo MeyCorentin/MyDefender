@@ -7,12 +7,17 @@
 
 #include "includes/my_defender.h"
 #include "includes/my.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include <stdio.h>
+#include <stdlib.h>
 #include <SFML/Graphics.h>
 #include <stdio.h>
 #include <math.h>
 
-grid_cell *make_grid(global *game, grid_cell *grid_cell_, shop *my_shop)
-{
+grid_cell *make_grid(global *game, grid_cell *grid_cell_, shop *my_shop) {
     struct grid_cell *new = (grid_cell *)malloc(sizeof(grid_cell));
     int i = grid_cell_->l_pos;
     int r = (grid_cell_->g_pos) / 14;
@@ -67,8 +72,7 @@ grid_cell *make_grid(global *game, grid_cell *grid_cell_, shop *my_shop)
     return (grid_cell_);
 }
 
-grid_cell init_cell(global *game, grid_cell grid_cell_, shop *my_shop)
-{
+grid_cell init_cell(global *game, grid_cell grid_cell_, shop *my_shop) {
     int i = 0;
     int r = 0;
     int dx = 51;
@@ -84,7 +88,7 @@ grid_cell init_cell(global *game, grid_cell grid_cell_, shop *my_shop)
     sfCircleShape *c_4 = sfCircleShape_create();
     sfVector2f p_4 = {original_x + (dx * (2 + i)), original_y + (dy * (0 + i))};
     sfCircleShape *c_5 = sfCircleShape_create();
-    sfVector2f p_5 = {original_x + (dx * (0 + i)) + dx - 25, original_y + (dy * (0 + i) - 25)};
+    sfVector2f p_5 = {original_x+ ( dx * (0 + i)) + dx - 25 , original_y + (dy * (0 + i) - 25)};
 
     sfCircleShape_setFillColor(c_1, sfBlue);
     sfCircleShape_setRadius(c_1, 5.0);
@@ -119,8 +123,7 @@ grid_cell init_cell(global *game, grid_cell grid_cell_, shop *my_shop)
     return (grid_cell_);
 }
 
-void draw_cell(global *game, grid_cell *new, shop *my_shop)
-{
+void draw_cell(global *game, grid_cell *new, shop *my_shop) {
     sfRenderWindow_drawCircleShape(game->window, new->c_1, NULL);
     sfRenderWindow_drawCircleShape(game->window, new->c_2, NULL);
     sfRenderWindow_drawCircleShape(game->window, new->c_3, NULL);
@@ -130,13 +133,12 @@ void draw_cell(global *game, grid_cell *new, shop *my_shop)
         draw_cell(game, new->next_cell, my_shop);
 }
 
-void read_path(global *game)
-{
+void read_path(global *game) {
     int level = game->menus->level;
-    char *buffer = malloc(sizeof(char) * 136);
+    char *buffer = malloc(sizeof(char) * 139);
     int fd = open("path", O_RDONLY);
 
-    int test = read(fd, buffer, 136);
+    int test = read(fd, buffer, 139);
     buffer[test] = '\0';
     close(fd);
     char **temp_split = my_split_tab(buffer, '\n');
@@ -145,16 +147,24 @@ void read_path(global *game)
     game->path_way = split_path;
 }
 
-void add_cell_status(global *game, grid_cell *new, shop *my_shop)
-{
+const char *str = "temp_f";
+
+void add_cell_status(global *game, grid_cell *new, shop *my_shop, FILE* output_file) {
     int i = 0;
+    int fd = open("path", O_RDONLY);
 
     new->status = 1;
     for (; game->path_way[i]; i++)
     {
-        if (my_getnbr(game->path_way[i]) == new->g_pos)
+        if (my_getnbr(game->path_way[i]) == new->g_pos) {
+            fwrite(new_put_nbr_str((int)new->p_5.x), 1, 3, output_file);
+            fwrite(",", 1, 1, output_file);
+            fwrite(new_put_nbr_str((int)new->p_5.y), 1, 3, output_file);
+            fwrite("\n", 1, 1, output_file);
             new->status = 2;
+        }
     }
+    close(fd);
     if (new->g_pos != 196)
-        add_cell_status(game, new->next_cell, my_shop);
+        add_cell_status(game, new->next_cell, my_shop, output_file);
 }

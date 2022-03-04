@@ -17,6 +17,7 @@
     #include <sys/stat.h>
     #include <fcntl.h>
     #include <unistd.h>
+    #include <stdio.h>
 
 typedef struct sounds {
     sfSoundBuffer *music;
@@ -220,6 +221,16 @@ typedef struct gold {
     char *temp;
 } gold;
 
+typedef struct enemy_ {
+    struct enemy_ *enemy_first;
+    sfSprite *enemy_1;
+    sfVector2f pos;
+    sfTexture *texture;
+    struct enemy_ *enemy_next;
+    int number;
+    sfVector2f direct;
+}enemy_;
+
 typedef struct global {
     sfRenderWindow *window;
     sfCircleShape * radius;
@@ -247,10 +258,12 @@ typedef struct global {
     int on_map;
     sfVector2f pos_free;
     char **path_way;
+    char *total_path;
     int path_nbr;
     int click;
     int take_pos;
     int on_bat;
+    int unground;
 } global;
 
 void open_shop(global *game, shop *my_shop);
@@ -289,7 +302,7 @@ void click_shop(global *game, shop *my_shop);
 void check_shop(global *game, shop *my_shop);
 grid_cell *make_grid(global *game , grid_cell * grid_cell_ , shop * my_shop);
 grid_cell init_cell(global *game , grid_cell grid_cell_ , shop * my_shop);
-void add_cell_status(global *game, grid_cell * new, shop * my_shop);
+void add_cell_status(global *game, grid_cell * new, shop * my_shop, FILE* output_file);
 void drop_cannon(global *game, shop *my_shop);
 void drop_archer(global *game, shop *my_shop);
 void drop_mortar(global *game, shop *my_shop);
@@ -316,5 +329,6 @@ void place_struct(global *game, struct grid_cell *new, shop *my_shop);
 void up_struct(global *game, batiment *bat);
 void destroy_struct(global *game, batiment *bat);
 void set_texture_hdv(global *game, batiment *hdv);
+void create_path(global *game, grid_cell *new, shop *my_shop);
 
 #endif /* MY_DEFENDER_H_ */

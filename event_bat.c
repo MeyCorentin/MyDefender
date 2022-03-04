@@ -20,20 +20,20 @@ int is_only(global *game, int num)
 
 void get_cannon(global *game, shop *my_shop)
 {
-    sfVector2i pos_mouse = sfMouse_getPosition((sfWindow *) game->window);
-    sfColor opacity_down = {255 ,255, 255, 150};
+    sfVector2i pos_mouse = sfMouse_getPosition((sfWindow *)game->window);
+    sfColor opacity_down = {255, 255, 255, 150};
     sfVector2f rad_pos;
 
     if (pos_mouse.x >= my_shop->pos_cannon.x && pos_mouse.x <= \
-my_shop->pos_cannon.x + 120 && pos_mouse.y >= my_shop->pos_cannon.y && \
-pos_mouse.y <= my_shop->pos_cannon.y + 100) {
+		my_shop->pos_cannon.x + 120 && pos_mouse.y >= my_shop->pos_cannon.y && \
+		pos_mouse.y <= my_shop->pos_cannon.y + 100) {
 		my_shop->stats->mouse->is_cannon = 0;
         if (sfMouse_isButtonPressed(sfMouseLeft) == sfTrue && is_only(game, 0) == 0) {
 			rad_pos.x = pos_mouse.x - 90;
 			rad_pos.y = pos_mouse.y - 90;
-			sfCircleShape_setPosition(game->radius , rad_pos);
+			sfCircleShape_setPosition(game->radius, rad_pos);
 			sfCircleShape_setFillColor(game->radius, opacity_down);
-			sfCircleShape_setRadius(game->radius , 90);
+			sfCircleShape_setRadius(game->radius, 90);
 			game->on_map = 1;
 			game->texture = "pictures/defences/cannon/1.png";
 			my_shop->cannon = sfTexture_createFromFile(game->texture, sfFalse);

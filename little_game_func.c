@@ -15,19 +15,20 @@ batiment *get_last(global *game, sfVector2f pos, int name)
     batiment *temp = game->first;
 
     while (temp->next != NULL)
-    {
         temp = temp->next;
-    }
     temp->next = add_bat(game, temp, pos, name);
     return (temp->next);
 }
 
 void draw_level(global *game, batiment *temp)
 {
-    if (temp->level == 10) {
+    if (temp->level == 10)
+    {
         temp->temp = malloc(sizeof(char) * 3);
         temp->temp[2] = '\0';
-    } else {
+    }
+    else
+    {
         temp->temp = malloc(sizeof(char) * 2);
         temp->temp[1] = '\0';
     }
@@ -38,7 +39,7 @@ void draw_level(global *game, batiment *temp)
     sfRenderWindow_drawText(game->window, temp->level_str, sfFalse);
 }
 
-void draw_rad(global *game, batiment * bat_)
+void draw_rad(global *game, batiment *bat_)
 {
     sfCircleShape *radius = sfCircleShape_create();
     sfVector2f radius_pos;
@@ -48,42 +49,42 @@ void draw_rad(global *game, batiment * bat_)
     radius_pos = bat_->pos;
     if (game->rad_god == 1)
     {
-        if (bat_->type == 1)
+        if (bat_->name == 1)
         {
             sfCircleShape_setRadius(radius, 90);
             radius_pos.x -= 90 / 2 - 60 / 2 + 12;
             radius_pos.y -= 90 / 2 - 60 / 2 + 2;
             rad_size = 90;
         }
-        if (bat_->type == 2)
+        if (bat_->name == 2)
         {
             sfCircleShape_setRadius(radius, 110);
             radius_pos.x -= 110 / 2 - 60 / 2 + 22;
             radius_pos.y -= 110 / 2 - 60 / 2 + 12;
             rad_size = 110;
         }
-        if (bat_->type == 3)
+        if (bat_->name == 3)
         {
             sfCircleShape_setRadius(radius, 140);
             radius_pos.x -= 140 / 2 - 60 / 2 + 45;
             radius_pos.y -= 140 / 2 - 60 / 2 + 25;
             rad_size = 140;
         }
-        if (bat_->type == 4)
+        if (bat_->name == 4)
         {
             sfCircleShape_setRadius(radius, 140);
             radius_pos.x -= 140 / 2 - 60 / 2 + 45;
             radius_pos.y -= 140 / 2 - 60 / 2 + 25;
             rad_size = 140;
         }
-        if (bat_->type == 5)
+        if (bat_->name == 5)
         {
             sfCircleShape_setRadius(radius, 200);
             radius_pos.x -= 200 / 2 - 60 / 2 + 80;
             radius_pos.y -= 200 / 2 - 60 / 2 + 50;
             rad_size = 200;
         }
-        if (bat_->type == 6)
+        if (bat_->name == 6)
         {
             sfCircleShape_setRadius(radius, 90);
             radius_pos.x -= 80 / 2 - 60 / 2 + 12;
@@ -101,15 +102,15 @@ void draw_rad(global *game, batiment * bat_)
         draw_rad(game, bat_->next);
 }
 
-void check_hit(global *game, batiment * bat_)
+void check_hit(global *game, batiment *bat_)
 {
     sfVector2i pos_mouse = sfMouse_getPosition((sfWindow *)game->window);
 
     if (game->rad_god == 1)
     {
-        if ((abs(pos_mouse.x -(bat_->rad_size/2) -  bat_->pos.x) * (abs(pos_mouse.x -(bat_->rad_size/2) -  bat_->pos.x)) +
-            abs(pos_mouse.y - (bat_->rad_size/2) - bat_->pos.y)) *(abs(pos_mouse.y - (bat_->rad_size/2) - bat_->pos.y))
-             < (bat_->rad_size)* (bat_->rad_size))                  // Test si cliqué.
+        if ((abs(pos_mouse.x - (bat_->rad_size / 2) - bat_->pos.x) * (abs(pos_mouse.x - (bat_->rad_size / 2) - bat_->pos.x)) +
+            abs(pos_mouse.y - (bat_->rad_size / 2) - bat_->pos.y)) * (abs(pos_mouse.y - (bat_->rad_size / 2) - bat_->pos.y))
+            < (bat_->rad_size) * (bat_->rad_size))                            // Test si cliqué.
             sfCircleShape_setFillColor(bat_->radius, sfGreen);
         sfRenderWindow_drawCircleShape(game->window, bat_->radius, NULL);
     }
@@ -119,7 +120,8 @@ void check_hit(global *game, batiment * bat_)
 
 void draw_structs(global *game, batiment *bat_)
 {
-    if (bat_->on_bat == 0) {
+    if (bat_->on_bat == 0)
+    {
         bat_->level_up->pos_up.x = bat_->pos.x + 15;
         bat_->level_up->pos_up.y = bat_->pos.y + 97;
         sfSprite_setPosition(bat_->level_up->up, bat_->level_up->pos_up);
@@ -162,7 +164,7 @@ void draw_game(global *game, shop *my_shop, grid_cell grid_cell)
     (game->god == 0) ? draw_cell(game, grid_cell.next_cell, my_shop) : 1;
     update_gold(game);
     draw_rad(game, game->first);
-    sfRenderWindow_drawCircleShape(game->window , game->radius , sfFalse);
+    sfRenderWindow_drawCircleShape(game->window, game->radius, sfFalse);
     place_struct(game, &grid_cell, my_shop);
     check_hit(game, game->first);
     draw_structs(game, game->first);
