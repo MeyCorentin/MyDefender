@@ -36,6 +36,8 @@ sfKeyboard_isKeyPressed(sfKeyQ)) && game->secs != 4) {
             start_game(game);
         } if (sfKeyboard_isKeyPressed(sfKeyR)) {
             sfSound_play(game->sounds->click);
+            game->gold = 100000;
+            game->price_hdv = 1000;
             game->level = 1;
             start_game(game);
         }
@@ -69,6 +71,8 @@ void create_window(int level)
     game->clock = sfClock_create();
     game->is_sounds = 0;
     game->is_music = 0;
+    game->gold = 100000;
+    game->price_hdv = 1000;
     create_sounds(game);
     set_sounds_buttons(game, menus);
     game->menus = menus;

@@ -264,6 +264,8 @@ typedef struct global {
     int take_pos;
     int on_bat;
     int unground;
+    int gold;
+    int price_hdv;
 } global;
 
 void open_shop(global *game, shop *my_shop);

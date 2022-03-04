@@ -29,6 +29,8 @@ void up_struct(global *game, batiment *bat)
         bat->stats->price *= 1.5;
         bat->stats->pv *= 1.5;
         if (bat->name == -1) {
+            game->price_hdv = bat->stats->price;
+            game->gold = bat->gold;
             game->level += 1;
             set_texture_hdv(game, bat);
             set_minimap(game->menus);

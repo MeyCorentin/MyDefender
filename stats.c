@@ -14,7 +14,7 @@ void set_stats_hdv(global *game, batiment *bat)
     bat->stats->pv = 1000;
     bat->stats->damage = 0;
     bat->stats->attack_speed = 0;
-    bat->stats->price = 1000;
+    bat->stats->price = game->price_hdv;
 }
 
 void set_stats_cannon(global *game, batiment *bat)

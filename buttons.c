@@ -24,6 +24,9 @@ void check_others_buttons(global *game, menu *menus, sfVector2i mouse)
         + 236) {
         sfText_setColor(menus->c_restart, sfWhite);
         if (game->event.type == sfEvtMouseButtonReleased) {
+            game->level = 1;
+            game->gold = 100000;
+            game->price_hdv = 1000;
             sfSound_play(game->sounds->click);
             start_game(game);
         }

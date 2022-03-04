@@ -108,7 +108,7 @@ batiment *create_hdv(global *game)
     hdv->next = NULL;
     hdv->last = NULL;
     hdv->level = game->level;
-    hdv->gold = 100000;
+    hdv->gold = game->gold;
     hdv->bat = sfSprite_create();
     hdv->level_str = sfText_create();
     hdv->type = 9;
