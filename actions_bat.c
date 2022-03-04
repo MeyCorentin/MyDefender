@@ -15,16 +15,25 @@ void destroy_struct(global *game, batiment *bat)
     temp = bat;
     prev = bat->prev;
     prev->next = temp->next;
-    game->first->gold += bat->stats->price / 2;
+    game->first->gold += bat->stats->price / 3;
     free(temp);
 }
 
 void up_struct(global *game, batiment *bat)
 {
-    sfSound_play(game->sounds->anvil);
-    bat->level += 1;
-    game->first->gold -= bat->stats->price;
-    bat->stats->damage *= 1.5;
-    bat->stats->price *= 1.5;
-    bat->stats->pv *= 1.5;
+    if (bat->on_bat == 0) {
+        sfSound_play(game->sounds->anvil);
+        bat->level += 1;
+        game->first->gold -= bat->stats->price;
+        bat->stats->damage *= 1.5;
+        bat->stats->price *= 1.5;
+        bat->stats->pv *= 1.5;
+        bat->on_bat = 1;
+        if (bat->name == -1) {
+            game->level += 1;
+            set_texture_hdv(game, bat);
+            set_minimap(game->menus);
+            set_texture_map(game);
+        }
+    }
 }

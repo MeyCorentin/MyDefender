@@ -34,7 +34,7 @@ void draw_level(global *game, batiment *temp)
     temp->pos_level.x = temp->pos.x + 56;
     temp->pos_level.y = temp->pos.y + 90;
     sfText_setPosition(temp->level_str, temp->pos_level);
-    sfText_setString(temp->level_str, new_put_nbr_str(temp->level, temp->temp));
+    sfText_setString(temp->level_str, new_put_nbr_str(temp->level));
     sfRenderWindow_drawText(game->window, temp->level_str, sfFalse);
 }
 
@@ -124,10 +124,9 @@ void draw_structs(global *game, batiment *bat_)
         bat_->level_up->pos_up.y = bat_->pos.y + 97;
         sfSprite_setPosition(bat_->level_up->up, bat_->level_up->pos_up);
         sfRenderWindow_drawSprite(game->window, bat_->level_up->up, sfFalse);
-        if (bat_->name != -1) {
+        if (bat_->name != -1)
             sfRenderWindow_drawSprite(game->window, bat_->level_up->destroy, sfFalse);
-            sfText_setString(bat_->level_up->cost, new_put_nbr_str(bat_->stats->price, bat_->temp));
-        }
+        sfText_setString(bat_->level_up->cost, new_put_nbr_str(bat_->stats->price));
         bat_->level_up->pos_cost.x = bat_->level_up->pos_up.x - 20;
         bat_->level_up->pos_cost.y = bat_->level_up->pos_up.y + 30;
         sfText_setPosition(bat_->level_up->cost, bat_->level_up->pos_cost);
@@ -137,6 +136,22 @@ void draw_structs(global *game, batiment *bat_)
     draw_level(game, bat_);
     if (bat_->next != NULL)
         draw_structs(game, bat_->next);
+}
+
+void draw_stats(global *game, shop *my_shop)
+{
+    if (my_shop->stats->mouse->is_cannon == 0 && game->take == 1)
+        sfRenderWindow_drawSprite(game->window, my_shop->stats->cannon, sfFalse);
+    if (my_shop->stats->mouse->is_archer == 0 && game->take == 1)
+        sfRenderWindow_drawSprite(game->window, my_shop->stats->archer, sfFalse);
+    if (my_shop->stats->mouse->is_mortar == 0 && game->take == 1)
+        sfRenderWindow_drawSprite(game->window, my_shop->stats->mortar, sfFalse);
+    if (my_shop->stats->mouse->is_air == 0 && game->take == 1)
+        sfRenderWindow_drawSprite(game->window, my_shop->stats->air, sfFalse);
+    if (my_shop->stats->mouse->is_xbow == 0 && game->take == 1)
+        sfRenderWindow_drawSprite(game->window, my_shop->stats->xbow, sfFalse);
+    if (my_shop->stats->mouse->is_wizard == 0 && game->take == 1)
+        sfRenderWindow_drawSprite(game->window, my_shop->stats->wizard, sfFalse);
 }
 
 void draw_game(global *game, shop *my_shop, grid_cell grid_cell)
@@ -151,17 +166,17 @@ void draw_game(global *game, shop *my_shop, grid_cell grid_cell)
     place_struct(game, &grid_cell, my_shop);
     check_hit(game, game->first);
     draw_structs(game, game->first);
+    draw_stats(game, my_shop);
 }
 
 void set_game(global *game)
 {
-    sfTexture *t_map = sfTexture_createFromFile("pictures/maps/backgrounds/4.png", NULL);
     sfCircleShape *radius = sfCircleShape_create();
 
     game->first = create_hdv(game);
     game->god = 1;
     game->map = sfSprite_create();
-    sfSprite_setTexture(game->map, t_map, sfFalse);
+    set_texture_map(game);
     set_music(game);
     create_pause(game);
     game->shop_is_open = 1;

@@ -24,6 +24,7 @@ miniatures/9.png", NULL);
     if (menus->level == 10)
         menus->t_map = sfTexture_createFromFile("pictures/maps/\
 miniatures/10.png", NULL);
+    sfSprite_setTexture(menus->map, menus->t_map, sfFalse);
 }
 
 void set_minimap(menu *menus)
@@ -63,6 +64,7 @@ void set_texture_map2(global *game)
     if (game->level == 10)
         game->t_map = sfTexture_createFromFile("pictures/maps/backgrounds/\
 10.png", NULL);
+    sfSprite_setTexture(game->map, game->t_map, sfFalse);
 }
 
 void set_texture_map(global *game)

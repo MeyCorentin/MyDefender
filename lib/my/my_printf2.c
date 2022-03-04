@@ -75,12 +75,11 @@ void binary(int nb)
 void integer(int nb)
 {
     char *new_nb = malloc(sizeof(char *));
-    char *result = malloc(sizeof(char *));
 
     if (nb >= 0) {
-        my_strcpy(new_nb, new_put_nbr_str(nb, result));
+        my_strcpy(new_nb, new_put_nbr_str(nb));
     } else {
-        new_nb = new_put_nbr_str(4294967295 + nb, result);
+        new_nb = new_put_nbr_str(4294967295 + nb);
     }
     my_putstr(new_nb);
     free(new_nb);

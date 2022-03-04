@@ -231,7 +231,7 @@ void start_game(global *game)
         update_game(game);                                                    // Met a jour les sprites.
         draw_game(game, my_shop, grid_cell);                                             // Draw la map.                                   // Draw les bâtiments.
         (game->shop_is_open == 0) ? open_shop(game, my_shop) : 1;
-        sfRenderWindow_display(game->window);
         check_game_event(game, my_shop);                                      // Regarde les inputs.
+        sfRenderWindow_display(game->window);
     }
 }

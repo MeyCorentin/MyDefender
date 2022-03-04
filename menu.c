@@ -86,7 +86,6 @@ menu *create_menu(int level)
     sfSprite_setTexture(menus->background, menus->t_background, sfFalse);
     sfSprite_setTexture(menus->restart, menus->t_battle, sfFalse);
     sfSprite_setTexture(menus->quit, menus->t_quit, sfFalse);
-    sfSprite_setTexture(menus->map, menus->t_map, sfFalse);
     sfSprite_setTexture(menus->continu, menus->t_battle, sfFalse);
     return (menus);
 }

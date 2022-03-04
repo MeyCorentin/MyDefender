@@ -56,31 +56,33 @@ batiment *add_bat(global *game, batiment *prev, sfVector2f pos, int name)
     sfText_setColor(new_bat->level_str, sfBlue);
     add_bat_buttons(game, new_bat);
     check_name(game, name, new_bat);
+    game->secs = 5;
     return (new_bat);
 }
 
 void set_texture_hdv(global *game, batiment *hdv)
 {
-    if (game->level == 1)
+    if (hdv->level == 1)
         hdv->t_bat = sfTexture_createFromFile("pictures/hdv/1.png", NULL);
-    if (game->level == 2)
+    if (hdv->level == 2)
         hdv->t_bat = sfTexture_createFromFile("pictures/hdv/2.png", NULL);
-    if (game->level == 3)
+    if (hdv->level == 3)
         hdv->t_bat = sfTexture_createFromFile("pictures/hdv/3.png", NULL);
-    if (game->level == 4)
+    if (hdv->level == 4)
         hdv->t_bat = sfTexture_createFromFile("pictures/hdv/4.png", NULL);
-    if (game->level == 5)
+    if (hdv->level == 5)
         hdv->t_bat = sfTexture_createFromFile("pictures/hdv/5.png", NULL);
-    if (game->level == 6)
+    if (hdv->level == 6)
         hdv->t_bat = sfTexture_createFromFile("pictures/hdv/6.png", NULL);
-    if (game->level == 7)
+    if (hdv->level == 7)
         hdv->t_bat = sfTexture_createFromFile("pictures/hdv/7.png", NULL);
-    if (game->level == 8)
+    if (hdv->level == 8)
         hdv->t_bat = sfTexture_createFromFile("pictures/hdv/8.png", NULL);
-    if (game->level == 9)
+    if (hdv->level == 9)
         hdv->t_bat = sfTexture_createFromFile("pictures/hdv/9.png", NULL);
-    if (game->level == 10)
+    if (hdv->level == 10)
         hdv->t_bat = sfTexture_createFromFile("pictures/hdv/10.png", NULL);
+    sfSprite_setTexture(hdv->bat, hdv->t_bat, sfFalse);
 }
 
 batiment *create_hdv(global *game)
@@ -94,7 +96,7 @@ batiment *create_hdv(global *game)
     hdv->temp = malloc(sizeof(char *));
     set_stats_hdv(game, hdv);
     sfText_setFont(hdv->level_up->cost, font);
-    sfText_setString(hdv->level_up->cost, new_put_nbr_str(hdv->stats->price, hdv->temp));
+    sfText_setString(hdv->level_up->cost, new_put_nbr_str(hdv->stats->price));
     sfText_setColor(hdv->level_up->cost, sfGreen);
     hdv->level_up->up = sfSprite_create();
     hdv->level_up->t_up = sfTexture_createFromFile("pictures/buttons/arrow.png", NULL);
@@ -118,7 +120,6 @@ batiment *create_hdv(global *game)
     hdv->pos.y = 0;
     sfText_setFont(hdv->level_str, font);
     set_texture_hdv(game, hdv);
-    sfSprite_setTexture(hdv->bat, hdv->t_bat, sfFalse);
     sfText_setColor(hdv->level_str, sfBlue);
     return (hdv);
 }

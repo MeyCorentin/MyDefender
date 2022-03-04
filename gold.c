@@ -27,12 +27,8 @@ void create_gold(global *game)
 
 void update_gold(global *game)
 {
-    int cmpt = 0;
-
-    for (; game->gold_gestion->temp[cmpt] != '\0'; cmpt += 1)
-        game->gold_gestion->temp[cmpt] = '\0';
     sfText_setString(game->gold_gestion->money,	"Gold : ");
-    sfText_setString(game->gold_gestion->number, new_put_nbr_str(game->first->gold, game->gold_gestion->temp));
+    sfText_setString(game->gold_gestion->number, new_put_nbr_str(game->first->gold));
     sfRenderWindow_drawText(game->window, game->gold_gestion->money, sfFalse);
     sfRenderWindow_drawText(game->window, game->gold_gestion->number, sfFalse);
 }

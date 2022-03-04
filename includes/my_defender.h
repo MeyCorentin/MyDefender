@@ -91,7 +91,39 @@ typedef struct batiment {
     int name;
 } batiment;
 
+typedef struct mouse {
+    int is_cannon;
+    int is_archer;
+    int is_mortar;
+    int is_air;
+    int is_xbow;
+    int is_wizard;
+} mouse_t;
+
+typedef struct stat_shop {
+    sfSprite *cannon;
+    sfSprite *archer;
+    sfSprite *mortar;
+    sfSprite *air;
+    sfSprite *xbow;
+    sfSprite *wizard;
+    sfTexture *t_cannon;
+    sfTexture *t_archer;
+    sfTexture *t_mortar;
+    sfTexture *t_air;
+    sfTexture *t_xbow;
+    sfTexture *t_wizard;
+    sfVector2f pos_cannon;
+    sfVector2f pos_archer;
+    sfVector2f pos_mortar;
+    sfVector2f pos_air;
+    sfVector2f pos_xbow;
+    sfVector2f pos_wizard;
+    mouse_t *mouse;
+} stat_shop;
+
 typedef struct shop {
+    stat_shop *stats;
     sfSprite *button;
     sfTexture *open;
     sfTexture *close;
@@ -283,5 +315,6 @@ void draw_ground(global *game , struct grid_cell *new, shop * my_shop);
 void place_struct(global *game, struct grid_cell *new, shop *my_shop);
 void up_struct(global *game, batiment *bat);
 void destroy_struct(global *game, batiment *bat);
+void set_texture_hdv(global *game, batiment *hdv);
 
 #endif /* MY_DEFENDER_H_ */

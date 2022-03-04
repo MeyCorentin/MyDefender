@@ -25,12 +25,28 @@ char *calculs_str(int count, int nb, char *resultat, int cmpt_str)
     return (resultat);
 }
 
-char *new_put_nbr_str(int nb, char *resultat)
+int get_len(int nb)
+{
+    int len = 0;
+
+    while (nb > 1) {
+        nb /= 10;
+        len += 1;
+    }
+    return (len);
+}
+
+char *new_put_nbr_str(int nb)
 {
     int count = -1;
     int digits = nb;
     int cmpt_str = 0;
+    char *resultat = malloc(sizeof(char) * (get_len(nb) + 1));
 
+    while (digits != 0) {
+        digits = digits / 10;
+        count = count + 1;
+    }
     if (nb < 0) {
         nb = nb - nb * 2;
         resultat[cmpt_str] = '-';
@@ -38,10 +54,6 @@ char *new_put_nbr_str(int nb, char *resultat)
     }
     if (nb == 0)
         resultat[cmpt_str] = '0';
-    while (digits != 0) {
-        digits = digits / 10;
-        count = count + 1;
-    }
     resultat = calculs_str(count, nb, resultat, cmpt_str);
     return (resultat);
 }

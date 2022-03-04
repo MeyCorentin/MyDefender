@@ -38,7 +38,7 @@ char *my_strncpy(char *dest, char const *src, int n);
 char *my_strstr(char *str, char const *to_find);
 char *my_strupcase(char *str);
 void my_swap(int *a, int *b);
-char *new_put_nbr_str(int nb, char *resultat);
+char *new_put_nbr_str(int nb);
 void deci_to_oct(int character);
 void deci_to_octal(int nb);
 void binary(int nb);
