@@ -7,37 +7,37 @@
 
 int my_strlen(char const *str);
 
-int test_lowcase(char const *str, int cmpt, int boolean)
+int test_lowcase(char const *str, int cmpt, int boole)
 {
     char cmpt_ascii;
     for (cmpt_ascii = 65; cmpt_ascii <= 90; cmpt_ascii += 1) {
         if (str[cmpt] == cmpt_ascii)
-            boolean = 1;
+            boole = 1;
     }
-    return (boolean);
+    return (boole);
 }
 
-int test_upcase(char const *str, int cmpt, int boolean)
+int test_upcase(char const *str, int cmpt, int boole)
 {
     char cmpt_ascii;
     for (cmpt_ascii = 97; cmpt_ascii <= 122; cmpt_ascii += 1) {
         if (str[cmpt] == cmpt_ascii)
-            boolean = 1;
+            boole = 1;
     }
-    return (boolean);
+    return (boole);
 }
 
 int my_str_isalpha(char const *str)
 {
     int cmpt;
-    int boolean;
+    int boole;
     if (my_strlen(str) <= 0)
         return (0);
     for (cmpt = 0; cmpt < my_strlen(str); cmpt += 1) {
-        boolean = 0;
-        boolean = test_lowcase(str, cmpt, boolean);
-        boolean = test_upcase(str, cmpt, boolean);
-        if (boolean == 0) {
+        boole = 0;
+        boole = test_lowcase(str, cmpt, boole);
+        boole = test_upcase(str, cmpt, boole);
+        if (boole == 0) {
             return (0);
         }
     }

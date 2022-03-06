@@ -18,6 +18,8 @@
     #include <fcntl.h>
     #include <unistd.h>
     #include <stdio.h>
+    #include <math.h>
+    #include <string.h>
 
 typedef struct sounds {
     sfSoundBuffer *music;
@@ -29,7 +31,15 @@ typedef struct sounds {
     sfSound *click;
 } sounds;
 
+typedef struct coords {
+    int dx;
+    int dy;
+    int original_x;
+    int original_y;
+} coords_t;
+
 typedef struct grid_cell {
+    coords_t *coords;
     sfSprite* ground;
     int g_pos;
     int l_pos;
@@ -39,14 +49,15 @@ typedef struct grid_cell {
     sfCircleShape * c_3;
     sfCircleShape * c_4;
     sfCircleShape * c_5;
+    sfVector2f p_1;
+    sfVector2f p_2;
     sfVector2f p_3;
+    sfVector2f p_4;
     sfVector2f p_5;
-    int dx;
-    int dy;
     struct grid_cell *first_cell;
     struct grid_cell *prev_cell;
     struct grid_cell *next_cell;
-}grid_cell;
+} grid_cell;
 
 typedef struct level_up {
     sfSprite *up;
@@ -65,6 +76,8 @@ typedef struct stats_bat {
     int price;
     float attack_speed;
     char *name;
+    int bat_name;
+    int level;
 } stats_bat;
 
 typedef struct batiment {
@@ -79,17 +92,15 @@ typedef struct batiment {
     int rad_size;
     int type;
     int status;
-    int level;
     float range;
     int gold;
     sfSprite *bat;
     sfTexture *t_bat;
     sfVector2f pos;
     char *temp;
-    sfText * level_str;
+    sfText *level_str;
     sfVector2f pos_level;
     int on_bat;
-    int name;
 } batiment;
 
 typedef struct mouse {
@@ -123,25 +134,35 @@ typedef struct stat_shop {
     mouse_t *mouse;
 } stat_shop;
 
-typedef struct shop {
-    stat_shop *stats;
-    sfSprite *button;
+typedef struct t_shop {
+    sfTexture *cannon;
+    sfTexture *archer;
+    sfTexture *mortar;
+    sfTexture *air_defence;
+    sfTexture *xbow;
+    sfTexture *wizard;
+    sfTexture *t_wizard;
+    sfTexture *t_xbow;
+    sfTexture *t_air_defence;
+    sfTexture *t_mortar;
+    sfTexture *t_archer;
+    sfTexture *t_cannon;
     sfTexture *open;
     sfTexture *close;
+} t_shop_t;
+
+typedef struct shop {
+    stat_shop *stats;
+    t_shop_t *t_shop;
+    sfSprite *button;
     sfVector2f pos_button_close;
     sfVector2f pos_button_open;
     sfSprite *s_cannon;
-    sfTexture *t_cannon;
     sfSprite *s_archer;
-    sfTexture *t_archer;
     sfSprite *s_mortar;
-    sfTexture *t_mortar;
     sfSprite *s_air_defence;
-    sfTexture *t_air_defence;
     sfSprite *s_xbow;
-    sfTexture *t_xbow;
     sfSprite *s_wizard;
-    sfTexture *t_wizard;
     sfVector2f pos_cannon;
     sfVector2f pos_archer;
     sfVector2f pos_mortar;
@@ -149,30 +170,30 @@ typedef struct shop {
     sfVector2f pos_xbow;
     sfVector2f pos_wizard;
     int snap;
-    sfTexture *cannon;
-    sfTexture *archer;
-    sfTexture *mortar;
-    sfTexture *air_defence;
-    sfTexture *xbow;
-    sfTexture *wizard;
 } shop;
 
-typedef struct menu {
-    int level;
-    sfSprite *music;
-    sfSprite *sounds;
+typedef struct t_menu {
     sfTexture *m_on;
     sfTexture *m_off;
     sfTexture *s_on;
     sfTexture *s_off;
+    sfTexture *t_battle;
+    sfTexture *t_quit;
+    sfTexture *t_map;
+    sfTexture *t_background;
+    sfFont *supercell;
+} t_menu_t;
+
+typedef struct menu {
+    int level;
+    t_menu_t *t_menu;
+    sfSprite *music;
+    sfSprite *sounds;
     sfVector2f pos_music;
     sfVector2f pos_sounds;
     sfSprite *restart;
-    sfTexture *t_battle;
     sfSprite *quit;
-    sfTexture *t_quit;
     sfSprite *map;
-    sfTexture *t_map;
     sfSprite *continu;
     sfVector2f pos_continu;
     sfVector2f pos_restart;
@@ -181,14 +202,26 @@ typedef struct menu {
     sfVector2f pos_map;
     sfText *c_continu;
     sfText *c_restart;
-    sfFont *supercell;
     sfVector2f pos_con;
     sfVector2f pos_res;
     sfSprite *background;
-    sfTexture *t_background;
 } menu;
 
+typedef struct p_pause {
+    sfVector2f pos_c_con;
+    sfVector2f pos_c_res;
+    sfVector2f pos_c_quit;
+    sfVector2f pos_back;
+    sfVector2f pos_con;
+    sfVector2f pos_res;
+    sfVector2f pos_quit;
+    sfVector2f pos_music;
+    sfVector2f pos_sounds;
+    sfVector2f pos_text;
+} p_pause_t;
+
 typedef struct menu_pause {
+    p_pause_t *p_pause;
     sfSprite *music;
     sfSprite *sounds;
     sfSprite *back;
@@ -200,17 +233,7 @@ typedef struct menu_pause {
     sfText *c_quit;
     sfText *c_continu;
     sfText *c_restart;
-    sfVector2f pos_c_con;
-    sfVector2f pos_c_res;
-    sfVector2f pos_c_quit;
-    sfVector2f pos_back;
-    sfVector2f pos_con;
-    sfVector2f pos_res;
-    sfVector2f pos_quit;
-    sfVector2f pos_music;
-    sfVector2f pos_sounds;
     sfText *text;
-    sfVector2f pos_text;
 } menu_pause;
 
 typedef struct gold {
@@ -229,41 +252,49 @@ typedef struct enemy_ {
     struct enemy_ *enemy_next;
     int number;
     sfVector2f direct;
-}enemy_;
+} enemy_;
 
-typedef struct global {
-    sfRenderWindow *window;
-    sfCircleShape * radius;
-    sfEvent event;
-    int shop_is_open;
-    int pause_is_open;
-    int level;
-    sfSprite *map;
-    sfTexture *t_map;
-    batiment *first;
-    sounds *sounds;
-    menu_pause *pause;
-    menu *menus;
-    gold *gold_gestion;
-    int god;
-    int rad_god;
-    sfClock *clock;
-    sfTime time;
-    int secs;
-    int take;
-    char *texture;
-    sfVector2f p_5;
-    int is_sounds;
-    int is_music;
-    int on_map;
-    sfVector2f pos_free;
-    char **path_way;
-    char *total_path;
+typedef struct boole {
     int path_nbr;
     int click;
     int take_pos;
     int on_bat;
     int unground;
+    int shop_is_open;
+    int pause_is_open;
+    int god;
+    int is_sounds;
+    int is_music;
+    int on_map;
+    int take;
+} boole_t;
+
+typedef struct map {
+    sfSprite *map;
+    sfTexture *t_map;
+    sfVector2f p_5;
+    sfVector2f pos_free;
+    char **path_way;
+    char *total_path;
+} map_t;
+
+typedef struct global {
+    boole_t *boole;
+    map_t *map;
+    sfRenderWindow *window;
+    sfCircleShape * radius;
+    sfEvent event;
+    int level;
+    batiment *first;
+    sounds *sounds;
+    menu_pause *pause;
+    menu *menus;
+    gold *gold_gestion;
+    int rad_god;
+    sfClock *clock;
+    sfTime time;
+    int secs;
+    char *texture;
     int gold;
     int price_hdv;
 } global;
@@ -290,7 +321,7 @@ void set_menu(global *game);
 void check_sounds_pause(global *game, sfVector2i mouse);
 void check_music_pause(global *game, sfVector2i mouse);
 void set_pos_buttons(global *game);
-void set_pos_sounds(global *game);
+void set_pos_sounds(global *game, sfVector2f scale_text);
 void set_pos_text(global *game);
 void create_window(int level);
 void check_pause_event(global *game);
@@ -300,11 +331,13 @@ void draw_game(global *game, shop *my_shop, grid_cell grid_cell);
 void draw_structs(global *game, batiment *bat);
 batiment *get_last(global *game, sfVector2f pos, int name);
 void shop_event(global *game, shop *my_shop);
-void click_shop(global *game, shop *my_shop);
+void click_shop(global *game, shop *my_shop, sfVector2i pos_mouse, sfVector2f \
+pos_button);
 void check_shop(global *game, shop *my_shop);
 grid_cell *make_grid(global *game , grid_cell * grid_cell_ , shop * my_shop);
 grid_cell init_cell(global *game , grid_cell grid_cell_ , shop * my_shop);
-void add_cell_status(global *game, grid_cell * new, shop * my_shop, FILE* output_file);
+void add_cell_status(global *game, grid_cell * new, shop * my_shop, FILE* \
+output_file);
 void drop_cannon(global *game, shop *my_shop);
 void drop_archer(global *game, shop *my_shop);
 void drop_mortar(global *game, shop *my_shop);
@@ -326,11 +359,24 @@ int is_only(global *game, int num);
 void struct_event(global *game, batiment *bat_);
 void check_name(global *game, int name, batiment *bat);
 void set_stats_hdv(global *game, batiment *bat);
+void set_stats_cannon(global *game, batiment *bat);
+void set_stats_archer(global *game, batiment *bat);
+void set_stats_mortar(global *game, batiment *bat);
 void draw_ground(global *game , struct grid_cell *new, shop * my_shop);
 void place_struct(global *game, struct grid_cell *new, shop *my_shop);
 void up_struct(global *game, batiment *bat);
 void destroy_struct(global *game, batiment *bat);
 void set_texture_hdv(global *game, batiment *hdv);
 void create_path(global *game, grid_cell *new, shop *my_shop);
+void create_enemy(global *game, struct enemy_ *enemy);
+void draw_enemy(global *game, struct enemy_ *enemy);
+void create_stat_shop(shop *my_shop);
+void snap_obj(global *game, struct grid_cell *new, shop *my_shop, sfVector2i \
+pos_mouse);
+void add_ground(global *game , struct grid_cell *new, shop * my_shop);
+void set_enemy(global *game, struct enemy_ *enemy_f);
+void check_click(global *game, struct grid_cell *grid_cell, shop *my_shop);
+struct grid_cell set_all(global *game, shop *my_shop, struct grid_cell \
+grid_cell, struct enemy_ *enemy_f);
 
 #endif /* MY_DEFENDER_H_ */

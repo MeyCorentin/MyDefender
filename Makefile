@@ -5,7 +5,7 @@
 ## It's the Makefile of my_hunter project
 ##
 
-SRC	 =      lib/my/my_revstr.c      \
+LIB	 =      lib/my/my_revstr.c      \
                 lib/my/my_str_isprintable.c     \
                 lib/my/my_compute_power_rec.c   \
                 lib/my/my_showmem.c     \
@@ -40,7 +40,14 @@ SRC	 =      lib/my/my_revstr.c      \
 		lib/my/my_printf2.c	\
 		lib/my/new_put_nbr.c	\
 
-OBJ = $(SRC:.c=.o)
+SRC =   src/bats/*.c      \
+        src/game/*.c    \
+        src/map/*.c     \
+        src/menus/*.c   \
+        src/shop/*.c    \
+        src/enemys/*.c  \
+
+OBJ = $(LIB:.c=.o)
 
 NAME = my_defender
 
@@ -50,10 +57,8 @@ $(NAME): $(OBJ)
 	@echo ">>> Librairy compiled."
 	@ar rc libmy.a $(OBJ)
 	@echo ">>> Executable \"${NAME}\" created."
-	@gcc -g3 -o ${NAME} main.c shop.c menu.c actions_bat.c stats.c game.c pause.c buttons.c \
-set_hdv.c cell.c map.c clock.c gold.c sounds_buttons.c set_pause.c set_window.c\
- event_pause.c little_game_func.c place_bat.c event_bat.c game_event.c my_tab.c \
--lcsfml-graphics -lcsfml-audio -lcsfml-system -lcsfml-window -Wall -lm -L. libmy.a
+	@gcc -g3 -o ${NAME} $(SRC) -lcsfml-graphics -lcsfml-audio \
+        -lcsfml-system -lcsfml-window -Wall -lm -L. libmy.a
 
 clean:
 	@rm -f $(OBJ)
