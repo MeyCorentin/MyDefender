@@ -278,7 +278,18 @@ typedef struct map {
     char *total_path;
 } map_t;
 
+typedef struct transition {
+    sfSprite *clouds;
+    sfSprite *clouds2;
+    sfTexture *t_clouds;
+    sfColor opacity;
+    sfVector2f pos_clouds;
+    sfVector2f pos_clouds2;
+} transition_t;
+
 typedef struct global {
+    transition_t *transition;
+    shop *shop;
     boole_t *boole;
     map_t *map;
     sfRenderWindow *window;
@@ -356,7 +367,7 @@ void read_path(global *game);
 void update_gold(global *game);
 void create_gold(global *game);
 int is_only(global *game, int num);
-void struct_event(global *game, batiment *bat_);
+void struct_event(global *game, batiment *bat_, grid_cell grid_cell_);
 void check_name(global *game, int name, batiment *bat);
 void set_stats_hdv(global *game, batiment *bat);
 void set_stats_cannon(global *game, batiment *bat);
@@ -364,7 +375,7 @@ void set_stats_archer(global *game, batiment *bat);
 void set_stats_mortar(global *game, batiment *bat);
 void draw_ground(global *game , struct grid_cell *new, shop * my_shop);
 void place_struct(global *game, struct grid_cell *new, shop *my_shop);
-void up_struct(global *game, batiment *bat);
+void up_struct(global *game, batiment *bat, grid_cell grid_cell_);
 void destroy_struct(global *game, batiment *bat);
 void set_texture_hdv(global *game, batiment *hdv);
 void create_path(global *game, grid_cell *new, shop *my_shop);
@@ -378,5 +389,7 @@ void set_enemy(global *game, struct enemy_ *enemy_f);
 void check_click(global *game, struct grid_cell *grid_cell, shop *my_shop);
 struct grid_cell set_all(global *game, shop *my_shop, struct grid_cell \
 grid_cell, struct enemy_ *enemy_f);
+void create_transition(global *game);
+void check_time(global *game, batiment *bat, grid_cell grid_cell_);
 
 #endif /* MY_DEFENDER_H_ */

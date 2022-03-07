@@ -31,7 +31,7 @@ void destroy_struct(global *game, batiment *bat)
     free(temp);
 }
 
-void up_struct(global *game, batiment *bat)
+void up_struct(global *game, batiment *bat, grid_cell grid_cell_)
 {
     if (bat->on_bat == 0) {
         sfSound_play(game->sounds->anvil);
@@ -40,25 +40,20 @@ void up_struct(global *game, batiment *bat)
         bat->stats->damage *= 1.5;
         bat->stats->price *= 1.5;
         bat->stats->pv *= 1.5;
-        if (bat->stats->bat_name == -1) {
-            game->price_hdv = bat->stats->price;
-            game->gold = bat->gold;
-            game->level += 1;
-            //game->menus->level += 1;
-            set_texture_hdv(game, bat);
-            set_texture_map(game);
-        }
+        if (bat->stats->bat_name == -1)
+            check_time(game, bat, grid_cell_);
     }
 }
 
-void button_struct(global *game, batiment *bat_, sfVector2i pos_mouse)
+void button_struct(global *game, batiment *bat_, sfVector2i pos_mouse, \
+grid_cell grid_cell_)
 {
     if (bat_->stats->level < 10 && game->first->gold >= bat_->stats->price && \
     pos_mouse.x > bat_->level_up->pos_up.x && pos_mouse.x < bat_->level_up->\
     pos_up.x + 30 && pos_mouse.y > bat_->level_up->pos_up.y && pos_mouse.y < \
     bat_->level_up->pos_up.y + 30 && game->event.type == \
     sfEvtMouseButtonReleased)
-        up_struct(game, bat_);
+        up_struct(game, bat_, grid_cell_);
     /* if (pos_mouse.x > bat_->level_up->pos_destroy.x && pos_mouse.x < bat_->\
     level_up->pos_destroy.x + 30 && pos_mouse.y > bat_->level_up->\
     pos_destroy.y && pos_mouse.y < bat_->level_up->pos_destroy.y + 30 && \
@@ -66,7 +61,7 @@ void button_struct(global *game, batiment *bat_, sfVector2i pos_mouse)
         destroy_struct(game, bat_); */
 }
 
-void struct_event(global *game, batiment *bat_)
+void struct_event(global *game, batiment *bat_, grid_cell grid_cell_)
 {
     sfVector2i pos_mouse = sfMouse_getPosition((sfWindow *)game->window);
 
@@ -83,7 +78,7 @@ void struct_event(global *game, batiment *bat_)
         else if (bat_->on_bat == 0)
             bat_->on_bat = 1;
     }
-    button_struct(game, bat_, pos_mouse);
+    button_struct(game, bat_, pos_mouse, grid_cell_);
     if (bat_->next != NULL)
-        struct_event(game, bat_->next);
+        struct_event(game, bat_->next, grid_cell_);
 }

@@ -29,14 +29,14 @@ void test_shop(global *game, shop *my_shop)
     }
 }
 
-void check_game_event(global *game, shop *my_shop)
+void check_game_event(global *game, shop *my_shop, grid_cell grid_cell_)
 {
     while (sfRenderWindow_pollEvent(game->window, &game->event)) {
         if (game->event.type == sfEvtClosed)
             sfRenderWindow_close(game->window);
         test_shop(game, my_shop);
         check_shop(game, my_shop);
-        struct_event(game, game->first);
+        struct_event(game, game->first, grid_cell_);
     }
 }
 
@@ -66,6 +66,9 @@ void start_game(global *game)
     struct grid_cell grid_cell;
     struct enemy_ *enemy_f = malloc(sizeof(struct enemy_));
     
+    game->shop = malloc(sizeof(shop));
+    game->shop = my_shop;
+    create_transition(game);
     grid_cell = set_all(game, my_shop, grid_cell, enemy_f);
     while (sfRenderWindow_isOpen(game->window)) {
         sfRenderWindow_clear(game->window, sfBlack);
@@ -73,7 +76,7 @@ void start_game(global *game)
         draw_game(game, my_shop, grid_cell);
         (game->boole->shop_is_open == 0) ? open_shop(game, my_shop) : 1;
         draw_enemy(game, enemy_f);
-        check_game_event(game, my_shop);
+        check_game_event(game, my_shop, grid_cell);
         sfRenderWindow_display(game->window);
         check_click(game, &grid_cell, my_shop);
     }
