@@ -284,10 +284,14 @@ typedef struct map {
 typedef struct transition {
     sfSprite *clouds;
     sfSprite *clouds2;
+    sfSprite *clouds3;
+    sfSprite *clouds4;
     sfTexture *t_clouds;
     sfColor opacity;
     sfVector2f pos_clouds;
     sfVector2f pos_clouds2;
+    sfVector2f pos_clouds3;
+    sfVector2f pos_clouds4;
 } transition_t;
 
 typedef struct global {
@@ -394,8 +398,15 @@ void check_click(global *game, struct grid_cell *grid_cell, shop *my_shop);
 struct grid_cell set_all(global *game, shop *my_shop, struct grid_cell \
 grid_cell, struct enemy_ *enemy_f);
 void create_transition(global *game);
-void check_time(global *game, batiment *bat, grid_cell grid_cell_);
 void moov_enemy(global *game, struct enemy_ *enemy);
 void update_enemy(global * game);
+void check_time(global *game, batiment *bat, grid_cell grid_cell_);
+void set_pos_clouds(global *game);
+void set_pos_trans(global *game);
+void set_pos_dissip(global *game);
+void set_pos_clouds2(global *game);
+void set_pos_come(global *game);
+void set_color_clouds(global *game);
+void dissip_clouds(global *game, grid_cell grid_cell_);
 
 #endif /* MY_DEFENDER_H_ */

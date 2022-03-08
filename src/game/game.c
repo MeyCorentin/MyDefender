@@ -70,6 +70,7 @@ void start_game(global *game)
     game->shop = my_shop;
     create_transition(game);
     grid_cell = set_all(game, my_shop, grid_cell, enemy_f);
+    dissip_clouds(game, grid_cell);
     while (sfRenderWindow_isOpen(game->window)) {
         sfRenderWindow_clear(game->window, sfBlack);
         update_game(game);
