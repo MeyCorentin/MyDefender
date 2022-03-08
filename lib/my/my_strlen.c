@@ -12,3 +12,14 @@ int my_strlen(char const *str)
     for (cmpt = 0; str[cmpt] != '\0'; cmpt += 1);
     return (cmpt);
 }
+
+int my_intlen(int argc)
+{
+    int i = 1;
+
+    while (argc > 9) {
+        i++;
+        argc = argc / 10;
+    }
+    return (i);
+}

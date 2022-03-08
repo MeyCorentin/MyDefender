@@ -33,23 +33,65 @@ void read_path(global *game)
     game->map->path_way = split_path;
 }
 
-void add_cell_status(global *game, grid_cell *new, shop *my_shop, FILE* \
-output_file)
-{
-    int i = 0;
-    int fd = open("src/txt/path", O_RDONLY);
 
-    new->status = 1;
-    for (; game->map->path_way[i]; i++) {
-        if (my_getnbr(game->map->path_way[i]) == new->g_pos) {
-            fwrite(new_put_nbr_str((int) new->p_5.x), 1, 3, output_file);
+void create_cell_intermediate(grid_cell *new, FILE* output_file, char * path, sfVector2f actual , sfVector2f next) {
+    int temp_x = my_intlen(actual.x);
+    int temp_y = my_intlen(actual.y);
+    int boucle = 1;
+    int down_x = abs((actual.x - (next.x)) / 30);
+    int down_y = abs((actual.y - (next.y)) / 30);
+
+    if ((int)actual.x < (int)next.x && (int)actual.y < (int)next.y) {
+        for (; boucle != 30; boucle++) {
+            fwrite(new_put_nbr_str(new->p_5.x + (down_x + 1) * boucle), 1, temp_x, output_file);
             fwrite(",", 1, 1, output_file);
-            fwrite(new_put_nbr_str((int) new->p_5.y), 1, 3, output_file);
+            fwrite(new_put_nbr_str(new->p_5.y +  (down_y) * boucle), 1, temp_y, output_file);
             fwrite("\n", 1, 1, output_file);
-            new->status = 2;
         }
     }
+    if ((int)actual.x > (int)next.x && (int)actual.y > (int)next.y) {
+        for (; boucle != 30; boucle++) {
+            fwrite(new_put_nbr_str((int) new->p_5.x - (down_x) * boucle), 1, temp_x, output_file);
+            fwrite(",", 1, 1, output_file);
+            fwrite(new_put_nbr_str((int) new->p_5.y - (down_y) * boucle), 1, temp_y, output_file);
+            fwrite("\n", 1, 1, output_file);
+        }
+    }
+    if ((int)actual.x < (int)next.x && (int)actual.y > (int)next.y) {
+        for (; boucle != 30; boucle++) {
+            fwrite(new_put_nbr_str((int) new->p_5.x + (down_x) * boucle), 1, temp_x, output_file);
+            fwrite(",", 1, 1, output_file);
+            fwrite(new_put_nbr_str((int) new->p_5.y - (down_y) * boucle), 1, temp_y, output_file);
+            fwrite("\n", 1, 1, output_file);
+        }
+    }
+    if ((int)actual.x > (int)next.x && (int)actual.y < (int)next.y) {
+        for (; boucle != 30; boucle++) {
+            fwrite(new_put_nbr_str((int) new->p_5.x - (down_x) * boucle), 1, temp_x, output_file);
+            fwrite(",", 1, 1, output_file);
+            fwrite(new_put_nbr_str((int) new->p_5.y +  (down_y) * boucle), 1, temp_y, output_file);
+            fwrite("\n", 1, 1, output_file);
+        }
+    }
+}
+void add_cell_status(global *game, grid_cell *new, grid_cell *next_cell ,FILE* output_file, char * path)
+{
+    int fd = open("src/txt/path", O_RDONLY);
+    int temp_x = my_intlen(new->p_5.x);
+    int temp_y = my_intlen(new->p_5.y);
+
+    if (my_getnbr(path) == new->g_pos) {
+        fwrite(new_put_nbr_str((int) new->p_5.x), 1, temp_x, output_file);
+        fwrite(",", 1, 1, output_file);
+        fwrite(new_put_nbr_str((int) new->p_5.y), 1, temp_y, output_file);
+        fwrite("\n", 1, 1, output_file);
+        if (new->g_pos != 195)
+            create_cell_intermediate(new , output_file, path, new->p_5, next_cell->p_5);
+        new->status = 2;
+    }
+    if (new->status != 2)
+        new->status = 1;
     close(fd);
     if (new->g_pos != 196)
-        add_cell_status(game, new->next_cell, my_shop, output_file);
+        add_cell_status(game, new->next_cell, next_cell, output_file, path);
 }

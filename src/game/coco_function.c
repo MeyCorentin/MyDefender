@@ -36,12 +36,23 @@ void check_click(global *game, struct grid_cell *grid_cell, shop *my_shop)
         check_click(game, grid_cell->next_cell, my_shop);
 }
 
+grid_cell *find_next_cell(global *game ,grid_cell *new, char *path) {
+    if (my_getnbr(path) == new->g_pos)
+        return (new);
+    if (new->g_pos != 196)
+        find_next_cell(game ,new->next_cell, path);
+}
+
 void read_something(global *game, struct grid_cell grid_cell, shop *my_shop)
 {
+    int i = 0;
+
     read_path(game);
     const char* filename = "src/txt/out.txt";
     FILE* output_file = fopen(filename, "w+");
-    add_cell_status(game, grid_cell.next_cell, my_shop, output_file);
+    for (; game->map->path_way[i + 1]; i++)
+            add_cell_status(game, grid_cell.next_cell, find_next_cell(game ,grid_cell.next_cell ,game->map->path_way[i + 1])
+        , output_file, game->map->path_way[i]);
     fclose(output_file);
 }
 

@@ -49,5 +49,6 @@ int my_printf(char *s, ...);
 char **my_split_tab(char * argv, char char_);
 void my_print_tab(char **tab);
 int my_count_split(char *argv, char char_);
+int my_intlen(int argc);
 
 #endif /* MY_H_ */

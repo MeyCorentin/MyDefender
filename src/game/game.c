@@ -65,7 +65,7 @@ void start_game(global *game)
     shop *my_shop = create_shop();
     struct grid_cell grid_cell;
     struct enemy_ *enemy_f = malloc(sizeof(struct enemy_));
-    
+
     game->shop = malloc(sizeof(shop));
     game->shop = my_shop;
     create_transition(game);
@@ -77,6 +77,7 @@ void start_game(global *game)
         (game->boole->shop_is_open == 0) ? open_shop(game, my_shop) : 1;
         draw_enemy(game, enemy_f);
         check_game_event(game, my_shop, grid_cell);
+        update_enemy(game);
         sfRenderWindow_display(game->window);
         check_click(game, &grid_cell, my_shop);
     }

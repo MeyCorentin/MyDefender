@@ -57,6 +57,7 @@ typedef struct grid_cell {
     struct grid_cell *first_cell;
     struct grid_cell *prev_cell;
     struct grid_cell *next_cell;
+    struct grid_cell *p_next_cell;
 } grid_cell;
 
 typedef struct level_up {
@@ -250,8 +251,10 @@ typedef struct enemy_ {
     sfVector2f pos;
     sfTexture *texture;
     struct enemy_ *enemy_next;
+    struct enemy_ *enemy_prev;
     int number;
     sfVector2f direct;
+    int loc;
 } enemy_;
 
 typedef struct boole {
@@ -288,10 +291,12 @@ typedef struct transition {
 } transition_t;
 
 typedef struct global {
+    grid_cell *path_cell;
     transition_t *transition;
     shop *shop;
     boole_t *boole;
     map_t *map;
+    enemy_ *enemy;
     sfRenderWindow *window;
     sfCircleShape * radius;
     sfEvent event;
@@ -347,8 +352,7 @@ pos_button);
 void check_shop(global *game, shop *my_shop);
 grid_cell *make_grid(global *game , grid_cell * grid_cell_ , shop * my_shop);
 grid_cell init_cell(global *game , grid_cell grid_cell_ , shop * my_shop);
-void add_cell_status(global *game, grid_cell * new, shop * my_shop, FILE* \
-output_file);
+void add_cell_status(global *game, grid_cell * new, grid_cell *next_cell,  FILE *output_file, char *path);
 void drop_cannon(global *game, shop *my_shop);
 void drop_archer(global *game, shop *my_shop);
 void drop_mortar(global *game, shop *my_shop);
@@ -391,5 +395,7 @@ struct grid_cell set_all(global *game, shop *my_shop, struct grid_cell \
 grid_cell, struct enemy_ *enemy_f);
 void create_transition(global *game);
 void check_time(global *game, batiment *bat, grid_cell grid_cell_);
+void moov_enemy(global *game, struct enemy_ *enemy);
+void update_enemy(global * game);
 
 #endif /* MY_DEFENDER_H_ */

@@ -13,6 +13,7 @@ void set_new(struct grid_cell *new, grid_cell *grid_cell_)
     new->prev_cell = grid_cell_;
     new->first_cell = grid_cell_->first_cell;
     new->next_cell = NULL;
+    grid_cell_->next_cell = new;
     new->g_pos = grid_cell_->g_pos + 1;
     new->l_pos = grid_cell_->l_pos + 1;
     grid_cell_->next_cell = new;
