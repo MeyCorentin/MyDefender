@@ -41,37 +41,35 @@ int get_path_pos_y(int i) {
     for (; buffer[cmpt] != '\n'; cmpt++ , j++)
         path_y[j] = buffer[cmpt];
     path_y[j] = '\0';
-    // printf("%s\n", path_y);
     close(fd);
     return (my_getnbr(path_y));
 }
 
-void create_enemy(global *game, struct enemy_ *enemy)
+void create_enemy(global *game, struct enemy_ *enemy, int i)
 {
-    sfTexture *e_1 = sfTexture_createFromFile("pictures/mob/dragon.png", NULL);
     enemy_ *new = malloc(sizeof(enemy_));
-    sfSprite *temp = sfSprite_create();
 
-    new->enemy_prev = enemy;
-    new->loc = -30;
-    new->enemy_1 = temp;
-    new->texture = e_1;
-    new->enemy_next = NULL;
-    new->enemy_first = new;
-    sfSprite_setTexture(new->enemy_1 , new->texture , sfFalse);
+    if (i == 1)
+        new = create_barbar(game, enemy, i, new);
+    if (i == 2)
+        new = create_archer(game, enemy, i, new);
+    if (i == 3)
+        new = create_goblin(game, enemy, i, new);
+    if (i == 4)
+        new = create_giant(game, enemy, i, new);
+    if (i == 5)
+        new = create_dragon(game, enemy, i, new);
     (enemy->enemy_next == NULL) ? enemy->enemy_next = new : \
-    create_enemy(game, enemy->enemy_next);
+    create_enemy(game, enemy->enemy_next, i);
 }
 
 void set_enemy_pos(global * game, struct enemy_ *enemy) {
-    sfVector2f pos;
-
     if(enemy->loc > 0) {
-    pos.x = get_path_pos_x(enemy->loc);
-    pos.y = get_path_pos_y(enemy->loc);
-    pos.x -= 25;
-    pos.y -= 20;
-    sfSprite_setPosition(enemy->enemy_1, pos);
+    enemy->e_pos.x = get_path_pos_x(enemy->loc);
+    enemy->e_pos.y = get_path_pos_y(enemy->loc);
+    enemy->e_pos.x -= 25;
+    enemy->e_pos.y -= 20;
+    sfSprite_setPosition(enemy->enemy_1, enemy->e_pos);
     if (enemy->enemy_next != NULL)
         set_enemy_pos(game, enemy->enemy_next);
     }
@@ -113,8 +111,9 @@ void set_enemy(global *game, struct enemy_ *enemy_f)
     enemy_f->enemy_next = NULL;
     enemy_f->loc = 0;
     game->enemy = enemy_f;
-    for (int cmpt = 0; cmpt < 7; cmpt += 1)
-        create_enemy(game, enemy_f);
+
+    for(int i = 0 ; i != 30; i ++)
+        create_enemy(game, enemy_f, (rand() % 5) + 1);
     set_enemy_pos(game, enemy_f);
 }
 

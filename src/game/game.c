@@ -75,8 +75,8 @@ void start_game(global *game)
         sfRenderWindow_clear(game->window, sfBlack);
         update_game(game);
         draw_game(game, my_shop, grid_cell);
-        (game->boole->shop_is_open == 0) ? open_shop(game, my_shop) : 1;
         draw_enemy(game, enemy_f);
+        (game->boole->shop_is_open == 0) ? open_shop(game, my_shop) : 1;
         check_game_event(game, my_shop, grid_cell);
         update_enemy(game);
         sfRenderWindow_display(game->window);

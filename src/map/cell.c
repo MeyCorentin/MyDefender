@@ -35,15 +35,15 @@ void read_path(global *game)
 
 
 void create_cell_intermediate(grid_cell *new, FILE* output_file, char * path, sfVector2f actual , sfVector2f next) {
-    int temp_x = my_intlen(actual.x);
-    int temp_y = my_intlen(actual.y);
+    int temp_x = my_intlen(actual.x) + 1;
+    int temp_y = my_intlen(actual.y) + 1;
     int boucle = 1;
-    int down_x = abs((actual.x - (next.x)) / 30);
-    int down_y = abs((actual.y - (next.y)) / 30);
+    float down_x = fabs((actual.x - (next.x)) / (float)30);
+    float down_y = fabs((actual.y - (next.y)) / (float)30);
 
     if ((int)actual.x < (int)next.x && (int)actual.y < (int)next.y) {
         for (; boucle != 30; boucle++) {
-            fwrite(new_put_nbr_str(new->p_5.x + (down_x + 1) * boucle), 1, temp_x, output_file);
+            fwrite(new_put_nbr_str(new->p_5.x + (down_x) * boucle), 1, temp_x, output_file);
             fwrite(",", 1, 1, output_file);
             fwrite(new_put_nbr_str(new->p_5.y +  (down_y) * boucle), 1, temp_y, output_file);
             fwrite("\n", 1, 1, output_file);
@@ -85,8 +85,8 @@ void add_cell_status(global *game, grid_cell *new, grid_cell *next_cell ,FILE* o
         fwrite(",", 1, 1, output_file);
         fwrite(new_put_nbr_str((int) new->p_5.y), 1, temp_y, output_file);
         fwrite("\n", 1, 1, output_file);
-        if (new->g_pos != 195)
-            create_cell_intermediate(new , output_file, path, new->p_5, next_cell->p_5);
+        if (new->g_pos != 196)
+            create_cell_intermediate(new, output_file, path, new->p_5, next_cell->p_5);
         new->status = 2;
     }
     if (new->status != 2)

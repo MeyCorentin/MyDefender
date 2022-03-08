@@ -253,8 +253,14 @@ typedef struct enemy_ {
     struct enemy_ *enemy_next;
     struct enemy_ *enemy_prev;
     int number;
+    int pv;
+    int damage;
+    int level;
+    int level_hdv;
     sfVector2f direct;
     int loc;
+    int speed;
+    sfVector2f e_pos;
 } enemy_;
 
 typedef struct boole {
@@ -387,8 +393,6 @@ void up_struct(global *game, batiment *bat, grid_cell grid_cell_);
 void destroy_struct(global *game, batiment *bat);
 void set_texture_hdv(global *game, batiment *hdv);
 void create_path(global *game, grid_cell *new, shop *my_shop);
-void create_enemy(global *game, struct enemy_ *enemy);
-void draw_enemy(global *game, struct enemy_ *enemy);
 void create_stat_shop(shop *my_shop);
 void snap_obj(global *game, struct grid_cell *new, shop *my_shop, sfVector2i \
 pos_mouse);
@@ -408,5 +412,11 @@ void set_pos_clouds2(global *game);
 void set_pos_come(global *game);
 void set_color_clouds(global *game);
 void dissip_clouds(global *game, grid_cell grid_cell_);
+void create_enemy(global *game, struct enemy_ *enemy, int i);
+enemy_ * create_dragon(global *game, struct enemy_ *enemy, int i, enemy_ * new);
+enemy_ * create_archer(global *game, struct enemy_ *enemy, int i, enemy_ * new);
+enemy_ * create_goblin(global *game, struct enemy_ *enemy, int i, enemy_ * new);
+enemy_ * create_giant(global *game, struct enemy_ *enemy, int i, enemy_ * new);
+enemy_ * create_barbar(global *game, struct enemy_ *enemy, int i, enemy_ * new);
 
 #endif /* MY_DEFENDER_H_ */
