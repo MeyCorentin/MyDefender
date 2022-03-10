@@ -34,7 +34,7 @@ void check_event(global *game, menu *menus, sfVector2i mouse)
             start_game(game);
         } if (sfKeyboard_isKeyPressed(sfKeyR)) {
             sfSound_play(game->sounds->click);
-            game->gold = 100000;
+            game->gold = 100;
             game->price_hdv = 1000;
             game->level = 1;
             start_game(game);
@@ -73,9 +73,10 @@ void create_window(int level)
     sfRenderWindow_setFramerateLimit(game->window, 120);
     game->level = level;
     game->clock = sfClock_create();
+    game->archer_clock = sfClock_create();
     game->boole->is_sounds = 0;
     game->boole->is_music = 0;
-    game->gold = 100000;
+    game->gold = 100;
     game->price_hdv = 1000;
     create_sounds(game);
     set_sounds_buttons(game, menus);

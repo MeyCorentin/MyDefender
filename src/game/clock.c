@@ -15,14 +15,21 @@ void set_music(global *game)
 
 void update_game(global *game)
 {
+    game->archer_tower_time = sfClock_getElapsedTime(game->archer_clock);
+    game->archer_tower = game->archer_tower_time.microseconds / 5000.0;
     game->time = sfClock_getElapsedTime(game->clock);
     game->secs = game->time.microseconds / 5000.0;
 }
 
 void update_enemy(global * game)
 {
-    if (game->secs > 6) {
+    if (game->secs > 2) {
         moov_enemy(game, game->enemy);
         sfClock_restart(game->clock);
+    }
+
+    if (game->archer_tower > 300) {
+        make_dmg_archer(game, game->first);
+        sfClock_restart(game->archer_clock);
     }
 }

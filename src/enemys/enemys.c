@@ -8,14 +8,14 @@
 #include "../../includes/my_defender.h"
 
 int get_path_pos_x(int i) {
-    char *buffer = malloc(sizeof(char) * 2173000);
+    char *buffer = malloc(sizeof(char) * 100000);
     int fd = open("src/txt/out.txt", O_RDONLY);
-    char *path_x = malloc(sizeof(char) * 2173000);
+    char *path_x = malloc(sizeof(char) * 100000);
     int cmpt = 0;
     int j = 0;
     int k = 0;
 
-    read(fd, buffer, 2173000);
+    read(fd, buffer, 100000);
     for (; k != i; k++)
         for (; buffer[cmpt++] != '\n';);
     for (; buffer[cmpt] != ','; cmpt++ , j++)
@@ -27,14 +27,14 @@ int get_path_pos_x(int i) {
 }
 
 int get_path_pos_y(int i) {
-    char *buffer = malloc(sizeof(char) * 2173000);
+    char *buffer = malloc(sizeof(char) * 100000);
     int fd = open("src/txt/out.txt", O_RDONLY);
-    char *path_y = malloc(sizeof(char) * 2173000);
+    char *path_y = malloc(sizeof(char) * 100000);
     int cmpt = 0;
     int j = 0;
     int k = 0;
 
-    read(fd, buffer, 2173000);
+    read(fd, buffer, 100000);
     for (; k != i; k++)
         for (; buffer[cmpt++] != '\n';);
     for (; buffer[cmpt] != ','; cmpt++);
@@ -69,6 +69,7 @@ void set_enemy_pos(global * game, struct enemy_ *enemy) {
     enemy->e_pos.y = get_path_pos_y(enemy->loc);
     enemy->e_pos.x -= 25;
     enemy->e_pos.y -= 20;
+    enemy->pos = enemy->e_pos;
     sfSprite_setPosition(enemy->enemy_1, enemy->e_pos);
     if (enemy->enemy_next != NULL)
         set_enemy_pos(game, enemy->enemy_next);
@@ -85,13 +86,19 @@ void draw_enemy(global *game, struct enemy_ *enemy)
 void moov_enemy(global *game, struct enemy_ *enemy)
 {
     enemy->loc++;
-    if(enemy->loc > 0) {
-    if( enemy->loc >= 38 * 30)
-        enemy->loc = 0;
-    set_enemy_pos(game, enemy);
+    if (enemy->loc >= 0) {
+        if (enemy->pv <= 0) {
+            enemy->loc = 0;
+            enemy->pv = enemy->pv_base;
+            game->first->gold  += enemy->reward;
+            update_gold(game);
+        }
+        if (enemy->loc >= 38 * 30)
+            enemy->loc = 0;
+        set_enemy_pos(game, enemy);
+    }
     if (enemy->enemy_next!= NULL)
         moov_enemy(game, enemy->enemy_next);
-    }
 }
 
 void set_enemy(global *game, struct enemy_ *enemy_f)
@@ -111,9 +118,9 @@ void set_enemy(global *game, struct enemy_ *enemy_f)
     enemy_f->enemy_next = NULL;
     enemy_f->loc = 0;
     game->enemy = enemy_f;
+    for(int i = 0 ; i != 25; i ++)
+        create_enemy(game, enemy_f, rand() % 5 + 1);
 
-    for(int i = 0 ; i != 30; i ++)
-        create_enemy(game, enemy_f, (rand() % 5) + 1);
     set_enemy_pos(game, enemy_f);
 }
 

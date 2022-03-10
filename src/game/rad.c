@@ -63,14 +63,13 @@ void set_rad3(batiment *bat_, sfVector2f radius_pos)
 
 void draw_rad(global *game, batiment *bat_)
 {
-    sfVector2f radius_pos = bat_->pos;
     sfColor opacity = {255, 255, 255, 100};
 
     bat_->radius = sfCircleShape_create();
     if (game->rad_god == 1) {
-        set_rad1(bat_, radius_pos);
-        set_rad2(bat_, radius_pos);
-        set_rad3(bat_, radius_pos);
+        set_rad1(bat_, bat_->pos);
+        set_rad2(bat_, bat_->pos);
+        set_rad3(bat_, bat_->pos);
         sfCircleShape_setFillColor(bat_->radius, opacity);
         sfCircleShape_setPosition(bat_->radius, bat_->rad_pos);
         sfRenderWindow_drawCircleShape(game->window, bat_->radius, NULL);

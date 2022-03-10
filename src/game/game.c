@@ -76,6 +76,7 @@ void start_game(global *game)
         update_game(game);
         draw_game(game, my_shop, grid_cell);
         draw_enemy(game, enemy_f);
+        update_gold(game);
         (game->boole->shop_is_open == 0) ? open_shop(game, my_shop) : 1;
         check_game_event(game, my_shop, grid_cell);
         update_enemy(game);

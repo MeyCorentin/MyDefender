@@ -49,7 +49,6 @@ void draw_game(global *game, shop *my_shop, grid_cell grid_cell)
     sfRenderWindow_drawSprite(game->window, my_shop->button, sfFalse);
     draw_ground(game, &grid_cell, my_shop);
     (game->boole->god == 0) ? draw_cell(game, grid_cell.next_cell, my_shop) : 1;
-    update_gold(game);
     draw_rad(game, game->first);
     sfRenderWindow_drawCircleShape(game->window, game->radius, sfFalse);
     place_struct(game, &grid_cell, my_shop);

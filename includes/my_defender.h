@@ -102,6 +102,9 @@ typedef struct batiment {
     sfText *level_str;
     sfVector2f pos_level;
     int on_bat;
+    struct enemy_ * target;
+    int focus;
+    int hitable;
 } batiment;
 
 typedef struct mouse {
@@ -254,13 +257,16 @@ typedef struct enemy_ {
     struct enemy_ *enemy_prev;
     int number;
     int pv;
+    int pv_base;
     int damage;
     int level;
     int level_hdv;
+    int type;
     sfVector2f direct;
     int loc;
     int speed;
     sfVector2f e_pos;
+    int reward;
 } enemy_;
 
 typedef struct boole {
@@ -320,9 +326,14 @@ typedef struct global {
     sfClock *clock;
     sfTime time;
     int secs;
+    sfClock *archer_clock;
+    sfTime archer_tower_time;
+    int archer_tower;
     char *texture;
     int gold;
     int price_hdv;
+    sfColor * opacity_down;
+    sfVector2i pos_mouse;
 } global;
 
 void open_shop(global *game, shop *my_shop);
@@ -418,5 +429,9 @@ enemy_ * create_archer(global *game, struct enemy_ *enemy, int i, enemy_ * new);
 enemy_ * create_goblin(global *game, struct enemy_ *enemy, int i, enemy_ * new);
 enemy_ * create_giant(global *game, struct enemy_ *enemy, int i, enemy_ * new);
 enemy_ * create_barbar(global *game, struct enemy_ *enemy, int i, enemy_ * new);
+void detect_enemy(global *game, struct enemy_ *enemy, batiment *bat_);
+void draw_enemy(global *game, struct enemy_ *enemy);
+void make_dmg(global *game, batiment *bat_);
+void make_dmg_archer(global *game, batiment * bat_);
 
 #endif /* MY_DEFENDER_H_ */

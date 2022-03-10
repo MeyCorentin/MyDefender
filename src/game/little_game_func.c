@@ -17,22 +17,6 @@ batiment *get_last(global *game, sfVector2f pos, int name)
     return (temp->next);
 }
 
-void check_hit(global *game, batiment *bat_)
-{
-    sfVector2i pos_mouse = sfMouse_getPosition((sfWindow *)game->window);
-    sfColor color = {0, 255, 0, 150};
-
-    if (game->rad_god == 1) {
-        if (sqrt((pos_mouse.x - bat_->pos.x - 70) * (pos_mouse.x - bat_->\
-        pos.x - 70) + (pos_mouse.y - bat_->pos.y - 70) * (pos_mouse.y - bat_->\
-        pos.y - 70)) < bat_->rad_size)
-            sfCircleShape_setFillColor(bat_->radius, color);
-        sfRenderWindow_drawCircleShape(game->window, bat_->radius, NULL);
-    }
-    if (bat_->next != NULL)
-        check_hit(game, bat_->next);
-}
-
 void set_game(global *game)
 {
     sfCircleShape *radius = sfCircleShape_create();
