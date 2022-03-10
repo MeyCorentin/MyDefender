@@ -118,8 +118,8 @@ void set_enemy(global *game, struct enemy_ *enemy_f)
     enemy_f->enemy_next = NULL;
     enemy_f->loc = 0;
     game->enemy = enemy_f;
-    for(int i = 0 ; i != 25; i ++)
-        create_enemy(game, enemy_f, rand() % 5 + 1);
+    for(int i = 0 ; i != 5; i ++)
+        create_enemy(game, enemy_f, rand() % 2 + 1);
 
     set_enemy_pos(game, enemy_f);
 }

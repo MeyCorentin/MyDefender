@@ -21,14 +21,14 @@ int is_only(global *game, int num)
 
 void destroy_struct(global *game, batiment *bat)
 {
-    batiment *temp = malloc(sizeof(batiment));
     batiment *prev = malloc(sizeof(batiment));
 
-    temp = bat;
+    sfSound_play(game->sounds->destroy);
     prev = bat->prev;
-    prev->next = temp->next;
+    prev->next = bat->next;
+    if (prev->next)
+        prev->next->prev = prev;
     game->first->gold += bat->stats->price / 3;
-    free(temp);
 }
 
 void up_struct(global *game, batiment *bat, grid_cell grid_cell_)
@@ -54,11 +54,11 @@ grid_cell grid_cell_)
     bat_->level_up->pos_up.y + 30 && game->event.type == \
     sfEvtMouseButtonReleased)
         up_struct(game, bat_, grid_cell_);
-    /* if (pos_mouse.x > bat_->level_up->pos_destroy.x && pos_mouse.x < bat_->\
+    if (pos_mouse.x > bat_->level_up->pos_destroy.x && pos_mouse.x < bat_->\
     level_up->pos_destroy.x + 30 && pos_mouse.y > bat_->level_up->\
     pos_destroy.y && pos_mouse.y < bat_->level_up->pos_destroy.y + 30 && \
     game->event.type == sfEvtMouseButtonReleased)
-        destroy_struct(game, bat_); */
+        destroy_struct(game, bat_);
 }
 
 void struct_event(global *game, batiment *bat_, grid_cell grid_cell_)

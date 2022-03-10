@@ -19,6 +19,7 @@ void update_game(global *game)
     game->archer_tower = game->archer_tower_time.microseconds / 5000.0;
     game->time = sfClock_getElapsedTime(game->clock);
     game->secs = game->time.microseconds / 5000.0;
+    game->other_secs = game->time.microseconds / 5000.0;
 }
 
 void update_enemy(global * game)

@@ -40,6 +40,7 @@ void check_sounds(global *game, menu *menus, sfVector2i mouse)
             game->secs = 2;
             sfSound_setVolume(game->sounds->click, 100);
             sfSound_setVolume(game->sounds->anvil, 100);
+            sfSound_setVolume(game->sounds->destroy, 100);
         } else if (game->boole->is_sounds == 0 && game->secs != 2) {
             sfSound_play(game->sounds->click);
             sfSprite_setTexture(menus->sounds, menus->t_menu->s_off, sfFalse);
@@ -47,6 +48,7 @@ void check_sounds(global *game, menu *menus, sfVector2i mouse)
             game->secs = 2;
             sfSound_setVolume(game->sounds->click, 0);
             sfSound_setVolume(game->sounds->anvil, 0);
+            sfSound_setVolume(game->sounds->destroy, 0);
         }
     }
 }

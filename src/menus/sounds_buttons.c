@@ -50,6 +50,7 @@ void set_volume_sounds(global *game)
     game->secs = 2;
     sfSound_setVolume(game->sounds->click, 0);
     sfSound_setVolume(game->sounds->anvil, 0);
+    sfSound_setVolume(game->sounds->destroy, 0);
 }
 
 void check_sounds_pause(global *game, sfVector2i mouse)
@@ -68,6 +69,7 @@ void check_sounds_pause(global *game, sfVector2i mouse)
             game->secs = 2;
             sfSound_setVolume(game->sounds->click, 100);
             sfSound_setVolume(game->sounds->anvil, 100);
+            sfSound_setVolume(game->sounds->destroy, 100);
         } else if (game->boole->is_sounds == 0 && game->secs != 2)
             set_volume_sounds(game);
     }

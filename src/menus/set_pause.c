@@ -63,10 +63,10 @@ void set_pos_buttons(global *game)
 
 void set_pos_sounds(global *game, sfVector2f scale_text)
 {
-    game->pause->p_pause->pos_music.x = game->pause->p_pause->pos_back.x + 10;
-    game->pause->p_pause->pos_music.y = game->pause->p_pause->pos_back.y + 10;
-    game->pause->p_pause->pos_sounds.x = game->pause->p_pause->pos_back.x + 900;
-    game->pause->p_pause->pos_sounds.y = game->pause->p_pause->pos_back.y + 10;
+    game->pause->p_pause->pos_music.x = game->pause->p_pause->pos_back.x + 30;
+    game->pause->p_pause->pos_music.y = game->pause->p_pause->pos_back.y + 70;
+    game->pause->p_pause->pos_sounds.x = game->pause->p_pause->pos_back.x + 880;
+    game->pause->p_pause->pos_sounds.y = game->pause->p_pause->pos_back.y + 70;
     sfSprite_setPosition(game->pause->music, game->pause->p_pause->pos_music);
     sfSprite_setPosition(game->pause->sounds, game->pause->p_pause->pos_sounds);
     if (game->boole->is_music == 0)

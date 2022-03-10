@@ -37,6 +37,8 @@ void check_game_event(global *game, shop *my_shop, grid_cell grid_cell_)
         test_shop(game, my_shop);
         check_shop(game, my_shop);
         struct_event(game, game->first, grid_cell_);
+        if (sfKeyboard_isKeyPressed(sfKeyT) && game->other_secs != 0)
+            loop_tree(game);
     }
 }
 

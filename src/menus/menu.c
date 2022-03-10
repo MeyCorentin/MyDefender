@@ -18,6 +18,9 @@ void draw_menu(global *game, menu *menus)
     sfRenderWindow_drawText(game->window, menus->c_restart, sfFalse);
     sfRenderWindow_drawSprite(game->window, menus->music, sfFalse);
     sfRenderWindow_drawSprite(game->window, menus->sounds, sfFalse);
+    if (game->boole->on_htp == 0)
+        sfRenderWindow_drawSprite(game->window, game->how_to_play->htp, \
+        sfFalse);
 }
 
 void set_pos_menu(menu *menus)

@@ -29,6 +29,8 @@ typedef struct sounds {
     sfSound *anvil;
     sfSoundBuffer *b_click;
     sfSound *click;
+    sfSoundBuffer *b_destroy;
+    sfSound *destroy;
 } sounds;
 
 typedef struct coords {
@@ -282,6 +284,8 @@ typedef struct boole {
     int is_music;
     int on_map;
     int take;
+    int on_htp;
+    int in_tree;
 } boole_t;
 
 typedef struct map {
@@ -306,7 +310,52 @@ typedef struct transition {
     sfVector2f pos_clouds4;
 } transition_t;
 
+typedef struct how_to_play {
+    sfSprite *htp;
+    sfTexture *t_htp;
+    sfVector2f scale;
+    sfVector2f position;
+    int page;
+} how_to_play_t;
+
+typedef struct chained_skill {
+    struct chained_skill *first;
+    struct chained_skill *prev;
+    sfSprite *skill;
+    sfVector2f pos_skill;
+    sfVector2f pos_skill2;
+    int type;
+    int value;
+    int active;
+    struct chained_skill *next;
+    int price;
+} chained_skill_t;
+
+typedef struct skill_tree {
+    sfSprite *back;
+    sfTexture *t_back;
+    sfTexture *tree;
+    sfTexture *sword;
+    sfTexture *gold;
+    sfTexture *speed;
+    sfTexture *hearth;
+    chained_skill_t *first_skill;
+    int x;
+    int y;
+} skill_tree_t;
+
+typedef struct bonus {
+    int all;
+    int life;
+    int strenght;
+    int gold;
+    int speed;
+} bonus_t;
+
 typedef struct global {
+    bonus_t *bonus;
+    skill_tree_t *tree;
+    how_to_play_t *how_to_play;
     grid_cell *path_cell;
     transition_t *transition;
     shop *shop;
@@ -326,6 +375,7 @@ typedef struct global {
     sfClock *clock;
     sfTime time;
     int secs;
+    int other_secs;
     sfClock *archer_clock;
     sfTime archer_tower_time;
     int archer_tower;
@@ -424,14 +474,21 @@ void set_pos_come(global *game);
 void set_color_clouds(global *game);
 void dissip_clouds(global *game, grid_cell grid_cell_);
 void create_enemy(global *game, struct enemy_ *enemy, int i);
-enemy_ * create_dragon(global *game, struct enemy_ *enemy, int i, enemy_ * new);
-enemy_ * create_archer(global *game, struct enemy_ *enemy, int i, enemy_ * new);
-enemy_ * create_goblin(global *game, struct enemy_ *enemy, int i, enemy_ * new);
-enemy_ * create_giant(global *game, struct enemy_ *enemy, int i, enemy_ * new);
-enemy_ * create_barbar(global *game, struct enemy_ *enemy, int i, enemy_ * new);
+enemy_ *create_dragon(global *game, struct enemy_ *enemy, int i, enemy_ * new);
+enemy_ *create_archer(global *game, struct enemy_ *enemy, int i, enemy_ * new);
+enemy_ *create_goblin(global *game, struct enemy_ *enemy, int i, enemy_ * new);
+enemy_ *create_giant(global *game, struct enemy_ *enemy, int i, enemy_ * new);
+enemy_ *create_barbar(global *game, struct enemy_ *enemy, int i, enemy_ * new);
 void detect_enemy(global *game, struct enemy_ *enemy, batiment *bat_);
 void draw_enemy(global *game, struct enemy_ *enemy);
 void make_dmg(global *game, batiment *bat_);
 void make_dmg_archer(global *game, batiment * bat_);
+void create_htp(global *game);
+void event_htp(global *game);
+void update_htp(global *game);
+void test_htp(global *game);
+void create_tree(global *game);
+void loop_tree(global *game);
+void create_bonus(global *game);
 
 #endif /* MY_DEFENDER_H_ */

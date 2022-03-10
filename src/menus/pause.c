@@ -66,7 +66,7 @@ void create_pause(global *game)
     game->pause->music = sfSprite_create();
     game->pause->sounds = sfSprite_create();
     game->pause->t_back = sfTexture_createFromFile\
-    ("pictures/maps/clouds.jpg", NULL);
+    ("pictures/buttons/leandre.png", NULL);
     game->pause->button = sfTexture_createFromFile\
     ("pictures/buttons/button.png", NULL);
     set_textures_pause(game);
