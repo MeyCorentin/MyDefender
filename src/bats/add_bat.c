@@ -16,6 +16,8 @@ void add_bat_end(global *game, batiment *new_bat)
     sfFalse);
     sfSprite_setTexture(new_bat->level_up->destroy, new_bat->level_up->\
     t_destroy, sfFalse);
+    new_bat->level_up->pos_up.x = new_bat->pos.x + 90;
+    new_bat->level_up->pos_up.y = new_bat->pos.y + 100;
     new_bat->level_up->pos_destroy.x = new_bat->pos.x + 90;
     new_bat->level_up->pos_destroy.y = new_bat->pos.y + 100;
     sfSprite_setPosition(new_bat->level_up->up, new_bat->level_up->pos_up);
@@ -56,7 +58,6 @@ batiment *add_bat(global *game, batiment *prev, sfVector2f pos, int name)
     new_bat->prev = prev;
     new_bat->next = NULL;
     new_bat->last = NULL;
-    new_bat->type = name;
     new_bat->target = NULL;
     new_bat->focus = 0;
     new_bat->temp =  malloc(sizeof(char *));
@@ -70,5 +71,6 @@ batiment *add_bat(global *game, batiment *prev, sfVector2f pos, int name)
     add_bat_buttons(game, new_bat);
     check_name(game, name, new_bat);
     game->secs = 5;
+    create_bullet(game, new_bat);
     return (new_bat);
 }

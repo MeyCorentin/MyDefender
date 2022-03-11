@@ -21,7 +21,6 @@ int get_path_pos_x(int i) {
     for (; buffer[cmpt] != ','; cmpt++ , j++)
         path_x[j] = buffer[cmpt];
     path_x[j] = '\0';
-    // printf("%s\n", path_x);
     close(fd);
     return (my_getnbr(path_x));
 }
@@ -65,12 +64,11 @@ void create_enemy(global *game, struct enemy_ *enemy, int i)
 
 void set_enemy_pos(global * game, struct enemy_ *enemy) {
     if(enemy->loc > 0) {
-    enemy->e_pos.x = get_path_pos_x(enemy->loc);
-    enemy->e_pos.y = get_path_pos_y(enemy->loc);
-    enemy->e_pos.x -= 25;
-    enemy->e_pos.y -= 20;
-    enemy->pos = enemy->e_pos;
-    sfSprite_setPosition(enemy->enemy_1, enemy->e_pos);
+    enemy->pos.x = get_path_pos_x(enemy->loc);
+    enemy->pos.y = get_path_pos_y(enemy->loc);
+    enemy->pos.x -= 25;
+    enemy->pos.y -= 20;
+    sfSprite_setPosition(enemy->enemy_1, enemy->pos);
     if (enemy->enemy_next != NULL)
         set_enemy_pos(game, enemy->enemy_next);
     }
@@ -120,7 +118,6 @@ void set_enemy(global *game, struct enemy_ *enemy_f)
     game->enemy = enemy_f;
     for(int i = 0 ; i != 5; i ++)
         create_enemy(game, enemy_f, rand() % 2 + 1);
-
     set_enemy_pos(game, enemy_f);
 }
 

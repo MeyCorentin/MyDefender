@@ -48,6 +48,8 @@ void basic_hdv(global *game, batiment *hdv)
     hdv->pos.y = 0;
     hdv->level_up->pos_destroy.x = 0;
     hdv->level_up->pos_destroy.y = 0;
+    hdv->level_up->pos_up.x = 0;
+    hdv->level_up->pos_up.y = 0;
     hdv->level_up->up = sfSprite_create();
     hdv->level_up->t_up = sfTexture_createFromFile\
     ("pictures/buttons/arrow.png", NULL);
@@ -75,5 +77,6 @@ batiment *create_hdv(global *game)
         hdv->t_bat = sfTexture_createFromFile("pictures/hdv/1.png", NULL);
     set_texture_hdv(game, hdv);
     sfText_setColor(hdv->level_str, sfBlue);
+    create_bullet(game, hdv);
     return (hdv);
 }

@@ -55,6 +55,7 @@ void draw_game(global *game, shop *my_shop, grid_cell grid_cell)
     check_hit(game, game->first);
     draw_structs(game, game->first);
     draw_stats(game, my_shop);
+    update_bullet(game, game->first);
 }
 
 void draw_structs(global *game, batiment *bat_)

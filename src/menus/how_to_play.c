@@ -7,28 +7,42 @@
 
 #include "../../includes/my_defender.h"
 
+void creatre_textures_htp(global *game)
+{
+    game->how_to_play->htp_1 = sfTexture_createFromFile\
+    ("pictures/htp/menu_defender.png", NULL);
+    game->how_to_play->htp_2 = sfTexture_createFromFile\
+    ("pictures/htp/game_defender.png", NULL);
+    game->how_to_play->htp_3 = sfTexture_createFromFile\
+    ("pictures/htp/shop_defender.png", NULL);
+    game->how_to_play->htp_4 = sfTexture_createFromFile\
+    ("pictures/htp/reach_defender.png", NULL);
+    game->how_to_play->htp_5 = sfTexture_createFromFile\
+    ("pictures/htp/map_defender.png", NULL);
+    game->how_to_play->htp_6 = sfTexture_createFromFile\
+    ("pictures/htp/pause_defender.png", NULL);
+}
+
 void update_htp(global *game)
 {
     if (game->how_to_play->page == 1)
-        game->how_to_play->t_htp = sfTexture_createFromFile\
-        ("pictures/htp/menu_defender.png", NULL);
+        sfSprite_setTexture(game->how_to_play->htp, game->how_to_play->\
+        htp_1, sfFalse);
     if (game->how_to_play->page == 2)
-        game->how_to_play->t_htp = sfTexture_createFromFile\
-        ("pictures/htp/game_defender.png", NULL);
+        sfSprite_setTexture(game->how_to_play->htp, game->how_to_play->\
+        htp_2, sfFalse);
     if (game->how_to_play->page == 3)
-        game->how_to_play->t_htp = sfTexture_createFromFile\
-        ("pictures/htp/shop_defender.png", NULL);
+        sfSprite_setTexture(game->how_to_play->htp, game->how_to_play->\
+        htp_3, sfFalse);
     if (game->how_to_play->page == 4)
-        game->how_to_play->t_htp = sfTexture_createFromFile\
-        ("pictures/htp/reach_defender.png", NULL);
+        sfSprite_setTexture(game->how_to_play->htp, game->how_to_play->\
+        htp_4, sfFalse);
     if (game->how_to_play->page == 5)
-        game->how_to_play->t_htp = sfTexture_createFromFile\
-        ("pictures/htp/map_defender.png", NULL);
+        sfSprite_setTexture(game->how_to_play->htp, game->how_to_play->\
+        htp_5, sfFalse);
     if (game->how_to_play->page == 6)
-        game->how_to_play->t_htp = sfTexture_createFromFile\
-        ("pictures/htp/pause_defender.png", NULL);
-    sfSprite_setTexture(game->how_to_play->htp, game->how_to_play->\
-    t_htp, sfFalse);
+        sfSprite_setTexture(game->how_to_play->htp, game->how_to_play->\
+        htp_6, sfFalse);
 }
 
 void create_htp(global *game)
@@ -36,6 +50,7 @@ void create_htp(global *game)
     game->how_to_play = malloc(sizeof(how_to_play_t));
     game->how_to_play->page = 1;
     game->how_to_play->htp = sfSprite_create();
+    creatre_textures_htp(game);
     game->how_to_play->position.x = 300;
     game->how_to_play->position.y = 150;
     game->how_to_play->scale.x = 0.7;

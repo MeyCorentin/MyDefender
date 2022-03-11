@@ -83,7 +83,20 @@ typedef struct stats_bat {
     int level;
 } stats_bat;
 
+typedef struct bullet {
+    sfSprite *bullet;
+    sfTexture *t_bullet;
+    sfTexture *fireball;
+    sfTexture *left_arrow;
+    sfTexture *right_arrow;
+    sfTexture *up_arrow;
+    sfTexture *down_arrow;
+    sfVector2f pos_bullet;
+    int shot;
+} bullet_t;
+
 typedef struct batiment {
+    bullet_t *bullet;
     struct batiment *first;
     struct batiment *next;
     struct batiment *prev;
@@ -312,7 +325,12 @@ typedef struct transition {
 
 typedef struct how_to_play {
     sfSprite *htp;
-    sfTexture *t_htp;
+    sfTexture *htp_1;
+    sfTexture *htp_2;
+    sfTexture *htp_3;
+    sfTexture *htp_4;
+    sfTexture *htp_5;
+    sfTexture *htp_6;
     sfVector2f scale;
     sfVector2f position;
     int page;
@@ -490,5 +508,7 @@ void test_htp(global *game);
 void create_tree(global *game);
 void loop_tree(global *game);
 void create_bonus(global *game);
+void create_bullet(global *game, batiment *bat);
+void update_bullet(global *game, batiment *bat);
 
 #endif /* MY_DEFENDER_H_ */

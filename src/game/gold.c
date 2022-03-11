@@ -30,8 +30,7 @@ void create_gold(global *game)
 void update_gold(global *game)
 {
     sfText_setString(game->gold_gestion->money, "Gold : ");
-    sfText_setString(game->gold_gestion->number, new_put_nbr_str(game->first->\
-    gold));
+    sfText_setString(game->gold_gestion->number, new_put_nbr_str(game->first->gold));
     sfRenderWindow_drawText(game->window, game->gold_gestion->money, sfFalse);
     sfRenderWindow_drawText(game->window, game->gold_gestion->number, sfFalse);
 }

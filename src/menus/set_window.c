@@ -38,7 +38,7 @@ void check_event(global *game, menu *menus, sfVector2i mouse)
             start_game(game);
         } if (sfKeyboard_isKeyPressed(sfKeyR)) {
             sfSound_play(game->sounds->click);
-            game->gold = 100;
+            game->gold = 10000;
             game->price_hdv = 1000;
             game->level = 1;
             start_game(game);

@@ -75,14 +75,14 @@ void start_game(global *game)
     dissip_clouds(game, grid_cell);
     while (sfRenderWindow_isOpen(game->window)) {
         sfRenderWindow_clear(game->window, sfBlack);
-        update_game(game);
         draw_game(game, my_shop, grid_cell);
         draw_enemy(game, enemy_f);
-        update_gold(game);
+        update_game(game);
         (game->boole->shop_is_open == 0) ? open_shop(game, my_shop) : 1;
         check_game_event(game, my_shop, grid_cell);
         update_enemy(game);
-        sfRenderWindow_display(game->window);
         check_click(game, &grid_cell, my_shop);
+        update_gold(game);
+        sfRenderWindow_display(game->window);
     }
 }
