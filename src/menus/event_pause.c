@@ -75,12 +75,12 @@ void check_pause_event(global *game)
     while (sfRenderWindow_pollEvent(game->window, &game->event)) {
         if (game->event.type == sfEvtClosed)
             sfRenderWindow_close(game->window);
-        if (game->boole->pause_is_open == 0 && sfKeyboard_isKeyPressed\
-        (sfKeyEscape) && game->secs != 3) {
+        if ((game->boole->pause_is_open == 0 && sfKeyboard_isKeyPressed\
+        (sfKeyEscape) && game->other_secs != 0) || (mouse.x > 1370 && mouse.x < 1430 && mouse.y > 270 && mouse.y < 300 && game->event.type == sfEvtMouseButtonReleased)) {
             sfSound_play(game->sounds->click);
             sfSound_play(game->sounds->ambiance);
             game->boole->pause_is_open = 1;
-            game->secs = 3;
+            game->other_secs = 0;
         }
         check_button_event(game);
         check_sounds_pause(game, mouse);

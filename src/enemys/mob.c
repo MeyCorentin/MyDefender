@@ -11,6 +11,7 @@ enemy_ * create_barbar(global *game, struct enemy_ *enemy, int i, enemy_ * new)
 {
     sfTexture *e_1 = sfTexture_createFromFile("pictures/mob/barbarian.png", NULL);
     sfSprite *temp = sfSprite_create();
+    sfVector2f pos = {-100, -100};
 
     new->enemy_prev = enemy;
     new->loc = enemy->loc - 50;
@@ -22,6 +23,7 @@ enemy_ * create_barbar(global *game, struct enemy_ *enemy, int i, enemy_ * new)
     new->pv_base = 45;
     new->damage = 8;
     new->level_hdv = 1;
+    sfSprite_setPosition(new->enemy_1, pos);
     new->level = 1;
     new->speed = 16;
     new->type = 1;
@@ -32,6 +34,7 @@ enemy_ * create_archer(global *game, struct enemy_ *enemy, int i, enemy_ * new)
 {
     sfTexture *e_1 = sfTexture_createFromFile("pictures/mob/archer.png", NULL);
     sfSprite *temp = sfSprite_create();
+    sfVector2f pos = {-100, -100};
 
     new->enemy_prev = enemy;
     new->loc = enemy->loc - 50;
@@ -48,6 +51,7 @@ enemy_ * create_archer(global *game, struct enemy_ *enemy, int i, enemy_ * new)
     new->type = 2;
     new->reward = 15;
     sfSprite_setTexture(new->enemy_1 , new->texture , sfFalse);
+    sfSprite_setPosition(new->enemy_1, pos);
     return (new);
 }
 
@@ -55,6 +59,7 @@ enemy_ * create_goblin(global *game, struct enemy_ *enemy, int i, enemy_ * new)
 {
     sfTexture *e_1 = sfTexture_createFromFile("pictures/mob/goblin.png", NULL);
     sfSprite *temp = sfSprite_create();
+    sfVector2f pos = {-100, -100};
 
     new->enemy_prev = enemy;
     new->loc = enemy->loc - 50;
@@ -70,12 +75,14 @@ enemy_ * create_goblin(global *game, struct enemy_ *enemy, int i, enemy_ * new)
     new->speed = 32;
     new->type = 3;
     sfSprite_setTexture(new->enemy_1 , new->texture , sfFalse);
+    sfSprite_setPosition(new->enemy_1, pos);
     return (new);
 }
 enemy_ * create_giant(global *game, struct enemy_ *enemy, int i, enemy_ * new)
 {
     sfTexture *e_1 = sfTexture_createFromFile("pictures/mob/giant.png", NULL);
     sfSprite *temp = sfSprite_create();
+    sfVector2f pos = {-100, -100};
 
     new->enemy_prev = enemy;
     new->loc = enemy->loc - 50;
@@ -91,6 +98,7 @@ enemy_ * create_giant(global *game, struct enemy_ *enemy, int i, enemy_ * new)
     new->speed = 12;
     new->type = 4;
     sfSprite_setTexture(new->enemy_1 , new->texture , sfFalse);
+    sfSprite_setPosition(new->enemy_1, pos);
     return (new);
 }
 
@@ -98,6 +106,7 @@ enemy_ * create_dragon(global *game, struct enemy_ *enemy, int i, enemy_ * new)
 {
     sfTexture *e_1 = sfTexture_createFromFile("pictures/mob/dragon.png", NULL);
     sfSprite *temp = sfSprite_create();
+    sfVector2f pos = {-100, -100};
 
     new->enemy_prev = enemy;
     new->loc = enemy->loc - 50;
@@ -113,5 +122,6 @@ enemy_ * create_dragon(global *game, struct enemy_ *enemy, int i, enemy_ * new)
     new->speed = 16;
     new->type = 5;
     sfSprite_setTexture(new->enemy_1 , new->texture , sfFalse);
+    sfSprite_setPosition(new->enemy_1, pos);
     return (new);
 }

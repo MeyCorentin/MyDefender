@@ -17,10 +17,6 @@ void create_shot(global *game, batiment *bat)
     ("pictures/arrow_right.png", NULL);
     bat->bullet->left_arrow = sfTexture_createFromFile\
     ("pictures/arrow_left.png", NULL);
-    bat->bullet->up_arrow = sfTexture_createFromFile\
-    ("pictures/arrow_up.png", NULL);
-    bat->bullet->down_arrow = sfTexture_createFromFile\
-    ("pictures/arrow_down.png", NULL);
 }
 
 void create_bullet(global *game, batiment *bat)
@@ -43,10 +39,6 @@ void create_bullet(global *game, batiment *bat)
 void set_texture_in(global *game, batiment *bat)
 {
     if (bat->stats->bat_name == 2 || bat->stats->bat_name == 3 || bat->stats->bat_name == 4 || bat->stats->bat_name == 5) {
-        if (bat->bullet->pos_bullet.y < bat->target->pos.y)
-            sfSprite_setTexture(bat->bullet->bullet, bat->bullet->down_arrow, sfFalse);
-        if (bat->bullet->pos_bullet.y > bat->target->pos.y)
-            sfSprite_setTexture(bat->bullet->bullet, bat->bullet->up_arrow, sfFalse);
         if (bat->bullet->pos_bullet.x < bat->target->pos.x)
             sfSprite_setTexture(bat->bullet->bullet, bat->bullet->right_arrow, sfFalse);
         if (bat->bullet->pos_bullet.x > bat->target->pos.x)
@@ -80,11 +72,6 @@ void update_bullet(global *game, batiment *bat)
     }
     if (bat->next != NULL)
         update_bullet(game, bat->next);
-}
-
-void cannon_shot(global *game, batiment *bat)
-{
-    bat->bullet->shot = 0;
 }
 
 void make_dmg_archer(global *game, batiment * bat_) {

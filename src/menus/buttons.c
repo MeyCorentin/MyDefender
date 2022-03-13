@@ -49,6 +49,7 @@ void check_button_quit(global *game, menu *menus)
         sfSprite_setScale(menus->quit, scale_max);
         sfSprite_setPosition(menus->quit, menus->pos2_quit);
         if (game->event.type == sfEvtMouseButtonReleased) {
+            write_level(game);
             sfSound_play(game->sounds->click);
             sfRenderWindow_close(game->window);
         }

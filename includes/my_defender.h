@@ -331,6 +331,7 @@ typedef struct how_to_play {
     sfTexture *htp_4;
     sfTexture *htp_5;
     sfTexture *htp_6;
+    sfTexture *htp_7;
     sfVector2f scale;
     sfVector2f position;
     int page;
@@ -347,6 +348,11 @@ typedef struct chained_skill {
     int active;
     struct chained_skill *next;
     int price;
+    sfText *infos;
+    sfText *cost;
+    sfVector2f pos_infos;
+    sfVector2f scale;
+    sfVector2f pos_cost;
 } chained_skill_t;
 
 typedef struct skill_tree {
@@ -370,7 +376,21 @@ typedef struct bonus {
     int speed;
 } bonus_t;
 
+typedef struct infos {
+    sfText *skills;
+    sfText *shop;
+    sfText *pause;
+    sfFont *font;
+    sfText *htp;
+    sfVector2f scale;
+    sfVector2f pos_skills;
+    sfVector2f pos_pause;
+    sfVector2f pos_shop;
+    sfVector2f pos_htp;
+} infos_t;
+
 typedef struct global {
+    infos_t *infos;
     bonus_t *bonus;
     skill_tree_t *tree;
     how_to_play_t *how_to_play;
@@ -380,15 +400,15 @@ typedef struct global {
     boole_t *boole;
     map_t *map;
     enemy_ *enemy;
-    sfRenderWindow *window;
-    sfCircleShape * radius;
-    sfEvent event;
-    int level;
-    batiment *first;
     sounds *sounds;
     menu_pause *pause;
     menu *menus;
     gold *gold_gestion;
+    batiment *first;
+    sfRenderWindow *window;
+    sfCircleShape * radius;
+    sfEvent event;
+    int level;
     int rad_god;
     sfClock *clock;
     sfTime time;
@@ -510,5 +530,8 @@ void loop_tree(global *game);
 void create_bonus(global *game);
 void create_bullet(global *game, batiment *bat);
 void update_bullet(global *game, batiment *bat);
+void create_infos(global *game);
+void create_htp_button(global *game);
+void write_level(global *game);
 
 #endif /* MY_DEFENDER_H_ */

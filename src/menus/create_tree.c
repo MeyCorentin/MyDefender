@@ -6,8 +6,37 @@
 
 #include "../../includes/my_defender.h"
 
+void set_string_skills(global *game, chained_skill_t *skill)
+{
+    if (skill->type == 1)
+        sfText_setString(skill->infos, my_strcat(my_strcat(new_put_nbr_str\
+        (game->bonus->strenght), " + "), new_put_nbr_str(skill->value)));
+    if (skill->type == 2)
+        sfText_setString(skill->infos, my_strcat(my_strcat(new_put_nbr_str\
+        (game->bonus->speed), " + "), new_put_nbr_str(skill->value)));
+    if (skill->type == 3)
+        sfText_setString(skill->infos, my_strcat(my_strcat(new_put_nbr_str\
+        (game->bonus->gold), " + "), new_put_nbr_str(skill->value)));
+    if (skill->type == -1)
+        sfText_setString(skill->infos, my_strcat(my_strcat(new_put_nbr_str\
+        (game->bonus->all), " + "), new_put_nbr_str(skill->value)));
+    if (skill->type == 0)
+        sfText_setString(skill->infos, my_strcat(my_strcat(new_put_nbr_str\
+        (game->bonus->life), " + "), new_put_nbr_str(skill->value)));
+    sfText_setString(skill->cost, my_strcat(new_put_nbr_str(skill->price), " GOLD"));
+}
+
 void draw_skill_tree(global *game, chained_skill_t *skill)
 {
+    sfVector2i mouse = sfMouse_getPosition((sfWindow *) game->window);
+
+    if (mouse.x > skill->pos_skill.x && mouse.x < skill->pos_skill.x + 100 \
+    && mouse.y > skill->pos_skill.y && mouse.y < skill->pos_skill.y + 100 && \
+    skill->active == 1) {
+        set_string_skills(game, skill);
+        sfRenderWindow_drawText(game->window, skill->infos, sfFalse);
+        sfRenderWindow_drawText(game->window, skill->cost, sfFalse);
+    }
     sfRenderWindow_drawSprite(game->window, skill->skill, sfFalse);
     if (skill->next != NULL) {
         draw_skill_tree(game, skill->next);
@@ -51,6 +80,26 @@ chained_skill_t *check_prev(global *game, int cmpt)
         return (last_type);
 }
 
+void create_infos_skill(global *game, chained_skill_t *new_skill)
+{
+    new_skill->infos = sfText_create();
+    new_skill->cost = sfText_create();
+    new_skill->scale.x = 1;
+    new_skill->scale.y = 1;
+    new_skill->pos_infos.x = new_skill->pos_skill.x + 100;
+    new_skill->pos_infos.y = new_skill->pos_skill.y + 10;
+    new_skill->pos_cost.x = new_skill->pos_skill.x - 200;
+    new_skill->pos_cost.y = new_skill->pos_skill.y + 10;
+    sfText_setFont(new_skill->infos, game->infos->font);
+    sfText_setScale(new_skill->infos, new_skill->scale);
+    sfText_setPosition(new_skill->infos, new_skill->pos_infos);
+    sfText_setColor(new_skill->infos, sfBlack);
+    sfText_setFont(new_skill->cost, game->infos->font);
+    sfText_setScale(new_skill->cost, new_skill->scale);
+    sfText_setPosition(new_skill->cost, new_skill->pos_cost);
+    sfText_setColor(new_skill->cost, sfYellow);
+}
+
 chained_skill_t *create_skill(global *game, int cmpt, int level)
 {
     chained_skill_t *new_skill = malloc(sizeof(chained_skill_t));
@@ -78,6 +127,7 @@ chained_skill_t *create_skill(global *game, int cmpt, int level)
     sfSprite_setPosition(new_skill->skill, new_skill->pos_skill);
     new_skill->type = cmpt;
     sfSprite_setColor(new_skill->skill, unactive);
+    create_infos_skill(game, new_skill);
     return (new_skill);
 }
 
@@ -169,8 +219,10 @@ void check_mouse_tree(global *game, chained_skill_t *skill)
         sfSprite_setPosition(skill->skill, skill->pos_skill2);
         sfSprite_setScale(skill->skill, scale);
         if (game->event.type == sfEvtMouseButtonReleased && game->first->gold \
-        >= skill->price && skill->prev->active == 0)
+        >= skill->price && skill->prev->active == 0) {
+            sfSound_play(game->sounds->click);
             active_bonus(game, skill);
+        }
     } else {
         sfSprite_setPosition(skill->skill, skill->pos_skill);
         sfSprite_setScale(skill->skill, scale_basic);
@@ -181,13 +233,16 @@ void check_mouse_tree(global *game, chained_skill_t *skill)
 
 void event_tree(global *game)
 {
+    sfVector2i mouse = sfMouse_getPosition((sfWindow *) game->window);
+
     while (sfRenderWindow_pollEvent(game->window, &game->event)) {
         if (game->event.type == sfEvtClosed)
             sfRenderWindow_close(game->window);
         if ((sfKeyboard_isKeyPressed(sfKeyT) && game->other_secs != 0) || \
-        sfKeyboard_isKeyPressed(sfKeyEscape)) {
+        sfKeyboard_isKeyPressed(sfKeyEscape) || (mouse.x > 1790 && mouse.x < 1890 && mouse.y > 15 && mouse.y < 90 && game->event.type == sfEvtMouseButtonReleased)) {
             game->boole->in_tree = 1;
             game->other_secs = 0;
+            sfSound_play(game->sounds->click);
         }
         check_mouse_tree(game, game->tree->first_skill);
     }

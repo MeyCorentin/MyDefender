@@ -35,20 +35,20 @@ pos_button)
     if (pos_mouse.x > pos_button.x && pos_mouse.x < pos_button.x + 50 && \
     pos_mouse.y > pos_button.y && pos_mouse.y < pos_button.y + 150 && \
     game->event.type == sfEvtMouseButtonReleased) {
-        if (game->boole->shop_is_open == 1 && game->secs != 1) {
+        if (game->boole->shop_is_open == 1 && game->other_secs != 0) {
             sfSound_play(game->sounds->click);
             sfSprite_setTexture(my_shop->button, my_shop->t_shop->open, \
             sfFalse);
             game->boole->shop_is_open = 0;
             sfSprite_setPosition(my_shop->button, my_shop->pos_button_open);
-            game->secs = 1;
-        } else if (game->boole->shop_is_open == 0 && game->secs != 1) {
+            game->other_secs = 0;
+        } else if (game->boole->shop_is_open == 0 && game->other_secs != 0) {
             sfSound_play(game->sounds->click);
             sfSprite_setTexture(my_shop->button, my_shop->t_shop->close, \
             sfFalse);
             game->boole->shop_is_open = 1;
             sfSprite_setPosition(my_shop->button, my_shop->pos_button_close);
-            game->secs = 1;
+            game->other_secs = 0;
         }
     }
 }
@@ -87,11 +87,11 @@ void check_shop(global *game, shop *my_shop)
     check_keys(game);
     click_shop(game, my_shop, pos_mouse, pos_button);
     if (game->boole->pause_is_open == 1 && sfKeyboard_isKeyPressed\
-    (sfKeyEscape) && game->secs != 3) {
+    (sfKeyEscape) && game->other_secs != 0) {
         sfSound_play(game->sounds->click);
         sfSound_pause(game->sounds->ambiance);
         game->boole->pause_is_open = 0;
-        game->secs = 3;
+        game->other_secs = 0;
         in_pause(game);
     }
 }

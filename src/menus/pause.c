@@ -82,6 +82,7 @@ void in_pause(global *game)
     while (sfRenderWindow_isOpen(game->window) && game->boole->pause_is_open \
     == 0) {
         draw_pause(game);
+        update_gold(game);
         sfRenderWindow_display(game->window);
         check_pause_event(game);
         update_game(game);

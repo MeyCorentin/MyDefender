@@ -21,6 +21,8 @@ void creatre_textures_htp(global *game)
     ("pictures/htp/map_defender.png", NULL);
     game->how_to_play->htp_6 = sfTexture_createFromFile\
     ("pictures/htp/pause_defender.png", NULL);
+    game->how_to_play->htp_7 = sfTexture_createFromFile\
+    ("pictures/htp/skills_defender.png", NULL);
 }
 
 void update_htp(global *game)
@@ -43,6 +45,9 @@ void update_htp(global *game)
     if (game->how_to_play->page == 6)
         sfSprite_setTexture(game->how_to_play->htp, game->how_to_play->\
         htp_6, sfFalse);
+     if (game->how_to_play->page == 7)
+        sfSprite_setTexture(game->how_to_play->htp, game->how_to_play->\
+        htp_7, sfFalse);
 }
 
 void create_htp(global *game)
@@ -63,16 +68,18 @@ void change_page(global *game)
 {
     if (sfKeyboard_isKeyPressed(sfKeyLeft) && game->boole->on_htp == 0 && \
     game->secs > 30) {
+        sfSound_play(game->sounds->click);
         if (game->how_to_play->page > 1)
             game->how_to_play->page -= 1;
         else
-            game->how_to_play->page = 6;
+            game->how_to_play->page = 7;
         game->secs = 0;
         sfClock_restart(game->clock);
     }
     if (sfKeyboard_isKeyPressed(sfKeyRight) && game->boole->on_htp == 0 && \
     game->secs > 30) {
-        if (game->how_to_play->page < 6)
+        sfSound_play(game->sounds->click);
+        if (game->how_to_play->page < 7)
             game->how_to_play->page += 1;
         else
             game->how_to_play->page = 1;
@@ -83,14 +90,18 @@ void change_page(global *game)
 
 void test_htp(global *game)
 {
-    if (sfKeyboard_isKeyPressed(sfKeyH) && game->boole->on_htp == 1) {
+    if (sfKeyboard_isKeyPressed(sfKeyH) && game->boole->on_htp == 1 && game->other_secs > 30) {
         sfSound_play(game->sounds->click);
         game->boole->on_htp = 0;
+        game->other_secs = 0;
+        sfClock_restart(game->clock);
     }
-    if (sfKeyboard_isKeyPressed(sfKeyEscape) && game->boole->on_htp == 0) {
+    if ((sfKeyboard_isKeyPressed(sfKeyEscape) || sfKeyboard_isKeyPressed(sfKeyH)) && game->boole->on_htp == 0 && game->other_secs > 30) {
         sfSound_play(game->sounds->click);
         game->boole->on_htp = 1;
         game->how_to_play->page = 1;
+        game->other_secs = 0;
+        sfClock_restart(game->clock);
     }
     change_page(game);
 }

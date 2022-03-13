@@ -31,6 +31,7 @@ void check_event(global *game, menu *menus, sfVector2i mouse)
     while (sfRenderWindow_pollEvent(game->window, &game->event)) {
         if ((game->event.type == sfEvtClosed || \
         sfKeyboard_isKeyPressed(sfKeyQ)) && game->secs != 4) {
+            write_level(game);
             sfSound_play(game->sounds->click);
             sfRenderWindow_close(game->window);
         } if (sfKeyboard_isKeyPressed(sfKeyC)) {
@@ -55,17 +56,16 @@ void set_menu(global *game)
 
     set_minimap(game->menus);
     create_htp(game);
-    create_tree(game);
     create_bonus(game);
     while (sfRenderWindow_isOpen(game->window)) {
         mouse = sfMouse_getPosition((sfWindow *) game->window);
         sfRenderWindow_clear(game->window, sfBlack);
         update_htp(game);
-        test_htp(game);
         draw_menu(game, game->menus);
         check_event(game, game->menus, mouse);
         update_game(game);
         sfRenderWindow_display(game->window);
+        test_htp(game);
     }
 }
 
@@ -91,5 +91,6 @@ void create_window(int level)
     set_sounds_buttons(game, menus);
     game->menus = menus;
     game->boole->on_htp = 1;
+    create_htp_button(game);
     set_menu(game);
 }

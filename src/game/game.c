@@ -10,22 +10,22 @@
 void test_shop(global *game, shop *my_shop)
 {
     if (game->boole->shop_is_open == 1 && sfKeyboard_isKeyPressed(sfKeyS) \
-    && game->secs != 1) {
+    && game->other_secs != 0) {
         sfSound_play(game->sounds->click);
         sfSprite_setTexture(my_shop->button, my_shop->t_shop->open, \
         sfFalse);
         game->boole->shop_is_open = 0;
         sfSprite_setPosition(my_shop->button, my_shop->pos_button_open);
-        game->secs = 1;
+        game->other_secs = 0;
     }
     if (game->boole->shop_is_open == 0 && sfKeyboard_isKeyPressed(sfKeyS) \
-    && game->secs != 1) {
+    && game->other_secs != 0) {
         sfSound_play(game->sounds->click);
         sfSprite_setTexture(my_shop->button, my_shop->t_shop->close, \
         sfFalse);
         game->boole->shop_is_open = 1;
         sfSprite_setPosition(my_shop->button, my_shop->pos_button_close);
-        game->secs = 1;
+        game->other_secs = 0;
     }
 }
 
@@ -37,8 +37,10 @@ void check_game_event(global *game, shop *my_shop, grid_cell grid_cell_)
         test_shop(game, my_shop);
         check_shop(game, my_shop);
         struct_event(game, game->first, grid_cell_);
-        if (sfKeyboard_isKeyPressed(sfKeyT) && game->other_secs != 0)
+        if (sfKeyboard_isKeyPressed(sfKeyT) && game->other_secs != 0) {
+            sfSound_play(game->sounds->click);
             loop_tree(game);
+        }
     }
 }
 
@@ -71,6 +73,7 @@ void start_game(global *game)
     game->shop = malloc(sizeof(shop));
     game->shop = my_shop;
     create_transition(game);
+    create_tree(game);
     grid_cell = set_all(game, my_shop, grid_cell, enemy_f);
     dissip_clouds(game, grid_cell);
     while (sfRenderWindow_isOpen(game->window)) {
