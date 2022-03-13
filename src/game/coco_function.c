@@ -10,7 +10,7 @@
 void take_cell(global *game, int pos, struct grid_cell *new, shop *my_shop)
 {
     if (new->g_pos == pos && new->status == 1) {
-        new->status = 3; //À MODIFIER
+        new->status = 3;
         add_ground(game, new, my_shop);
     }
     if (new->g_pos != 196)
@@ -24,7 +24,7 @@ void check_click(global *game, struct grid_cell *grid_cell, shop *my_shop)
     if ((abs(pos_mouse.x - 25 - grid_cell->p_5.x)) * (abs(pos_mouse.x - 25 - \
     grid_cell->p_5.x)) + (abs(pos_mouse.y - 25 - grid_cell->p_5.y)) * \
     (abs(pos_mouse.y - 25 - grid_cell->p_5.y)) < 900) {
-        if (game->boole->click == 1 && sfMouse_isButtonPressed(sfMouseLeft) == \
+        if (game->boole->click == 1 && sfMouse_isButtonPressed(sfMouseLeft) ==\
         sfFalse && game->boole->unground == 1) {
             take_cell(game, game->boole->take_pos, grid_cell, my_shop);
             game->boole->click = 0;
@@ -36,11 +36,12 @@ void check_click(global *game, struct grid_cell *grid_cell, shop *my_shop)
         check_click(game, grid_cell->next_cell, my_shop);
 }
 
-grid_cell *find_next_cell(global *game ,grid_cell *new, char *path) {
+grid_cell *find_next_cell(global *game, grid_cell *new, char *path)
+{
     if (my_getnbr(path) == new->g_pos)
         return (new);
     if (new->g_pos != 196)
-        find_next_cell(game ,new->next_cell, path);
+        find_next_cell(game, new->next_cell, path);
 }
 
 void read_something(global *game, struct grid_cell grid_cell, shop *my_shop)
@@ -48,10 +49,10 @@ void read_something(global *game, struct grid_cell grid_cell, shop *my_shop)
     int i = 0;
 
     read_path(game);
-    const char* filename = "src/txt/out.txt";
-    FILE* output_file = fopen(filename, "w+");
+    const char *filename = "src/txt/out.txt";
+    FILE *output_file = fopen(filename, "w+");
     for (; game->map->path_way[i + 1]; i++)
-            add_cell_status(game, grid_cell.next_cell, find_next_cell(game ,grid_cell.next_cell ,game->map->path_way[i + 1])
+            add_cell_status(game, grid_cell.next_cell, find_next_cell(game, grid_cell.next_cell, game->map->path_way[i + 1])
         , output_file, game->map->path_way[i]);
     fclose(output_file);
 }

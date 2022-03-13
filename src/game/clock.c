@@ -22,7 +22,7 @@ void update_game(global *game)
     game->other_secs = game->time.microseconds / 5000.0;
 }
 
-void update_enemy(global * game)
+void update_enemy(global *game)
 {
     if (game->secs > 2) {
         moov_enemy(game, game->enemy);

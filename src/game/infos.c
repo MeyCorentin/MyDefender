@@ -59,7 +59,7 @@ void create_htp_button(global *game)
 void write_level(global *game)
 {
     int fd = open("src/txt/level", O_WRONLY);
-    
+
     if (game->level < 10)
         write(fd, my_strcat("0", new_put_nbr_str(game->level)), 2);
     else

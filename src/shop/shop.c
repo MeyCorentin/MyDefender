@@ -19,14 +19,14 @@ void open_shop(global *game, shop *my_shop)
 
 void create_defences(shop *my_shop)
 {
-    my_shop->s_cannon =	sfSprite_create();
-    my_shop->t_shop->t_cannon =	sfTexture_createFromFile\
+    my_shop->s_cannon = sfSprite_create();
+    my_shop->t_shop->t_cannon = sfTexture_createFromFile\
     ("pictures/defences/cannon/cannon_lvl1.png", NULL);
-    my_shop->s_archer =	sfSprite_create();
-    my_shop->t_shop->t_archer =	sfTexture_createFromFile\
+    my_shop->s_archer = sfSprite_create();
+    my_shop->t_shop->t_archer = sfTexture_createFromFile\
     ("pictures/defences/archer_tower/archer_tower_lvl1.png", NULL);
-    my_shop->s_mortar =	sfSprite_create();
-    my_shop->t_shop->t_mortar =	sfTexture_createFromFile\
+    my_shop->s_mortar = sfSprite_create();
+    my_shop->t_shop->t_mortar = sfTexture_createFromFile\
     ("pictures/defences/mortar/mortar_lvl1.png", NULL);
     my_shop->s_air_defence = sfSprite_create();
     my_shop->t_shop->t_air_defence = sfTexture_createFromFile\
@@ -34,8 +34,8 @@ void create_defences(shop *my_shop)
     my_shop->s_xbow = sfSprite_create();
     my_shop->t_shop->t_xbow = sfTexture_createFromFile\
     ("pictures/defences/x_bow/x_bow_lvl1.png", NULL);
-    my_shop->s_wizard =	sfSprite_create();
-    my_shop->t_shop->t_wizard =	sfTexture_createFromFile\
+    my_shop->s_wizard = sfSprite_create();
+    my_shop->t_shop->t_wizard = sfTexture_createFromFile\
     ("pictures/defences/wizard_tower/wizard_tower_lvl1.png", NULL);
 }
 

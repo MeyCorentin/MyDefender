@@ -7,7 +7,7 @@
 
 #include "../../includes/my_defender.h"
 
-enemy_ * create_barbar(global *game, struct enemy_ *enemy, int i, enemy_ * new)
+enemy_ *create_barbar(global *game, struct enemy_ *enemy, int i, enemy_ *new)
 {
     sfTexture *e_1 = sfTexture_createFromFile("pictures/mob/barbarian.png", NULL);
     sfSprite *temp = sfSprite_create();
@@ -27,10 +27,11 @@ enemy_ * create_barbar(global *game, struct enemy_ *enemy, int i, enemy_ * new)
     new->level = 1;
     new->speed = 16;
     new->type = 1;
-    sfSprite_setTexture(new->enemy_1 , new->texture , sfFalse);
+    sfSprite_setTexture(new->enemy_1, new->texture, sfFalse);
     return (new);
 }
-enemy_ * create_archer(global *game, struct enemy_ *enemy, int i, enemy_ * new)
+
+enemy_ *create_archer(global *game, struct enemy_ *enemy, int i, enemy_ *new)
 {
     sfTexture *e_1 = sfTexture_createFromFile("pictures/mob/archer.png", NULL);
     sfSprite *temp = sfSprite_create();
@@ -50,12 +51,12 @@ enemy_ * create_archer(global *game, struct enemy_ *enemy, int i, enemy_ * new)
     new->speed = 24;
     new->type = 2;
     new->reward = 15;
-    sfSprite_setTexture(new->enemy_1 , new->texture , sfFalse);
+    sfSprite_setTexture(new->enemy_1, new->texture, sfFalse);
     sfSprite_setPosition(new->enemy_1, pos);
     return (new);
 }
 
-enemy_ * create_goblin(global *game, struct enemy_ *enemy, int i, enemy_ * new)
+enemy_ *create_goblin(global *game, struct enemy_ *enemy, int i, enemy_ *new)
 {
     sfTexture *e_1 = sfTexture_createFromFile("pictures/mob/goblin.png", NULL);
     sfSprite *temp = sfSprite_create();
@@ -74,11 +75,12 @@ enemy_ * create_goblin(global *game, struct enemy_ *enemy, int i, enemy_ * new)
     new->level = 1;
     new->speed = 32;
     new->type = 3;
-    sfSprite_setTexture(new->enemy_1 , new->texture , sfFalse);
+    sfSprite_setTexture(new->enemy_1, new->texture, sfFalse);
     sfSprite_setPosition(new->enemy_1, pos);
     return (new);
 }
-enemy_ * create_giant(global *game, struct enemy_ *enemy, int i, enemy_ * new)
+
+enemy_ *create_giant(global *game, struct enemy_ *enemy, int i, enemy_ *new)
 {
     sfTexture *e_1 = sfTexture_createFromFile("pictures/mob/giant.png", NULL);
     sfSprite *temp = sfSprite_create();
@@ -97,12 +99,12 @@ enemy_ * create_giant(global *game, struct enemy_ *enemy, int i, enemy_ * new)
     new->level = 1;
     new->speed = 12;
     new->type = 4;
-    sfSprite_setTexture(new->enemy_1 , new->texture , sfFalse);
+    sfSprite_setTexture(new->enemy_1, new->texture, sfFalse);
     sfSprite_setPosition(new->enemy_1, pos);
     return (new);
 }
 
-enemy_ * create_dragon(global *game, struct enemy_ *enemy, int i, enemy_ * new)
+enemy_ *create_dragon(global *game, struct enemy_ *enemy, int i, enemy_ *new)
 {
     sfTexture *e_1 = sfTexture_createFromFile("pictures/mob/dragon.png", NULL);
     sfSprite *temp = sfSprite_create();
@@ -121,7 +123,7 @@ enemy_ * create_dragon(global *game, struct enemy_ *enemy, int i, enemy_ * new)
     new->level = 1;
     new->speed = 16;
     new->type = 5;
-    sfSprite_setTexture(new->enemy_1 , new->texture , sfFalse);
+    sfSprite_setTexture(new->enemy_1, new->texture, sfFalse);
     sfSprite_setPosition(new->enemy_1, pos);
     return (new);
 }

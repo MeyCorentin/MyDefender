@@ -15,7 +15,6 @@ void update_hdv(global *game, batiment *bat)
     game->first->next = NULL;
     game->gold = bat->gold;
     game->level += 1;
-    //game->menus->level += 1;
     set_texture_hdv(game, bat);
     set_texture_map(game);
     start_game(game);

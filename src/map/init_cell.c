@@ -31,7 +31,7 @@ grid_cell pos_grid_cell2(grid_cell grid_cell_, int i, int r)
     grid_cell_.p_4.y = grid_cell_.coords->original_y + (grid_cell_.coords->dy \
     * (0 + i));
     grid_cell_.c_5 = sfCircleShape_create();
-    grid_cell_.p_5.x = grid_cell_.coords->original_x+ ( grid_cell_.coords->dx \
+    grid_cell_.p_5.x = grid_cell_.coords->original_x + (grid_cell_.coords->dx \
     * (0 + i)) + grid_cell_.coords->dx - 25;
     grid_cell_.p_5.y = grid_cell_.coords->original_y + (grid_cell_.coords->dy \
     * (0 + i) - 25);

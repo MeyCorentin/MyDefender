@@ -13,7 +13,7 @@ int is_only(global *game, int num)
 
     for (int cmpt = 0; number[cmpt] != '\0'; cmpt += 1) {
         if (game->boole->take == number[cmpt] - 48 && game->boole->take \
-		!= num)
+        != num)
             return (1);
     }
     return (0);
@@ -63,7 +63,7 @@ grid_cell grid_cell_)
 
 void struct_event(global *game, batiment *bat_, grid_cell grid_cell_)
 {
-    sfVector2i pos_mouse = sfMouse_getPosition((sfWindow *) game->window);
+    sfVector2i pos_mouse = sfMouse_getPosition((sfWindow *)game->window);
 
     if (game->event.type == sfEvtMouseButtonReleased && !(pos_mouse.x > bat_->\
     level_up->pos_up.x && pos_mouse.x < bat_->level_up->pos_up.x + 30 && \

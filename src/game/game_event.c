@@ -67,19 +67,19 @@ void check_keys(global *game)
     }
     if (game->rad_god == 1 && sfKeyboard_isKeyPressed(sfKeyP) && \
     game->secs != 0) {
-        game->rad_god  = 0;
+        game->rad_god = 0;
         game->secs = 0;
     }
-    if (game->rad_god  == 0 && sfKeyboard_isKeyPressed(sfKeyP) && \
+    if (game->rad_god == 0 && sfKeyboard_isKeyPressed(sfKeyP) && \
     game->secs != 0) {
-        game->rad_god  = 1;
+        game->rad_god = 1;
         game->secs = 0;
     }
 }
 
 void check_shop(global *game, shop *my_shop)
 {
-    sfVector2i pos_mouse = sfMouse_getPosition((sfWindow *) game->window);
+    sfVector2i pos_mouse = sfMouse_getPosition((sfWindow *)game->window);
     sfVector2f pos_button = sfSprite_getPosition(my_shop->button);
 
     if (game->boole->shop_is_open == 0)

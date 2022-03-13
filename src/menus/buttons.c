@@ -40,7 +40,7 @@ void check_button_con(global *game, menu *menus, sfVector2i mouse)
 
 void check_button_quit(global *game, menu *menus)
 {
-    sfVector2i mouse = sfMouse_getPosition((sfWindow *) game->window);
+    sfVector2i mouse = sfMouse_getPosition((sfWindow *)game->window);
     sfVector2f scale_min = {1, 1};
     sfVector2f scale_max = {1.2, 1.2};
 

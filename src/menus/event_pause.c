@@ -70,7 +70,7 @@ void check_button_event(global *game)
 
 void check_pause_event(global *game)
 {
-    sfVector2i mouse = sfMouse_getPosition((sfWindow *) game->window);
+    sfVector2i mouse = sfMouse_getPosition((sfWindow *)game->window);
 
     while (sfRenderWindow_pollEvent(game->window, &game->event)) {
         if (game->event.type == sfEvtClosed)

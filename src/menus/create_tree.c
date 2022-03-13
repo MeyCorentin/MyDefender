@@ -28,7 +28,7 @@ void set_string_skills(global *game, chained_skill_t *skill)
 
 void draw_skill_tree(global *game, chained_skill_t *skill)
 {
-    sfVector2i mouse = sfMouse_getPosition((sfWindow *) game->window);
+    sfVector2i mouse = sfMouse_getPosition((sfWindow *)game->window);
 
     if (mouse.x > skill->pos_skill.x && mouse.x < skill->pos_skill.x + 100 \
     && mouse.y > skill->pos_skill.y && mouse.y < skill->pos_skill.y + 100 && \
@@ -209,7 +209,7 @@ void active_bonus(global *game, chained_skill_t *skill)
 
 void check_mouse_tree(global *game, chained_skill_t *skill)
 {
-    sfVector2i mouse = sfMouse_getPosition((sfWindow *) game->window);
+    sfVector2i mouse = sfMouse_getPosition((sfWindow *)game->window);
     sfVector2f scale = {1.5, 1.5};
     sfVector2f scale_basic = {1, 1};
 
@@ -233,7 +233,7 @@ void check_mouse_tree(global *game, chained_skill_t *skill)
 
 void event_tree(global *game)
 {
-    sfVector2i mouse = sfMouse_getPosition((sfWindow *) game->window);
+    sfVector2i mouse = sfMouse_getPosition((sfWindow *)game->window);
 
     while (sfRenderWindow_pollEvent(game->window, &game->event)) {
         if (game->event.type == sfEvtClosed)

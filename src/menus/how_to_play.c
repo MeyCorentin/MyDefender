@@ -45,7 +45,7 @@ void update_htp(global *game)
     if (game->how_to_play->page == 6)
         sfSprite_setTexture(game->how_to_play->htp, game->how_to_play->\
         htp_6, sfFalse);
-     if (game->how_to_play->page == 7)
+    if (game->how_to_play->page == 7)
         sfSprite_setTexture(game->how_to_play->htp, game->how_to_play->\
         htp_7, sfFalse);
 }

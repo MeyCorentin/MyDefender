@@ -46,7 +46,7 @@ void check_game_event(global *game, shop *my_shop, grid_cell grid_cell_)
 
 void place_struct(global *game, struct grid_cell *new, shop *my_shop)
 {
-    sfVector2i pos_mouse = sfMouse_getPosition((sfWindow *) game->window);
+    sfVector2i pos_mouse = sfMouse_getPosition((sfWindow *)game->window);
 
     sfCircleShape_setFillColor(new->c_5, sfRed);
     if (pow(abs(pos_mouse.x - 25 - new->p_5.x), 2) + pow(abs(pos_mouse.y - 25 \

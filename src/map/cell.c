@@ -33,8 +33,8 @@ void read_path(global *game)
     game->map->path_way = split_path;
 }
 
-
-void create_cell_intermediate(grid_cell *new, FILE* output_file, char * path, sfVector2f actual , sfVector2f next) {
+void create_cell_intermediate(grid_cell *new, FILE *output_file, char *path, sfVector2f actual, sfVector2f next)
+{
     int temp_x = my_intlen(actual.x) + 1;
     int temp_y = my_intlen(actual.y) + 1;
     int boucle = 1;
@@ -43,38 +43,39 @@ void create_cell_intermediate(grid_cell *new, FILE* output_file, char * path, sf
 
     if ((int)actual.x < (int)next.x && (int)actual.y < (int)next.y) {
         for (; boucle != 30; boucle++) {
-            fwrite(new_put_nbr_str(new->p_5.x + (down_x) * boucle), 1, temp_x, output_file);
+            fwrite(new_put_nbr_str((int)new->p_5.x + down_x * boucle), 1, temp_x, output_file);
             fwrite(",", 1, 1, output_file);
-            fwrite(new_put_nbr_str(new->p_5.y +  (down_y) * boucle), 1, temp_y, output_file);
+            fwrite(new_put_nbr_str((int)new->p_5.y + down_y * boucle), 1, temp_y, output_file);
             fwrite("\n", 1, 1, output_file);
         }
     }
     if ((int)actual.x > (int)next.x && (int)actual.y > (int)next.y) {
         for (; boucle != 30; boucle++) {
-            fwrite(new_put_nbr_str((int) new->p_5.x - (down_x) * boucle), 1, temp_x, output_file);
+            fwrite(new_put_nbr_str((int)new->p_5.x - down_x * boucle), 1, temp_x, output_file);
             fwrite(",", 1, 1, output_file);
-            fwrite(new_put_nbr_str((int) new->p_5.y - (down_y) * boucle), 1, temp_y, output_file);
+            fwrite(new_put_nbr_str((int)new->p_5.y - down_y * boucle), 1, temp_y, output_file);
             fwrite("\n", 1, 1, output_file);
         }
     }
     if ((int)actual.x < (int)next.x && (int)actual.y > (int)next.y) {
         for (; boucle != 30; boucle++) {
-            fwrite(new_put_nbr_str((int) new->p_5.x + (down_x) * boucle), 1, temp_x, output_file);
+            fwrite(new_put_nbr_str((int)new->p_5.x + down_x * boucle), 1, temp_x, output_file);
             fwrite(",", 1, 1, output_file);
-            fwrite(new_put_nbr_str((int) new->p_5.y - (down_y) * boucle), 1, temp_y, output_file);
+            fwrite(new_put_nbr_str((int)new->p_5.y - down_y * boucle), 1, temp_y, output_file);
             fwrite("\n", 1, 1, output_file);
         }
     }
     if ((int)actual.x > (int)next.x && (int)actual.y < (int)next.y) {
         for (; boucle != 30; boucle++) {
-            fwrite(new_put_nbr_str((int) new->p_5.x - (down_x) * boucle), 1, temp_x, output_file);
+            fwrite(new_put_nbr_str((int)new->p_5.x - down_x * boucle), 1, temp_x, output_file);
             fwrite(",", 1, 1, output_file);
-            fwrite(new_put_nbr_str((int) new->p_5.y +  (down_y) * boucle), 1, temp_y, output_file);
+            fwrite(new_put_nbr_str((int)new->p_5.y + down_y * boucle), 1, temp_y, output_file);
             fwrite("\n", 1, 1, output_file);
         }
     }
 }
-void add_cell_status(global *game, grid_cell *new, grid_cell *next_cell ,FILE* output_file, char * path)
+
+void add_cell_status(global *game, grid_cell *new, grid_cell *next_cell ,FILE *output_file, char * path)
 {
     int fd = open("src/txt/path", O_RDONLY);
     int temp_x = my_intlen(new->p_5.x);

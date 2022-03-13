@@ -11,7 +11,7 @@ int my_find_prime_sup(int nb)
 {
     int boole = 0;
 
-    for ( ; boole != 1; nb += 1) {
+    for (; boole != 1; nb += 1) {
         if (my_is_prime(nb) == 1) {
             boole = 1;
             return (nb);

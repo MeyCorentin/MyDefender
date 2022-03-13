@@ -58,7 +58,7 @@ void set_menu(global *game)
     create_htp(game);
     create_bonus(game);
     while (sfRenderWindow_isOpen(game->window)) {
-        mouse = sfMouse_getPosition((sfWindow *) game->window);
+        mouse = sfMouse_getPosition((sfWindow *)game->window);
         sfRenderWindow_clear(game->window, sfBlack);
         update_htp(game);
         draw_menu(game, game->menus);
