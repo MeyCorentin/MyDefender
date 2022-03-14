@@ -72,8 +72,10 @@ void create_pause(global *game)
     set_textures_pause(game);
     create_texts_pause(game);
     set_pos_sounds(game, scale_text);
-    sfText_setPosition(game->pause->c_continu, game->pause->p_pause->pos_c_con);
-    sfText_setPosition(game->pause->c_restart, game->pause->p_pause->pos_c_res);
+    sfText_setPosition(game->pause->c_continu, \
+    game->pause->p_pause->pos_c_con);
+    sfText_setPosition(game->pause->c_restart,
+    game->pause->p_pause->pos_c_res);
     sfText_setPosition(game->pause->c_quit, game->pause->p_pause->pos_c_quit);
 }
 

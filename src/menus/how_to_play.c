@@ -45,9 +45,8 @@ void update_htp(global *game)
     if (game->how_to_play->page == 6)
         sfSprite_setTexture(game->how_to_play->htp, game->how_to_play->\
         htp_6, sfFalse);
-    if (game->how_to_play->page == 7)
-        sfSprite_setTexture(game->how_to_play->htp, game->how_to_play->\
-        htp_7, sfFalse);
+    (game->how_to_play->page == 7) ? sfSprite_setTexture(game->how_to_play\
+    ->htp, game->how_to_play->htp_7, sfFalse) : 1;
 }
 
 void create_htp(global *game)
@@ -90,13 +89,15 @@ void change_page(global *game)
 
 void test_htp(global *game)
 {
-    if (sfKeyboard_isKeyPressed(sfKeyH) && game->boole->on_htp == 1 && game->other_secs > 30) {
+    if (sfKeyboard_isKeyPressed(sfKeyH) && game->boole->on_htp == 1 &&\
+        game->other_secs > 30) {
         sfSound_play(game->sounds->click);
         game->boole->on_htp = 0;
         game->other_secs = 0;
         sfClock_restart(game->clock);
     }
-    if ((sfKeyboard_isKeyPressed(sfKeyEscape) || sfKeyboard_isKeyPressed(sfKeyH)) && game->boole->on_htp == 0 && game->other_secs > 30) {
+    if ((sfKeyboard_isKeyPressed(sfKeyEscape) || sfKeyboard_isKeyPressed\
+    (sfKeyH)) && game->boole->on_htp == 0 && game->other_secs > 30) {
         sfSound_play(game->sounds->click);
         game->boole->on_htp = 1;
         game->how_to_play->page = 1;

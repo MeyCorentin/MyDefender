@@ -23,7 +23,8 @@ void set_string_skills(global *game, chained_skill_t *skill)
     if (skill->type == 0)
         sfText_setString(skill->infos, my_strcat(my_strcat(new_put_nbr_str\
         (game->bonus->life), " + "), new_put_nbr_str(skill->value)));
-    sfText_setString(skill->cost, my_strcat(new_put_nbr_str(skill->price), " GOLD"));
+    sfText_setString(skill->cost, \
+    my_strcat(new_put_nbr_str(skill->price), " GOLD"));
 }
 
 void draw_skill_tree(global *game, chained_skill_t *skill)
@@ -239,7 +240,9 @@ void event_tree(global *game)
         if (game->event.type == sfEvtClosed)
             sfRenderWindow_close(game->window);
         if ((sfKeyboard_isKeyPressed(sfKeyT) && game->other_secs != 0) || \
-        sfKeyboard_isKeyPressed(sfKeyEscape) || (mouse.x > 1790 && mouse.x < 1890 && mouse.y > 15 && mouse.y < 90 && game->event.type == sfEvtMouseButtonReleased)) {
+        sfKeyboard_isKeyPressed(sfKeyEscape) || (mouse.x > 1790 && mouse.x \
+        < 1890 && mouse.y > 15 && mouse.y < 90 && game->event.type ==\
+        sfEvtMouseButtonReleased)) {
             game->boole->in_tree = 1;
             game->other_secs = 0;
             sfSound_play(game->sounds->click);

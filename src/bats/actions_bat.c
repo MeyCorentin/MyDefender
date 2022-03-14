@@ -34,6 +34,7 @@ void destroy_struct(global *game, batiment *bat)
 void up_struct(global *game, batiment *bat, grid_cell grid_cell_)
 {
     if (bat->on_bat == 0) {
+        game->boole->ground = 1;
         sfSound_play(game->sounds->anvil);
         bat->stats->level += 1;
         game->first->gold -= bat->stats->price;
@@ -45,20 +46,36 @@ void up_struct(global *game, batiment *bat, grid_cell grid_cell_)
     }
 }
 
+void give_ground(global *game, grid_cell *grid_cell) {
+    sfVector2i pos_mouse = sfMouse_getPosition((sfWindow *)game->window);
+
+    if ((abs(pos_mouse.x - 60 - grid_cell->p_5.x)) * (abs(pos_mouse.x - 60 - \
+    grid_cell->p_5.x)) + (abs(pos_mouse.y - 90 - grid_cell->p_5.y)) * \
+    (abs(pos_mouse.y - 90 - grid_cell->p_5.y)) < 900) {
+        printf("ok");
+        grid_cell->status = 1;
+        add_base(game, grid_cell, game->shop);
+    }
+    if (grid_cell->g_pos != 196)
+        give_ground(game, grid_cell->next_cell);
+}
+
 void button_struct(global *game, batiment *bat_, sfVector2i pos_mouse, \
 grid_cell grid_cell_)
 {
     if (bat_->stats->level < 10 && game->first->gold >= bat_->stats->price && \
     pos_mouse.x > bat_->level_up->pos_up.x && pos_mouse.x < bat_->level_up->\
     pos_up.x + 30 && pos_mouse.y > bat_->level_up->pos_up.y && pos_mouse.y < \
-    bat_->level_up->pos_up.y + 30 && game->event.type == \
+    bat_->level_up->pos_up.y + 30 && game->event.type ==
     sfEvtMouseButtonReleased)
         up_struct(game, bat_, grid_cell_);
     if (pos_mouse.x > bat_->level_up->pos_destroy.x && pos_mouse.x < bat_->\
     level_up->pos_destroy.x + 30 && pos_mouse.y > bat_->level_up->\
     pos_destroy.y && pos_mouse.y < bat_->level_up->pos_destroy.y + 30 && \
-    game->event.type == sfEvtMouseButtonReleased)
+    game->event.type == sfEvtMouseButtonReleased) {
         destroy_struct(game, bat_);
+        give_ground(game, &grid_cell_);
+    }
 }
 
 void struct_event(global *game, batiment *bat_, grid_cell grid_cell_)

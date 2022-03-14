@@ -24,7 +24,7 @@ void pos_new(struct grid_cell *new, int i, int r)
 {
     new->coords->dx = 51;
     new->coords->dy = -33;
-    new->coords->original_x= 260 - 17 + (new->coords->dx * r);
+    new->coords->original_x = 260 - 17 + (new->coords->dx * r);
     new->coords->original_y = 540 - 11 + (abs(new->coords->dy) * r);
     new->c_1 = sfCircleShape_create();
     new->p_1.x = new->coords->original_x + (new->coords->dx * (0 + i));

@@ -299,6 +299,7 @@ typedef struct boole {
     int take;
     int on_htp;
     int in_tree;
+    int ground;
 } boole_t;
 
 typedef struct map {
@@ -533,5 +534,6 @@ void update_bullet(global *game, batiment *bat);
 void create_infos(global *game);
 void create_htp_button(global *game);
 void write_level(global *game);
+void add_base(global *game, struct grid_cell *new, shop *my_shop);
 
 #endif /* MY_DEFENDER_H_ */
