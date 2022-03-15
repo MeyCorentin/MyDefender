@@ -60,6 +60,10 @@ void create_enemy(global *game, struct enemy_ *enemy, int i)
         new = create_giant(game, enemy, i, new);
     if (i == 5)
         new = create_dragon(game, enemy, i, new);
+    new->pv_max = new->pv;
+    new->clock = sfClock_create();
+    new->seconds = 0;
+    create_lifebar(game, new);
     (enemy->enemy_next == NULL) ? enemy->enemy_next = new : \
     create_enemy(game, enemy->enemy_next, i);
 }
@@ -79,7 +83,15 @@ void set_enemy_pos(global *game, struct enemy_ *enemy)
 
 void draw_enemy(global *game, struct enemy_ *enemy)
 {
+    do_rect_enemy(game, enemy);
     sfRenderWindow_drawSprite(game->window, enemy->enemy_1, sfFalse);
+    update_lifebar(game, enemy);
+    sfSprite_setTextureRect(enemy->lifebar->life, enemy->lifebar->rect);
+    enemy->lifebar->pos_life.x = enemy->pos.x;
+    enemy->lifebar->pos_life.y = enemy->pos.y + 70;
+    sfSprite_setPosition(enemy->lifebar->life, enemy->lifebar->pos_life);
+    if (enemy->pv_max != -1)
+        sfRenderWindow_drawSprite(game->window, enemy->lifebar->life, sfFalse);
     if (enemy->enemy_next != NULL)
         draw_enemy(game, enemy->enemy_next);
 }
@@ -102,6 +114,25 @@ void moov_enemy(global *game, struct enemy_ *enemy)
         moov_enemy(game, enemy->enemy_next);
 }
 
+sfIntRect move_rect(sfIntRect rect, float offset, int max_value)
+{
+    rect.left += offset;
+    if (rect.left >= max_value)
+        rect.left = 0;
+    return (rect);
+}
+
+void do_rect_enemy(global *game, struct enemy_ *enemy)
+{
+    enemy->time = sfClock_getElapsedTime(enemy->clock);
+    enemy->seconds = enemy->time.microseconds / 5000;
+    if (enemy->seconds >= 20) {
+        enemy->rect = move_rect(enemy->rect, enemy->offset, enemy->max_value);
+        sfClock_restart(enemy->clock);
+    }
+    sfSprite_setTextureRect(enemy->enemy_1, enemy->rect);
+}
+
 void set_enemy(global *game, struct enemy_ *enemy_f)
 {
     sfCircleShape *radius = sfCircleShape_create();
@@ -118,8 +149,14 @@ void set_enemy(global *game, struct enemy_ *enemy_f)
     enemy_f->enemy_first = NULL;
     enemy_f->enemy_next = NULL;
     enemy_f->loc = 0;
+    enemy_f->lifebar = malloc(sizeof(lifebar_t));
+    enemy_f->pv_max = -1;
+    enemy_f->clock = sfClock_create();
+    enemy_f->offset = 0;
+    enemy_f->max_value = 0;
+    create_lifebar(game, enemy_f);
     game->enemy = enemy_f;
-    for (int i = 0; i != 5; i++)
-        create_enemy(game, enemy_f, rand() % 2 + 1);
+    for (int i = 0; i != 15; i++)
+        create_enemy(game, enemy_f, rand() % 5 + 1);
     set_enemy_pos(game, enemy_f);
 }

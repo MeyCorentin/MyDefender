@@ -263,7 +263,15 @@ typedef struct gold {
     char *temp;
 } gold;
 
+typedef struct lifebar {
+    sfSprite *life;
+    sfTexture *t_life;
+    sfVector2f pos_life;
+    sfIntRect rect;
+} lifebar_t;
+
 typedef struct enemy_ {
+    lifebar_t *lifebar;
     struct enemy_ *enemy_first;
     sfSprite *enemy_1;
     sfVector2f pos;
@@ -272,6 +280,7 @@ typedef struct enemy_ {
     struct enemy_ *enemy_prev;
     int number;
     int pv;
+    int pv_max;
     int pv_base;
     int damage;
     int level;
@@ -282,6 +291,12 @@ typedef struct enemy_ {
     int speed;
     sfVector2f e_pos;
     int reward;
+    sfIntRect rect;
+    float offset;
+    int max_value;
+    sfClock *clock;
+    sfTime time;
+    int seconds;
 } enemy_;
 
 typedef struct boole {
@@ -535,5 +550,9 @@ void create_infos(global *game);
 void create_htp_button(global *game);
 void write_level(global *game);
 void add_base(global *game, struct grid_cell *new, shop *my_shop);
+void update_lifebar(global *game, struct enemy_ *enemy);
+void create_lifebar(global *game, struct enemy_ *enemy);
+sfIntRect change_rect(sfIntRect rect, float x, float y);
+void do_rect_enemy(global *game, struct enemy_ *enemy);
 
 #endif /* MY_DEFENDER_H_ */

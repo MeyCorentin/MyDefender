@@ -9,7 +9,7 @@
 
 enemy_ *create_barbar(global *game, struct enemy_ *enemy, int i, enemy_ *new)
 {
-    sfTexture *e_1 = sfTexture_createFromFile("pictures/mob/barbarian.png", NULL);
+    sfTexture *e_1 = sfTexture_createFromFile("pictures/mob/barbarian2.png", NULL);
     sfSprite *temp = sfSprite_create();
     sfVector2f pos = {-100, -100};
 
@@ -27,13 +27,17 @@ enemy_ *create_barbar(global *game, struct enemy_ *enemy, int i, enemy_ *new)
     new->level = 1;
     new->speed = 16;
     new->type = 1;
+    new->offset = 81.5;
+    new->max_value = 1050;
+    new->rect = change_rect(new->rect, 81.5, 82);
+    sfSprite_setTextureRect(new->enemy_1, new->rect);
     sfSprite_setTexture(new->enemy_1, new->texture, sfFalse);
     return (new);
 }
 
 enemy_ *create_archer(global *game, struct enemy_ *enemy, int i, enemy_ *new)
 {
-    sfTexture *e_1 = sfTexture_createFromFile("pictures/mob/archer.png", NULL);
+    sfTexture *e_1 = sfTexture_createFromFile("pictures/mob/archer2.png", NULL);
     sfSprite *temp = sfSprite_create();
     sfVector2f pos = {-100, -100};
 
@@ -51,6 +55,10 @@ enemy_ *create_archer(global *game, struct enemy_ *enemy, int i, enemy_ *new)
     new->speed = 24;
     new->type = 2;
     new->reward = 15;
+    new->offset = 76;
+    new->max_value = 1064;
+    new->rect = change_rect(new->rect, 76, 89);
+    sfSprite_setTextureRect(new->enemy_1, new->rect);
     sfSprite_setTexture(new->enemy_1, new->texture, sfFalse);
     sfSprite_setPosition(new->enemy_1, pos);
     return (new);
@@ -58,7 +66,7 @@ enemy_ *create_archer(global *game, struct enemy_ *enemy, int i, enemy_ *new)
 
 enemy_ *create_goblin(global *game, struct enemy_ *enemy, int i, enemy_ *new)
 {
-    sfTexture *e_1 = sfTexture_createFromFile("pictures/mob/goblin.png", NULL);
+    sfTexture *e_1 = sfTexture_createFromFile("pictures/mob/goblin2.png", NULL);
     sfSprite *temp = sfSprite_create();
     sfVector2f pos = {-100, -100};
 
@@ -75,6 +83,10 @@ enemy_ *create_goblin(global *game, struct enemy_ *enemy, int i, enemy_ *new)
     new->level = 1;
     new->speed = 32;
     new->type = 3;
+    new->offset = 99.5;
+    new->max_value = 690;
+    new->rect = change_rect(new->rect, 99.5, 90);
+    sfSprite_setTextureRect(new->enemy_1, new->rect);
     sfSprite_setTexture(new->enemy_1, new->texture, sfFalse);
     sfSprite_setPosition(new->enemy_1, pos);
     return (new);
@@ -82,7 +94,7 @@ enemy_ *create_goblin(global *game, struct enemy_ *enemy, int i, enemy_ *new)
 
 enemy_ *create_giant(global *game, struct enemy_ *enemy, int i, enemy_ *new)
 {
-    sfTexture *e_1 = sfTexture_createFromFile("pictures/mob/giant.png", NULL);
+    sfTexture *e_1 = sfTexture_createFromFile("pictures/mob/giant2.png", NULL);
     sfSprite *temp = sfSprite_create();
     sfVector2f pos = {-100, -100};
 
@@ -99,6 +111,10 @@ enemy_ *create_giant(global *game, struct enemy_ *enemy, int i, enemy_ *new)
     new->level = 1;
     new->speed = 12;
     new->type = 4;
+    new->offset = 109.3;
+    new->max_value = 970;
+    new->rect = change_rect(new->rect, 109.3, 85);
+    sfSprite_setTextureRect(new->enemy_1, new->rect);
     sfSprite_setTexture(new->enemy_1, new->texture, sfFalse);
     sfSprite_setPosition(new->enemy_1, pos);
     return (new);
@@ -106,7 +122,7 @@ enemy_ *create_giant(global *game, struct enemy_ *enemy, int i, enemy_ *new)
 
 enemy_ *create_dragon(global *game, struct enemy_ *enemy, int i, enemy_ *new)
 {
-    sfTexture *e_1 = sfTexture_createFromFile("pictures/mob/dragon.png", NULL);
+    sfTexture *e_1 = sfTexture_createFromFile("pictures/mob/dragon2.png", NULL);
     sfSprite *temp = sfSprite_create();
     sfVector2f pos = {-100, -100};
 
@@ -123,6 +139,10 @@ enemy_ *create_dragon(global *game, struct enemy_ *enemy, int i, enemy_ *new)
     new->level = 1;
     new->speed = 16;
     new->type = 5;
+    new->offset = 129.6;
+    new->max_value = 1030;
+    new->rect = change_rect(new->rect, 129.6, 107);
+    sfSprite_setTextureRect(new->enemy_1, new->rect);
     sfSprite_setTexture(new->enemy_1, new->texture, sfFalse);
     sfSprite_setPosition(new->enemy_1, pos);
     return (new);

@@ -59,13 +59,13 @@ void update_bullet(global *game, batiment *bat)
         }
         if (bat->bullet->shot == 0) {
             if (bat->bullet->pos_bullet.x < bat->target->pos.x + 20)
-                bat->bullet->pos_bullet.x += 3;
+                bat->bullet->pos_bullet.x += 5;
             else
-                bat->bullet->pos_bullet.x -= 3;
+                bat->bullet->pos_bullet.x -= 5;
             if (bat->bullet->pos_bullet.y < bat->target->pos.y + 20)
-                bat->bullet->pos_bullet.y += 3;
+                bat->bullet->pos_bullet.y += 5;
             else
-                bat->bullet->pos_bullet.y -= 3;
+                bat->bullet->pos_bullet.y -= 5;
             sfSprite_setPosition(bat->bullet->bullet, bat->bullet->pos_bullet);
             sfRenderWindow_drawSprite(game->window, bat->bullet->bullet, sfFalse);
         }
