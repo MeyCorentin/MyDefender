@@ -271,11 +271,15 @@ typedef struct lifebar {
 } lifebar_t;
 
 typedef struct enemy_ {
+    int x_size;
+    int old_x;
+    int direction;
     lifebar_t *lifebar;
     struct enemy_ *enemy_first;
     sfSprite *enemy_1;
     sfVector2f pos;
     sfTexture *texture;
+    sfTexture *mirror;
     struct enemy_ *enemy_next;
     struct enemy_ *enemy_prev;
     int number;
