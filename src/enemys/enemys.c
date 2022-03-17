@@ -142,7 +142,7 @@ void set_enemy(global *game, struct enemy_ *enemy_f)
 {
     sfCircleShape *radius = sfCircleShape_create();
     sfTexture *e_1 =
-    sfTexture_createFromFile("pictures/mob/dragon.png", NULL);
+    sfTexture_createFromFile("pictures/mob/dragon2.png", NULL);
     sfSprite *temp = sfSprite_create();
 
     game->radius = radius;
