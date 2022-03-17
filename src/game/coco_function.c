@@ -69,6 +69,5 @@ grid_cell, struct enemy_ *enemy_f)
     read_something(game, grid_cell, my_shop);
     add_ground(game, grid_cell.next_cell, my_shop);
     create_infos(game);
-    printf("%d\n", game->gold);
     return (grid_cell);
 }

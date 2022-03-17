@@ -85,7 +85,6 @@ void start_game(global *game)
         check_game_event(game, my_shop, grid_cell);
         update_enemy(game);
         check_click(game, &grid_cell, my_shop);
-        printf("%d\n", game->first->gold);
         update_gold(game);
         sfRenderWindow_display(game->window);
     }

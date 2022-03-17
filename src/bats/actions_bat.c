@@ -52,7 +52,6 @@ void give_ground(global *game, grid_cell *grid_cell) {
     if ((abs(pos_mouse.x - 60 - grid_cell->p_5.x)) * (abs(pos_mouse.x - 60 - \
     grid_cell->p_5.x)) + (abs(pos_mouse.y - 90 - grid_cell->p_5.y)) * \
     (abs(pos_mouse.y - 90 - grid_cell->p_5.y)) < 900) {
-        printf("ok");
         grid_cell->status = 1;
         add_base(game, grid_cell, game->shop);
     }
