@@ -9,14 +9,17 @@
 
 int get_path_pos_x(int i)
 {
-    char *buffer = malloc(sizeof(char) * 100000);
+    struct stat st;
+    stat("src/txt/out.txt", &st);
+    int size = st.st_size;
+    char *buffer = malloc(sizeof(char) * size);
     int fd = open("src/txt/out.txt", O_RDONLY);
-    char *path_x = malloc(sizeof(char) * 100000);
+    char *path_x = malloc(sizeof(char) * size);
     int cmpt = 0;
     int j = 0;
     int k = 0;
 
-    read(fd, buffer, 100000);
+    read(fd, buffer, size);
     for (; k != i; k++)
         for (; buffer[cmpt++] != '\n';);
     for (; buffer[cmpt] != ','; cmpt++, j++)
@@ -28,14 +31,17 @@ int get_path_pos_x(int i)
 
 int get_path_pos_y(int i)
 {
-    char *buffer = malloc(sizeof(char) * 100000);
+    struct stat st;
+    stat("src/txt/out.txt", &st);
+    int size = st.st_size;
+    char *buffer = malloc(sizeof(char) * size);
     int fd = open("src/txt/out.txt", O_RDONLY);
-    char *path_y = malloc(sizeof(char) * 100000);
+    char *path_y = malloc(sizeof(char) * size);
     int cmpt = 0;
     int j = 0;
     int k = 0;
 
-    read(fd, buffer, 100000);
+    read(fd, buffer, size);
     for (; k != i; k++)
         for (; buffer[cmpt++] != '\n';);
     for (; buffer[cmpt] != ','; cmpt++);
@@ -111,7 +117,7 @@ void moov_enemy(global *game, struct enemy_ *enemy)
             game->first->gold += enemy->reward;
             update_gold(game);
         }
-        if (enemy->loc >= 38 * 30)
+        if (enemy->loc >= game->split * 30)
             enemy->loc = 0;
         set_enemy_pos(game, enemy);
     }

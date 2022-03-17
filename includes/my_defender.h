@@ -442,6 +442,7 @@ typedef struct global {
     int price_hdv;
     sfColor * opacity_down;
     sfVector2i pos_mouse;
+    int split;
 } global;
 
 void open_shop(global *game, shop *my_shop);

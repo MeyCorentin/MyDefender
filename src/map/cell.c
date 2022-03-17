@@ -20,15 +20,20 @@ void draw_cell(global *game, grid_cell *new, shop *my_shop)
 
 void read_path(global *game)
 {
-    int level = game->menus->level;
-    char *buffer = malloc(sizeof(char) * 139);
+    struct stat st;
+    stat("src/txt/path", &st);
+    int size = st.st_size;
+    int level = game->level;
+    char *buffer = malloc(sizeof(char) * size);
     int fd = open("src/txt/path", O_RDONLY);
 
-    int test = read(fd, buffer, 139);
+    int test = read(fd, buffer, size);
     buffer[test] = '\0';
     close(fd);
     char **temp_split = my_split_tab(buffer, '\n');
+    game->split =  my_count_split(temp_split[level - 1], '/') - 1;
     char **split_path = my_split_tab(temp_split[level - 1], '/');
+    printf("%s", temp_split[level - 1]);
     game->boole->path_nbr = my_count_split(temp_split[level - 1], '/');
     game->map->path_way = split_path;
 }
