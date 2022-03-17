@@ -70,16 +70,11 @@ void create_enemy(global *game, struct enemy_ *enemy, int i)
 
 void set_enemy_pos(global *game, struct enemy_ *enemy)
 {
-    enemy->old_x = enemy->pos.x;
     if (enemy->loc > 0) {
     enemy->pos.x = get_path_pos_x(enemy->loc);
     enemy->pos.y = get_path_pos_y(enemy->loc);
     enemy->pos.x -= 25;
     enemy->pos.y -= 20;
-    if(enemy->old_x > enemy->pos.x)
-        sfSprite_setTexture(enemy->enemy_1, enemy->mirror, sfFalse);
-    else
-        sfSprite_setTexture(enemy->enemy_1, enemy->texture, sfFalse);
     sfSprite_setPosition(enemy->enemy_1, enemy->pos);
     if (enemy->enemy_next != NULL)
         set_enemy_pos(game, enemy->enemy_next);
@@ -142,7 +137,7 @@ void set_enemy(global *game, struct enemy_ *enemy_f)
 {
     sfCircleShape *radius = sfCircleShape_create();
     sfTexture *e_1 =
-    sfTexture_createFromFile("pictures/mob/dragon2.png", NULL);
+    sfTexture_createFromFile("pictures/mob/dragon.png", NULL);
     sfSprite *temp = sfSprite_create();
 
     game->radius = radius;

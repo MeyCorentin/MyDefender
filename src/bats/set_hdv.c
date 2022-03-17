@@ -36,6 +36,7 @@ void basic_hdv(global *game, batiment *hdv)
     hdv->next = NULL;
     hdv->last = NULL;
     hdv->stats->level = game->level;
+    printf("%d\n", game->gold);
     hdv->gold = game->gold;
     hdv->bat = sfSprite_create();
     hdv->level_str = sfText_create();

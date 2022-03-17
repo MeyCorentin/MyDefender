@@ -6,6 +6,8 @@
 */
 
 #include "../../includes/my_defender.h"
+#include <stdlib.h>
+#include <string.h>
 
 void create_gold(global *game)
 {
@@ -29,10 +31,26 @@ void create_gold(global *game)
     game->gold_gestion->temp = malloc(sizeof(char *));
 }
 
+char *my_itoa(int number)
+{
+    int len;
+    char *str;
+    int tmp = number;
+
+    for (len = 0; tmp > 0; tmp /= 10, len += 1);
+    str = malloc(sizeof(*str) * (len + 1));
+    str[len] = '\0';
+    while (len--) {
+        str[len] = number % 10  + '0';
+        number /= 10;
+    }
+    return (str);
+}
+
 void update_gold(global *game)
 {
     sfText_setString(game->gold_gestion->money, "Gold : ");
-    sfText_setString(game->gold_gestion->number, new_put_nbr_str(game->first->gold));
+    sfText_setString(game->gold_gestion->number, my_itoa(game->first->gold));
     sfRenderWindow_drawText(game->window, game->gold_gestion->money, sfFalse);
     sfRenderWindow_drawText(game->window, game->gold_gestion->number, sfFalse);
     sfRenderWindow_drawText(game->window, game->infos->skills, sfFalse);

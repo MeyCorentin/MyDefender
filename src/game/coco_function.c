@@ -41,7 +41,8 @@ grid_cell *find_next_cell(global *game, grid_cell *new, char *path)
     if (my_getnbr(path) == new->g_pos)
         return (new);
     if (new->g_pos != 196)
-        find_next_cell(game, new->next_cell, path);
+        return (find_next_cell(game, new->next_cell, path));
+    return (NULL);
 }
 
 void read_something(global *game, struct grid_cell grid_cell, shop *my_shop)
@@ -68,5 +69,6 @@ grid_cell, struct enemy_ *enemy_f)
     read_something(game, grid_cell, my_shop);
     add_ground(game, grid_cell.next_cell, my_shop);
     create_infos(game);
+    printf("%d\n", game->gold);
     return (grid_cell);
 }
