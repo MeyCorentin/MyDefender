@@ -272,6 +272,7 @@ typedef struct lifebar {
 
 typedef struct enemy_ {
     int x_size;
+    int y_size;
     int old_x;
     int direction;
     lifebar_t *lifebar;
@@ -482,7 +483,8 @@ pos_button);
 void check_shop(global *game, shop *my_shop);
 grid_cell *make_grid(global *game , grid_cell * grid_cell_ , shop * my_shop);
 grid_cell init_cell(global *game , grid_cell grid_cell_ , shop * my_shop);
-void add_cell_status(global *game, grid_cell * new, grid_cell *next_cell,  FILE *output_file, char *path);
+void add_cell_status(global *game, grid_cell * new, grid_cell *next_cell,\
+FILE *output_file, char *path);
 void drop_cannon(global *game, shop *my_shop);
 void drop_archer(global *game, shop *my_shop);
 void drop_mortar(global *game, shop *my_shop);

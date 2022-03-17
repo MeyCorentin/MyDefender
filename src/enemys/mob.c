@@ -31,6 +31,8 @@ enemy_ *create_barbar(global *game, struct enemy_ *enemy, int i, enemy_ *new)
     new->type = 1;
     new->offset = 81.5;
     new->max_value = 1050;
+    new->x_size = 82;
+    new->y_size = 82;
     new->rect = change_rect(new->rect, 81.5, 82);
     sfSprite_setTextureRect(new->enemy_1, new->rect);
     sfSprite_setTexture(new->enemy_1, new->texture, sfFalse);
@@ -61,6 +63,8 @@ enemy_ *create_archer(global *game, struct enemy_ *enemy, int i, enemy_ *new)
     new->reward = 15;
     new->offset = 76;
     new->max_value = 1064;
+    new->x_size = 76;
+    new->y_size = 89;
     new->rect = change_rect(new->rect, 76, 89);
     sfSprite_setTextureRect(new->enemy_1, new->rect);
     sfSprite_setTexture(new->enemy_1, new->texture, sfFalse);
@@ -91,6 +95,8 @@ enemy_ *create_goblin(global *game, struct enemy_ *enemy, int i, enemy_ *new)
     new->type = 3;
     new->offset = 99.5;
     new->max_value = 690;
+    new->x_size = 99;
+    new->y_size = 90;
     new->rect = change_rect(new->rect, 99.5, 90);
     sfSprite_setTextureRect(new->enemy_1, new->rect);
     sfSprite_setTexture(new->enemy_1, new->texture, sfFalse);
@@ -121,6 +127,8 @@ enemy_ *create_giant(global *game, struct enemy_ *enemy, int i, enemy_ *new)
     new->type = 4;
     new->offset = 109.3;
     new->max_value = 970;
+    new->x_size = 109;
+    new->y_size = 85;
     new->rect = change_rect(new->rect, 109.3, 85);
     sfSprite_setTextureRect(new->enemy_1, new->rect);
     sfSprite_setTexture(new->enemy_1, new->texture, sfFalse);
@@ -151,6 +159,8 @@ enemy_ *create_dragon(global *game, struct enemy_ *enemy, int i, enemy_ *new)
     new->type = 5;
     new->offset = 129.6;
     new->max_value = 1030;
+    new->x_size = 130;
+    new->y_size = 107;
     new->rect = change_rect(new->rect, 129.6, 107);
     sfSprite_setTextureRect(new->enemy_1, new->rect);
     sfSprite_setTexture(new->enemy_1, new->texture, sfFalse);

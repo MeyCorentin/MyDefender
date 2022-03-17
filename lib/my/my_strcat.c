@@ -16,8 +16,8 @@ char *my_strcat(char *dest, char const *src)
     char *res;
 
     res = malloc(sizeof(*res) * (my_strlen(dest) + my_strlen(src) + 1));
-        while (dest[i] != '\0') {
-    res[i] = dest[i];
+    while (dest[i] != '\0') {
+        res[i] = dest[i];
         i++;
     }
     while (src[k] != '\0') {

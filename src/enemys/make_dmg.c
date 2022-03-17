@@ -77,15 +77,14 @@ void update_bullet(global *game, batiment *bat)
 void make_dmg_archer(global *game, batiment *bat_)
 {
     if (bat_->type != 9 && bat_->target != NULL) {
-        if (bat_->target->type == 2) {
+        if (bat_->target->type >= 1 && bat_->target->type <= 5) {
             if ((sqrt((bat_->target->pos.x - bat_->pos.x - 70) * (bat_->target->pos.x - bat_->pos.x - 70) + (bat_->target->pos.y - bat_->pos.y - 70) * (bat_->target->pos.y - bat_->pos.y - 70)) < bat_->rad_size)
-            || (sqrt((bat_->target->pos.x + 47 - bat_->pos.x - 70) * (bat_->target->pos.x + 47 - bat_->pos.x - 70) + (bat_->target->pos.y - bat_->pos.y - 70) * (bat_->target->pos.y - bat_->pos.y - 70)) < bat_->rad_size)
-            || (sqrt((bat_->target->pos.x - bat_->pos.x - 70) * (bat_->target->pos.x - bat_->pos.x - 70) + (bat_->target->pos.y + 63 - bat_->pos.y - 70) * (bat_->target->pos.y + 63 - bat_->pos.y - 70)) < bat_->rad_size)
-            || (sqrt((bat_->target->pos.x + 47 - bat_->pos.x - 70) * (bat_->target->pos.x + 47 - bat_->pos.x - 70) + (bat_->target->pos.y + 63 - bat_->pos.y - 70) * (bat_->target->pos.y + 63 - bat_->pos.y - 70)) < bat_->rad_size)) {
-                bat_->target->pv -= bat_->stats->damage;
+            || (sqrt((bat_->target->pos.x + bat_->target->x_size - bat_->pos.x - 70) * (bat_->target->pos.x + bat_->target->x_size - bat_->pos.x - 70) + (bat_->target->pos.y - bat_->pos.y - 70) * (bat_->target->pos.y - bat_->pos.y - 70)) < bat_->rad_size)
+            || (sqrt((bat_->target->pos.x - bat_->pos.x - 70) * (bat_->target->pos.x - bat_->pos.x - 70) + (bat_->target->pos.y + bat_->target->y_size  - bat_->pos.y - 70) * (bat_->target->pos.y + bat_->target->y_size  - bat_->pos.y - 70)) < bat_->rad_size)
+            || (sqrt((bat_->target->pos.x + bat_->target->x_size - bat_->pos.x - 70) * (bat_->target->pos.x + bat_->target->x_size - bat_->pos.x - 70) + (bat_->target->pos.y + bat_->target->y_size  - bat_->pos.y - 70) * (bat_->target->pos.y + bat_->target->y_size  - bat_->pos.y - 70)) < bat_->rad_size))
+                 bat_->target->pv -= bat_->stats->damage;
                 sfClock_restart(game->clock);
                 bat_->bullet->shot = 0;
-            }
         }
     }
     if (bat_->next != NULL)

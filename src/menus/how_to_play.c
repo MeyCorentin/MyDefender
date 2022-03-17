@@ -89,7 +89,7 @@ void change_page(global *game)
 
 void test_htp(global *game)
 {
-    if (sfKeyboard_isKeyPressed(sfKeyH) && game->boole->on_htp == 1 &&\
+    if (sfKeyboard_isKeyPressed(sfKeyH) && game->boole->on_htp == 1 && \
         game->other_secs > 30) {
         sfSound_play(game->sounds->click);
         game->boole->on_htp = 0;

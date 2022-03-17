@@ -82,7 +82,7 @@ void set_enemy_pos(global *game, struct enemy_ *enemy)
     enemy->pos.y = get_path_pos_y(enemy->loc);
     enemy->pos.x -= 25;
     enemy->pos.y -= 20;
-    if(enemy->old_x > enemy->pos.x)
+    if (enemy->old_x > enemy->pos.x)
         sfSprite_setTexture(enemy->enemy_1, enemy->mirror, sfFalse);
     else
         sfSprite_setTexture(enemy->enemy_1, enemy->texture, sfFalse);
