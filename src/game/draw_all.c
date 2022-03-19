@@ -53,6 +53,11 @@ void draw_game(global *game, shop *my_shop, grid_cell grid_cell)
     sfRenderWindow_drawCircleShape(game->window, game->radius, sfFalse);
     place_struct(game, &grid_cell, my_shop);
     check_hit(game, game->first);
+    update_lifebar_hdv(game, game->first);
+    game->first->lifebar->pos_life.x = game->first->pos.x + 35;
+    game->first->lifebar->pos_life.y = game->first->pos.y - 5;
+    sfSprite_setPosition(game->first->lifebar->life, game->first->lifebar->pos_life);
+    sfRenderWindow_drawSprite(game->window, game->first->lifebar->life, sfFalse);
     draw_structs(game, game->first);
     draw_stats(game, my_shop);
     update_bullet(game, game->first);

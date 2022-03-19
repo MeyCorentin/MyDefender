@@ -75,6 +75,7 @@ typedef struct level_up {
 
 typedef struct stats_bat {
     int pv;
+    int pv_max;
     float damage;
     int price;
     float attack_speed;
@@ -95,8 +96,16 @@ typedef struct bullet {
     int shot;
 } bullet_t;
 
+typedef struct lifebar {
+    sfSprite *life;
+    sfTexture *t_life;
+    sfVector2f pos_life;
+    sfIntRect rect;
+} lifebar_t;
+
 typedef struct batiment {
     bullet_t *bullet;
+    lifebar_t *lifebar;
     struct batiment *first;
     struct batiment *next;
     struct batiment *prev;
@@ -263,17 +272,10 @@ typedef struct gold {
     char *temp;
 } gold;
 
-typedef struct lifebar {
-    sfSprite *life;
-    sfTexture *t_life;
-    sfVector2f pos_life;
-    sfIntRect rect;
-} lifebar_t;
-
 typedef struct enemy_ {
     int x_size;
     int y_size;
-    int old_x;
+    float old_x;
     int direction;
     lifebar_t *lifebar;
     struct enemy_ *enemy_first;
@@ -410,6 +412,27 @@ typedef struct infos {
     sfVector2f pos_htp;
 } infos_t;
 
+typedef struct endgame {
+    int on_end;
+    sfSprite *back;
+    sfTexture *t_back;
+    sfText *end;
+    int enemy_kill;
+    sfSprite *restart;
+    sfTexture *t_restart;
+    sfText *res;
+    sfSprite *quit;
+    sfTexture *t_quit;
+    sfText *qui;
+    sfVector2f pos_end;
+    sfVector2f pos_restart;
+    sfVector2f pos_res;
+    sfVector2f pos_quit;
+    sfVector2f pos_qui;
+    sfText *score;
+    sfVector2f pos_score;
+} endgame_t;
+
 typedef struct global {
     infos_t *infos;
     bonus_t *bonus;
@@ -444,6 +467,7 @@ typedef struct global {
     sfColor * opacity_down;
     sfVector2i pos_mouse;
     int split;
+    int start;
 } global;
 
 void open_shop(global *game, shop *my_shop);
@@ -470,7 +494,7 @@ void check_music_pause(global *game, sfVector2i mouse);
 void set_pos_buttons(global *game);
 void set_pos_sounds(global *game, sfVector2f scale_text);
 void set_pos_text(global *game);
-void create_window(int level);
+void create_window(int level, int gold);
 void check_pause_event(global *game);
 void set_game(global *game);
 void draw_cell(global *game, grid_cell * new, shop * my_shop);
@@ -561,5 +585,9 @@ void update_lifebar(global *game, struct enemy_ *enemy);
 void create_lifebar(global *game, struct enemy_ *enemy);
 sfIntRect change_rect(sfIntRect rect, float x, float y);
 void do_rect_enemy(global *game, struct enemy_ *enemy);
+void free_game(global *game);
+char *my_itoa(int number);
+void update_lifebar_hdv(global *game, batiment *hdv);
+void create_lifebar_hdv(global *game, batiment *hdv);
 
 #endif /* MY_DEFENDER_H_ */

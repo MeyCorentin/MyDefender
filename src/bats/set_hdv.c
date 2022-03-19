@@ -56,6 +56,47 @@ void basic_hdv(global *game, batiment *hdv)
     hdv->level_up->cost = sfText_create();
 }
 
+void update_lifebar_hdv(global *game, batiment *hdv)
+{
+    if (hdv->stats->pv <= hdv->stats->pv_max && hdv->stats->pv >= hdv->stats->pv_max * 0.9)
+        hdv->lifebar->rect.top = 0;
+    if (hdv->stats->pv <= hdv->stats->pv_max  * 0.9 && hdv->stats->pv >= hdv->stats->pv_max * 0.8)
+        hdv->lifebar->rect.top = 30.2;
+    if (hdv->stats->pv <= hdv->stats->pv_max  * 0.8 && hdv->stats->pv >= hdv->stats->pv_max * 0.7)
+        hdv->lifebar->rect.top = 60.4;
+    if (hdv->stats->pv <= hdv->stats->pv_max  * 0.7 && hdv->stats->pv >= hdv->stats->pv_max * 0.6)
+        hdv->lifebar->rect.top = 90.6;
+    if (hdv->stats->pv <= hdv->stats->pv_max  * 0.6 && hdv->stats->pv >= hdv->stats->pv_max * 0.5)
+        hdv->lifebar->rect.top = 120.8;
+    if (hdv->stats->pv <= hdv->stats->pv_max  * 0.5 && hdv->stats->pv >= hdv->stats->pv_max * 0.4)
+        hdv->lifebar->rect.top = 151;
+    if (hdv->stats->pv <= hdv->stats->pv_max  * 0.4 && hdv->stats->pv >= hdv->stats->pv_max * 0.3)
+        hdv->lifebar->rect.top = 181.2;
+    if (hdv->stats->pv <= hdv->stats->pv_max  * 0.3 && hdv->stats->pv >= hdv->stats->pv_max * 0.2)
+        hdv->lifebar->rect.top = 211.4;
+    if (hdv->stats->pv <= hdv->stats->pv_max  * 0.2 && hdv->stats->pv >= hdv->stats->pv_max * 0.1)
+        hdv->lifebar->rect.top = 241.6;
+    if (hdv->stats->pv <= hdv->stats->pv_max  * 0.1 && hdv->stats->pv >= hdv->stats->pv_max * 0)
+        hdv->lifebar->rect.top = 271.8;
+}
+
+void create_lifebar_hdv(global *game, batiment *hdv)
+{
+    sfVector2f scale = {0.5, 0.5};
+
+    hdv->lifebar = malloc(sizeof(lifebar_t));
+    hdv->lifebar->life = sfSprite_create();
+    hdv->lifebar->t_life = sfTexture_createFromFile\
+    ("pictures/lifebar.png", NULL);
+    hdv->lifebar->pos_life.x = -100;
+    hdv->lifebar->pos_life.y = -100;
+    sfSprite_setPosition(hdv->lifebar->life, hdv->lifebar->pos_life);
+    hdv->lifebar->rect = change_rect(hdv->lifebar->rect, 108, 30.2);
+    sfSprite_setTexture(hdv->lifebar->life, hdv->lifebar->t_life, sfFalse);
+    sfSprite_setScale(hdv->lifebar->life, scale);
+    sfSprite_setTextureRect(hdv->lifebar->life, hdv->lifebar->rect);
+}
+
 batiment *create_hdv(global *game)
 {
     batiment *hdv = malloc(sizeof(batiment));
@@ -78,5 +119,6 @@ batiment *create_hdv(global *game)
     set_texture_hdv(game, hdv);
     sfText_setColor(hdv->level_str, sfBlue);
     create_bullet(game, hdv);
+    create_lifebar_hdv(game, hdv);
     return (hdv);
 }

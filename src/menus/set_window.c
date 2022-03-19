@@ -39,7 +39,7 @@ void check_event(global *game, menu *menus, sfVector2i mouse)
             start_game(game);
         } if (sfKeyboard_isKeyPressed(sfKeyR)) {
             sfSound_play(game->sounds->click);
-            game->gold = 10000;
+            game->gold = game->start;
             game->price_hdv = 1000;
             game->level = 1;
             start_game(game);
@@ -69,7 +69,34 @@ void set_menu(global *game)
     }
 }
 
-void create_window(int level)
+void free_game(global *game)
+{
+    free(game->shop->stats->mouse);
+    free(game->shop->stats);
+    free(game->shop->t_shop);
+    free(game->shop);
+    free(game->boole);
+    free(game->map);
+    free(game->enemy->lifebar);
+    free(game->sounds);
+    free(game->pause->p_pause);
+    free(game->pause);
+    free(game->gold_gestion->temp);
+    free(game->gold_gestion);
+}
+
+void free_menu(global *game, menu *menus)
+{
+    free(menus->t_menu);
+    free(menus);
+    free(game->infos);
+    free(game->bonus);
+    free(game->how_to_play);
+    free(game->transition);
+    free(game);
+}
+
+void create_window(int level, int gold)
 {
     sfVideoMode mode = {1920, 1080, 64};
     global *game = malloc(sizeof(global));
@@ -85,7 +112,8 @@ void create_window(int level)
     game->archer_clock = sfClock_create();
     game->boole->is_sounds = 0;
     game->boole->is_music = 0;
-    game->gold = 10000;
+    game->start = gold;
+    game->gold = game->start;
     game->price_hdv = 1000;
     create_sounds(game);
     set_sounds_buttons(game, menus);
@@ -93,4 +121,5 @@ void create_window(int level)
     game->boole->on_htp = 1;
     create_htp_button(game);
     set_menu(game);
+    free_menu(game, menus);
 }

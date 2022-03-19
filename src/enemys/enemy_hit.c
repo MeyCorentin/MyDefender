@@ -9,7 +9,7 @@
 
 void detect_enemy(global *game, struct enemy_ *enemy, batiment *bat_)
 {
-    if (enemy->type >= 1 && enemy->type <= 5) {
+    if (enemy->type >= 1 && enemy->type <= 5 && enemy->pos.x != 0 && enemy->pos.y != 0) {
         if (((sqrt((enemy->pos.x - bat_->pos.x - 70) * (enemy->pos.x - bat_->pos.x - 70) + (enemy->pos.y - bat_->pos.y - 70) * (enemy->pos.y - bat_->pos.y - 70)) <= bat_->rad_size) ||
             (sqrt((enemy->pos.x + enemy->x_size - bat_->pos.x - 70) * (enemy->pos.x + enemy->x_size - bat_->pos.x - 70) + (enemy->pos.y - bat_->pos.y - 70) * (enemy->pos.y - bat_->pos.y - 70)) <= bat_->rad_size) ||
             (sqrt((enemy->pos.x - bat_->pos.x - 70) * (enemy->pos.x - bat_->pos.x - 70) + (enemy->pos.y + enemy->y_size  - bat_->pos.y - 70) * (enemy->pos.y + 63 - bat_->pos.y - 70)) <= bat_->rad_size) ||
@@ -41,7 +41,8 @@ void check_hit(global *game, batiment *bat_)
         pos.x - 70) + (pos_mouse.y - bat_->pos.y - 70) * (pos_mouse.y - bat_->\
         pos.y - 70)) < bat_->rad_size)
             sfCircleShape_setFillColor(bat_->radius, color);
-        detect_enemy(game, game->enemy, bat_);
+        if (game->enemy->enemy_next != NULL)
+            detect_enemy(game, game->enemy->enemy_next, bat_);
         if (bat_->target != NULL) {
             if (bat_->target->type >= 1 && bat_->target->type <= 5) {
                 if ((sqrt((bat_->target->pos.x - bat_->pos.x - 70) * (bat_->target->pos.x - bat_->pos.x - 70) + (bat_->target->pos.y - bat_->pos.y - 70) * (bat_->target->pos.y - bat_->pos.y - 70)) < bat_->rad_size)

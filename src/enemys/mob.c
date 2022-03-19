@@ -28,6 +28,7 @@ enemy_ *create_barbar(global *game, struct enemy_ *enemy, int i, enemy_ *new)
     sfSprite_setPosition(new->enemy_1, pos);
     new->level = 1;
     new->speed = 16;
+    new->reward = 20;
     new->type = 1;
     new->offset = 81.5;
     new->max_value = 1050;
@@ -92,6 +93,7 @@ enemy_ *create_goblin(global *game, struct enemy_ *enemy, int i, enemy_ *new)
     new->level_hdv = 1;
     new->level = 1;
     new->speed = 32;
+    new->reward = 30;
     new->type = 3;
     new->offset = 99.5;
     new->max_value = 690;
@@ -125,6 +127,7 @@ enemy_ *create_giant(global *game, struct enemy_ *enemy, int i, enemy_ *new)
     new->level = 1;
     new->speed = 12;
     new->type = 4;
+    new->reward = 50;
     new->offset = 109.3;
     new->max_value = 970;
     new->x_size = 109;
@@ -156,6 +159,7 @@ enemy_ *create_dragon(global *game, struct enemy_ *enemy, int i, enemy_ *new)
     new->level_hdv = 7;
     new->level = 1;
     new->speed = 16;
+    new->reward = 100;
     new->type = 5;
     new->offset = 129.6;
     new->max_value = 1030;

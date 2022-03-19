@@ -82,9 +82,9 @@ void make_dmg_archer(global *game, batiment *bat_)
             || (sqrt((bat_->target->pos.x + bat_->target->x_size - bat_->pos.x - 70) * (bat_->target->pos.x + bat_->target->x_size - bat_->pos.x - 70) + (bat_->target->pos.y - bat_->pos.y - 70) * (bat_->target->pos.y - bat_->pos.y - 70)) < bat_->rad_size)
             || (sqrt((bat_->target->pos.x - bat_->pos.x - 70) * (bat_->target->pos.x - bat_->pos.x - 70) + (bat_->target->pos.y + bat_->target->y_size  - bat_->pos.y - 70) * (bat_->target->pos.y + bat_->target->y_size  - bat_->pos.y - 70)) < bat_->rad_size)
             || (sqrt((bat_->target->pos.x + bat_->target->x_size - bat_->pos.x - 70) * (bat_->target->pos.x + bat_->target->x_size - bat_->pos.x - 70) + (bat_->target->pos.y + bat_->target->y_size  - bat_->pos.y - 70) * (bat_->target->pos.y + bat_->target->y_size  - bat_->pos.y - 70)) < bat_->rad_size))
-                 bat_->target->pv -= bat_->stats->damage;
-                sfClock_restart(game->clock);
-                bat_->bullet->shot = 0;
+                bat_->target->pv -= bat_->stats->damage;
+            sfClock_restart(game->clock);
+            bat_->bullet->shot = 0;
         }
     }
     if (bat_->next != NULL)

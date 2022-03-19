@@ -13,7 +13,9 @@ void event_res(global *game, sfVector2i pos_mouse)
     pause->p_pause->pos_res.x + 240 && pos_mouse.y >= game->pause->p_pause->\
     pos_res.y && pos_mouse.y <= game->pause->p_pause->pos_res.y + 120) {
         sfText_setColor(game->pause->c_restart, sfWhite);
-        if (game->event.type == sfEvtMouseButtonPressed) {
+        if (game->event.type == sfEvtMouseButtonPressed)
+            sfText_setColor(game->pause->c_restart, sfRed);
+        else if (game->event.type == sfEvtMouseButtonPressed) {
             sfSound_play(game->sounds->click);
             start_game(game);
         }
@@ -28,9 +30,12 @@ void event_quit(global *game, sfVector2i pos_mouse)
     p_pause->pos_quit.y && pos_mouse.y <= game->pause->p_pause->pos_quit.y + \
     120) {
         sfText_setColor(game->pause->c_quit, sfWhite);
-        if (game->event.type == sfEvtMouseButtonPressed) {
+        if (game->event.type == sfEvtMouseButtonPressed)
+            sfText_setColor(game->pause->c_quit, sfRed);
+        else if (game->event.type == sfEvtMouseButtonPressed) {
             sfSound_play(game->sounds->click);
             game->secs = 4;
+            game->menus->level = game->first->stats->level;
             set_menu(game);
         }
     } else
@@ -43,7 +48,9 @@ void event_con(global *game, sfVector2i pos_mouse)
     pause->p_pause->pos_con.x + 240 && pos_mouse.y >= game->pause->p_pause->\
     pos_con.y && pos_mouse.y <= game->pause->p_pause->pos_con.y + 120) {
         sfText_setColor(game->pause->c_continu, sfWhite);
-        if (game->event.type == sfEvtMouseButtonPressed) {
+        if (game->event.type == sfEvtMouseButtonPressed)
+            sfText_setColor(game->pause->c_continu, sfRed);
+        else if (game->event.type == sfEvtMouseButtonPressed) {
             sfSound_play(game->sounds->click);
             game->boole->pause_is_open = 1;
         }
@@ -63,6 +70,7 @@ void check_button_event(global *game)
     }
     if (sfKeyboard_isKeyPressed(sfKeyQ)) {
         game->secs = 4;
+        game->menus->level = game->first->stats->level;
         sfSound_play(game->sounds->click);
         set_menu(game);
     }

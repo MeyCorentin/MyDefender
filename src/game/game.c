@@ -79,13 +79,14 @@ void start_game(global *game)
     while (sfRenderWindow_isOpen(game->window)) {
         sfRenderWindow_clear(game->window, sfBlack);
         draw_game(game, my_shop, grid_cell);
+        update_enemy(game);
         draw_enemy(game, enemy_f);
         update_game(game);
         (game->boole->shop_is_open == 0) ? open_shop(game, my_shop) : 1;
         check_game_event(game, my_shop, grid_cell);
-        update_enemy(game);
         check_click(game, &grid_cell, my_shop);
         update_gold(game);
         sfRenderWindow_display(game->window);
     }
+    //free_game(game);
 }

@@ -13,9 +13,11 @@ void check_button_res(global *game, menu *menus, sfVector2i mouse)
     + 473 && mouse.y >= menus->pos_restart.y && mouse.y <= menus->\
     pos_restart.y + 236) {
         sfText_setColor(menus->c_restart, sfWhite);
-        if (game->event.type == sfEvtMouseButtonReleased) {
+        if (game->event.type == sfEvtMouseButtonPressed)
+            sfText_setColor(menus->c_restart, sfBlue);
+        else if (game->event.type == sfEvtMouseButtonReleased) {
             game->level = 1;
-            game->gold = 10000;
+            game->gold = game->start;
             game->price_hdv = 1000;
             sfSound_play(game->sounds->click);
             start_game(game);
@@ -30,7 +32,9 @@ void check_button_con(global *game, menu *menus, sfVector2i mouse)
     + 473 && mouse.y >= menus->pos_continu.y && mouse.y <= menus->\
     pos_continu.y + 236) {
         sfText_setColor(menus->c_continu, sfWhite);
-        if (game->event.type == sfEvtMouseButtonReleased) {
+        if (game->event.type == sfEvtMouseButtonPressed)
+            sfText_setColor(menus->c_continu, sfBlue);
+        else if (game->event.type == sfEvtMouseButtonReleased) {
             sfSound_play(game->sounds->click);
             start_game(game);
         }

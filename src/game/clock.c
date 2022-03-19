@@ -25,7 +25,7 @@ void update_game(global *game)
 void update_enemy(global *game)
 {
     if (game->secs > 2) {
-        moov_enemy(game, game->enemy);
+        moov_enemy(game, game->enemy->enemy_next);
         sfClock_restart(game->clock);
     }
 

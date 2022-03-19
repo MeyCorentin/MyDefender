@@ -68,7 +68,7 @@ grid_cell grid_cell_)
     bat_->level_up->pos_up.y + 30 && game->event.type ==
     sfEvtMouseButtonReleased)
         up_struct(game, bat_, grid_cell_);
-    if (pos_mouse.x > bat_->level_up->pos_destroy.x && pos_mouse.x < bat_->\
+    if (bat_->on_bat == 0 && pos_mouse.x > bat_->level_up->pos_destroy.x && pos_mouse.x < bat_->\
     level_up->pos_destroy.x + 30 && pos_mouse.y > bat_->level_up->\
     pos_destroy.y && pos_mouse.y < bat_->level_up->pos_destroy.y + 30 && \
     game->event.type == sfEvtMouseButtonReleased) {
@@ -81,6 +81,7 @@ void struct_event(global *game, batiment *bat_, grid_cell grid_cell_)
 {
     sfVector2i pos_mouse = sfMouse_getPosition((sfWindow *)game->window);
 
+    button_struct(game, bat_, pos_mouse, grid_cell_);
     if (game->event.type == sfEvtMouseButtonReleased && !(pos_mouse.x > bat_->\
     level_up->pos_up.x && pos_mouse.x < bat_->level_up->pos_up.x + 30 && \
     pos_mouse.y > bat_->level_up->pos_up.y && pos_mouse.y < bat_->level_up->\
@@ -94,7 +95,6 @@ void struct_event(global *game, batiment *bat_, grid_cell grid_cell_)
         else if (bat_->on_bat == 0)
             bat_->on_bat = 1;
     }
-    button_struct(game, bat_, pos_mouse, grid_cell_);
     if (bat_->next != NULL)
         struct_event(game, bat_->next, grid_cell_);
 }

@@ -25,6 +25,7 @@ void add_bat_end(global *game, batiment *new_bat)
     pos_destroy);
     sfSprite_setScale(new_bat->level_up->up, scale_up);
     sfSprite_setScale(new_bat->level_up->destroy, scale_cross);
+    create_lifebar_hdv(game, new_bat);
 }
 
 void add_bat_buttons(global *game, batiment *new_bat)
