@@ -11,23 +11,23 @@ void update_lifebar(global *game, struct enemy_ *enemy)
 {
     if (enemy->pv <= enemy->pv_max && enemy->pv >= enemy->pv_max * 0.9)
         enemy->lifebar->rect.top = 0;
-    if (enemy->pv <= enemy->pv_max  * 0.9 && enemy->pv >= enemy->pv_max * 0.8)
+    if (enemy->pv <= enemy->pv_max * 0.9 && enemy->pv >= enemy->pv_max * 0.8)
         enemy->lifebar->rect.top = 30.2;
-    if (enemy->pv <= enemy->pv_max  * 0.8 && enemy->pv >= enemy->pv_max * 0.7)
+    if (enemy->pv <= enemy->pv_max * 0.8 && enemy->pv >= enemy->pv_max * 0.7)
         enemy->lifebar->rect.top = 60.4;
-    if (enemy->pv <= enemy->pv_max  * 0.7 && enemy->pv >= enemy->pv_max * 0.6)
+    if (enemy->pv <= enemy->pv_max * 0.7 && enemy->pv >= enemy->pv_max * 0.6)
         enemy->lifebar->rect.top = 90.6;
-    if (enemy->pv <= enemy->pv_max  * 0.6 && enemy->pv >= enemy->pv_max * 0.5)
+    if (enemy->pv <= enemy->pv_max * 0.6 && enemy->pv >= enemy->pv_max * 0.5)
         enemy->lifebar->rect.top = 120.8;
-    if (enemy->pv <= enemy->pv_max  * 0.5 && enemy->pv >= enemy->pv_max * 0.4)
+    if (enemy->pv <= enemy->pv_max * 0.5 && enemy->pv >= enemy->pv_max * 0.4)
         enemy->lifebar->rect.top = 151;
-    if (enemy->pv <= enemy->pv_max  * 0.4 && enemy->pv >= enemy->pv_max * 0.3)
+    if (enemy->pv <= enemy->pv_max * 0.4 && enemy->pv >= enemy->pv_max * 0.3)
         enemy->lifebar->rect.top = 181.2;
-    if (enemy->pv <= enemy->pv_max  * 0.3 && enemy->pv >= enemy->pv_max * 0.2)
+    if (enemy->pv <= enemy->pv_max * 0.3 && enemy->pv >= enemy->pv_max * 0.2)
         enemy->lifebar->rect.top = 211.4;
-    if (enemy->pv <= enemy->pv_max  * 0.2 && enemy->pv >= enemy->pv_max * 0.1)
+    if (enemy->pv <= enemy->pv_max * 0.2 && enemy->pv >= enemy->pv_max * 0.1)
         enemy->lifebar->rect.top = 241.6;
-    if (enemy->pv <= enemy->pv_max  * 0.1 && enemy->pv >= enemy->pv_max * 0)
+    if (enemy->pv <= enemy->pv_max * 0.1 && enemy->pv >= enemy->pv_max * 0)
         enemy->lifebar->rect.top = 271.8;
 }
 

@@ -24,8 +24,8 @@ void check_click(global *game, struct grid_cell *grid_cell, shop *my_shop)
     if ((abs(pos_mouse.x - 25 - grid_cell->p_5.x)) * (abs(pos_mouse.x - 25 - \
     grid_cell->p_5.x)) + (abs(pos_mouse.y - 25 - grid_cell->p_5.y)) * \
     (abs(pos_mouse.y - 25 - grid_cell->p_5.y)) < 900) {
-        if (game->boole->click == 1 && sfMouse_isButtonPressed(sfMouseLeft) == \
-        sfFalse && game->boole->unground == 1) {
+        if (game->boole->click == 1 && sfMouse_isButtonPressed(sfMouseLeft) \
+        == sfFalse && game->boole->unground == 1) {
             take_cell(game, game->boole->take_pos, grid_cell, my_shop);
             game->boole->click = 0;
             game->boole->take_pos = 200;
@@ -53,8 +53,9 @@ void read_something(global *game, struct grid_cell grid_cell, shop *my_shop)
     const char *filename = "src/txt/out.txt";
     FILE *output_file = fopen(filename, "w+");
     for (; game->map->path_way[i + 1]; i++)
-            add_cell_status(game, grid_cell.next_cell, find_next_cell(game, grid_cell.next_cell, game->map->path_way[i + 1])
-        , output_file, game->map->path_way[i]);
+        add_cell_status(grid_cell.next_cell, find_next_cell\
+        (game, grid_cell.next_cell, game->map->path_way[i + 1]), \
+        output_file, game->map->path_way[i]);
     fclose(output_file);
 }
 

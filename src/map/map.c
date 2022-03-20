@@ -50,39 +50,39 @@ miniatures/5.png", NULL);
 void set_texture_map2(global *game)
 {
     if (game->level == 6)
-        game->map->t_map = sfTexture_createFromFile("pictures/maps/backgrounds/\
-6.png", NULL);
+        game->map->t_map = sfTexture_createFromFile\
+        ("pictures/maps/backgrounds/6.png", NULL);
     if (game->level == 7)
-        game->map->t_map = sfTexture_createFromFile("pictures/maps/backgrounds/\
-7.png", NULL);
+        game->map->t_map = sfTexture_createFromFile\
+        ("pictures/maps/backgrounds/7.png", NULL);
     if (game->level == 8)
-        game->map->t_map = sfTexture_createFromFile("pictures/maps/backgrounds/\
-8.png", NULL);
+        game->map->t_map = sfTexture_createFromFile\
+        ("pictures/maps/backgrounds/8.png", NULL);
     if (game->level == 9)
-        game->map->t_map = sfTexture_createFromFile("pictures/maps/backgrounds/\
-9.png", NULL);
+        game->map->t_map = sfTexture_createFromFile\
+        ("pictures/maps/backgrounds/9.png", NULL);
     if (game->level == 10)
-        game->map->t_map = sfTexture_createFromFile("pictures/maps/backgrounds/\
-10.png", NULL);
+        game->map->t_map = sfTexture_createFromFile\
+        ("pictures/maps/backgrounds/10.png", NULL);
     sfSprite_setTexture(game->map->map, game->map->t_map, sfFalse);
 }
 
 void set_texture_map(global *game)
 {
     if (game->level == 1)
-        game->map->t_map = sfTexture_createFromFile("pictures/maps/backgrounds/\
-1.png", NULL);
+        game->map->t_map = sfTexture_createFromFile\
+        ("pictures/maps/backgrounds/1.png", NULL);
     if (game->level == 2)
-        game->map->t_map = sfTexture_createFromFile("pictures/maps/backgrounds/\
-2.png", NULL);
+        game->map->t_map = sfTexture_createFromFile\
+        ("pictures/maps/backgrounds/2.png", NULL);
     if (game->level == 3)
-        game->map->t_map = sfTexture_createFromFile("pictures/maps/backgrounds/\
-3.png", NULL);
+        game->map->t_map = sfTexture_createFromFile\
+        ("pictures/maps/backgrounds/3.png", NULL);
     if (game->level == 4)
-        game->map->t_map = sfTexture_createFromFile("pictures/maps/backgrounds/\
-4.png", NULL);
+        game->map->t_map = sfTexture_createFromFile\
+        ("pictures/maps/backgrounds/4.png", NULL);
     if (game->level == 5)
-        game->map->t_map = sfTexture_createFromFile("pictures/maps/backgrounds/\
-5.png", NULL);
+        game->map->t_map = sfTexture_createFromFile\
+        ("pictures/maps/backgrounds/5.png", NULL);
     set_texture_map2(game);
 }

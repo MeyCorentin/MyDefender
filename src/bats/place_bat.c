@@ -72,3 +72,32 @@ void drop_mortar(global *game, shop *my_shop)
     sfSprite_setPosition(my_shop->s_mortar, my_shop->pos_mortar);
     game->boole->take = 1;
 }
+
+int is_only(global *game, int num)
+{
+    char *number = "023456";
+
+    for (int cmpt = 0; number[cmpt] != '\0'; cmpt += 1) {
+        if (game->boole->take == number[cmpt] - 48 && game->boole->take \
+        != num)
+            return (1);
+    }
+    return (0);
+}
+
+void create_lifebar_hdv(global *game, batiment *hdv)
+{
+    sfVector2f scale = {0.5, 0.5};
+
+    hdv->lifebar = malloc(sizeof(lifebar_t));
+    hdv->lifebar->life = sfSprite_create();
+    hdv->lifebar->t_life = sfTexture_createFromFile\
+    ("pictures/lifebar.png", NULL);
+    hdv->lifebar->pos_life.x = -100;
+    hdv->lifebar->pos_life.y = -100;
+    sfSprite_setPosition(hdv->lifebar->life, hdv->lifebar->pos_life);
+    hdv->lifebar->rect = change_rect(hdv->lifebar->rect, 108, 30.2);
+    sfSprite_setTexture(hdv->lifebar->life, hdv->lifebar->t_life, sfFalse);
+    sfSprite_setScale(hdv->lifebar->life, scale);
+    sfSprite_setTextureRect(hdv->lifebar->life, hdv->lifebar->rect);
+}

@@ -29,9 +29,21 @@ void test_shop(global *game, shop *my_shop)
     }
 }
 
+void personnal_test(global *game)
+{
+    if (sfKeyboard_isKeyPressed(sfKeyW)) {
+        game->endgame->on_end = 2;
+        on_endgame(game);
+    } else if (sfKeyboard_isKeyPressed(sfKeyD)) {
+        game->endgame->on_end = 3;
+        on_endgame(game);
+    }
+}
+
 void check_game_event(global *game, shop *my_shop, grid_cell grid_cell_)
 {
     while (sfRenderWindow_pollEvent(game->window, &game->event)) {
+        personnal_test(game);
         if (game->event.type == sfEvtClosed)
             sfRenderWindow_close(game->window);
         test_shop(game, my_shop);
@@ -44,24 +56,16 @@ void check_game_event(global *game, shop *my_shop, grid_cell grid_cell_)
     }
 }
 
-void place_struct(global *game, struct grid_cell *new, shop *my_shop)
+void do_all(global *game, shop *my_shop, grid_cell grid_cell, enemy_ *enemy_f)
 {
-    sfVector2i pos_mouse = sfMouse_getPosition((sfWindow *)game->window);
-
-    sfCircleShape_setFillColor(new->c_5, sfRed);
-    if (pow(abs(pos_mouse.x - 25 - new->p_5.x), 2) + pow(abs(pos_mouse.y - 25 \
-    - new->p_5.y), 2) < 900)
-        sfCircleShape_setFillColor(new->c_5, sfGreen);
-    (new->status == 1) ? sfCircleShape_setFillColor(new->c_5, sfGreen) : 1;
-    snap_obj(game, new, my_shop, pos_mouse);
-    if (new->g_pos == 92) {
-        game->first->pos.x = new->p_3.x - 55;
-        game->first->pos.y = new->p_3.y - (abs(new->coords->dy) + \
-        abs(new->coords->dy) + abs(new->coords->dy)) + 10;
-        sfSprite_setPosition(game->first->bat, game->first->pos);
-    }
-    if (new->g_pos != 196)
-        place_struct(game, new->next_cell, my_shop);
+    draw_game(game, my_shop, grid_cell);
+    update_enemy(game);
+    draw_enemy(game, enemy_f);
+    update_game(game);
+    (game->boole->shop_is_open == 0) ? open_shop(game, my_shop) : 1;
+    check_game_event(game, my_shop, grid_cell);
+    check_click(game, &grid_cell, my_shop);
+    update_gold(game);
 }
 
 void start_game(global *game)
@@ -72,21 +76,14 @@ void start_game(global *game)
 
     game->shop = malloc(sizeof(shop));
     game->shop = my_shop;
+    create_end(game);
     create_transition(game);
     create_tree(game);
     grid_cell = set_all(game, my_shop, grid_cell, enemy_f);
     dissip_clouds(game, grid_cell);
     while (sfRenderWindow_isOpen(game->window)) {
         sfRenderWindow_clear(game->window, sfBlack);
-        draw_game(game, my_shop, grid_cell);
-        update_enemy(game);
-        draw_enemy(game, enemy_f);
-        update_game(game);
-        (game->boole->shop_is_open == 0) ? open_shop(game, my_shop) : 1;
-        check_game_event(game, my_shop, grid_cell);
-        check_click(game, &grid_cell, my_shop);
-        update_gold(game);
+        do_all(game, my_shop, grid_cell, enemy_f);
         sfRenderWindow_display(game->window);
     }
-    //free_game(game);
 }

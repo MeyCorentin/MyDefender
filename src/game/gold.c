@@ -41,7 +41,7 @@ char *my_itoa(int number)
     str = malloc(sizeof(*str) * (len + 1));
     str[len] = '\0';
     while (len--) {
-        str[len] = number % 10  + '0';
+        str[len] = number % 10 + '0';
         number /= 10;
     }
     return (str);

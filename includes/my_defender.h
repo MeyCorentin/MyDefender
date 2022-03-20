@@ -304,6 +304,9 @@ typedef struct enemy_ {
     sfClock *clock;
     sfTime time;
     int seconds;
+    sfClock *clock2;
+    sfTime time2;
+    int seconds2;
 } enemy_;
 
 typedef struct boole {
@@ -419,11 +422,11 @@ typedef struct endgame {
     sfText *end;
     int enemy_kill;
     sfSprite *restart;
-    sfTexture *t_restart;
     sfText *res;
     sfSprite *quit;
-    sfTexture *t_quit;
+    sfTexture *t_button;
     sfText *qui;
+    sfVector2f pos_back;
     sfVector2f pos_end;
     sfVector2f pos_restart;
     sfVector2f pos_res;
@@ -434,6 +437,7 @@ typedef struct endgame {
 } endgame_t;
 
 typedef struct global {
+    endgame_t *endgame;
     infos_t *infos;
     bonus_t *bonus;
     skill_tree_t *tree;
@@ -507,7 +511,7 @@ pos_button);
 void check_shop(global *game, shop *my_shop);
 grid_cell *make_grid(global *game , grid_cell * grid_cell_ , shop * my_shop);
 grid_cell init_cell(global *game , grid_cell grid_cell_ , shop * my_shop);
-void add_cell_status(global *game, grid_cell * new, grid_cell *next_cell,\
+void add_cell_status(grid_cell * new, grid_cell *next_cell,\
 FILE *output_file, char *path);
 void drop_cannon(global *game, shop *my_shop);
 void drop_archer(global *game, shop *my_shop);
@@ -589,5 +593,31 @@ void free_game(global *game);
 char *my_itoa(int number);
 void update_lifebar_hdv(global *game, batiment *hdv);
 void create_lifebar_hdv(global *game, batiment *hdv);
+void create_end(global *game);
+void on_endgame(global *game);
+void set_enemy_pos(global *game, struct enemy_ *enemy);
+void stats_barbar(global *game, enemy_ *new);
+void stats_archer(global *game, enemy_ *new);
+void stats_gobelin(global *game, enemy_ *new);
+void stats_giant(global *game, enemy_ *new);
+void stats_dragon(global *game, enemy_ *new);
+void set_texture_hdv(global *game, batiment *hdv);
+void create_lifebar_hdv(global *game, batiment *hdv);
+void do_pause_all(global *game, sfVector2i mouse);
+void check_button_event(global *game);
+void event_con(global *game, sfVector2i pos_mouse);
+void event_quit(global *game, sfVector2i pos_mouse);
+void event_res(global *game, sfVector2i pos_mouse);
+void free_menu(global *game, menu *menus);
+void draw_endgame(global *game);
+void update_end(global *game);
+chained_skill_t *check_prev(global *game, int cmpt);
+void set_string_skills(global *game, chained_skill_t *skill);
+chained_skill_t *get_last_skill(global *game, int cmpt, int level);
+chained_skill_t *create_skill(global *game, int cmpt, int level);
+void draw_skill_tree(global *game, chained_skill_t *skill);
+void active_bonus(global *game, chained_skill_t *skill);
+void create_shot(global *game, batiment *bat);
+void set_texture_in(global *game, batiment *bat);
 
 #endif /* MY_DEFENDER_H_ */

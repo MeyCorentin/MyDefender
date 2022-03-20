@@ -75,3 +75,23 @@ void drop_wizard(global *game, shop *my_shop)
     sfSprite_setPosition(my_shop->s_wizard, my_shop->pos_wizard);
     game->boole->take = 1;
 }
+
+void place_struct(global *game, struct grid_cell *new, shop *my_shop)
+{
+    sfVector2i pos_mouse = sfMouse_getPosition((sfWindow *)game->window);
+
+    sfCircleShape_setFillColor(new->c_5, sfRed);
+    if (pow(abs(pos_mouse.x - 25 - new->p_5.x), 2) + pow(abs(pos_mouse.y - 25 \
+    - new->p_5.y), 2) < 900)
+        sfCircleShape_setFillColor(new->c_5, sfGreen);
+    (new->status == 1) ? sfCircleShape_setFillColor(new->c_5, sfGreen) : 1;
+    snap_obj(game, new, my_shop, pos_mouse);
+    if (new->g_pos == 92) {
+        game->first->pos.x = new->p_3.x - 55;
+        game->first->pos.y = new->p_3.y - (abs(new->coords->dy) + \
+        abs(new->coords->dy) + abs(new->coords->dy)) + 10;
+        sfSprite_setPosition(game->first->bat, game->first->pos);
+    }
+    if (new->g_pos != 196)
+        place_struct(game, new->next_cell, my_shop);
+}

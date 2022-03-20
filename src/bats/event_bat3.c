@@ -32,8 +32,8 @@ void get_xbow(global *game, shop *my_shop)
     my_shop->pos_xbow.x + 120 && pos_mouse.y >= my_shop->pos_xbow.y && \
     pos_mouse.y <= my_shop->pos_xbow.y + 100) {
         my_shop->stats->mouse->is_xbow = 0;
-        if (sfMouse_isButtonPressed(sfMouseLeft) == sfTrue && is_only(game, 5) \
-        == 0) {
+        if (sfMouse_isButtonPressed(sfMouseLeft) == sfTrue && is_only\
+        (game, 5) == 0) {
             rad_pos.x = pos_mouse.x - 200;
             rad_pos.y = pos_mouse.y - 200;
             set_xbow_reach(game, my_shop, rad_pos);
@@ -71,8 +71,8 @@ void get_wizard(global *game, shop *my_shop)
     my_shop->pos_wizard.x + 120 && pos_mouse.y >= my_shop->pos_wizard.y && \
     pos_mouse.y <= my_shop->pos_wizard.y + 100) {
         my_shop->stats->mouse->is_wizard = 0;
-        if (sfMouse_isButtonPressed(sfMouseLeft) == sfTrue && is_only(game, 6) \
-        == 0) {
+        if (sfMouse_isButtonPressed(sfMouseLeft) == sfTrue && is_only\
+        (game, 6) == 0) {
             rad_pos.x = pos_mouse.x - 90;
             rad_pos.y = pos_mouse.y - 90;
             set_wizard_reach(game, my_shop, rad_pos);

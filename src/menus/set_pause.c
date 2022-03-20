@@ -63,8 +63,6 @@ void set_pos_buttons(global *game)
 
 void set_pos_sounds(global *game, sfVector2f scale_text)
 {
-    game->pause->p_pause->pos_music.x = game->pause->p_pause->pos_back.x + 30;
-    game->pause->p_pause->pos_music.y = game->pause->p_pause->pos_back.y + 70;
     game->pause->p_pause->pos_sounds.x = \
     game->pause->p_pause->pos_back.x + 880;
     game->pause->p_pause->pos_sounds.y = game->pause->p_pause->pos_back.y + 70;

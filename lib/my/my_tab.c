@@ -6,7 +6,7 @@
 */
 
 #include <stdlib.h>
-#include "includes/my_defender.h"
+#include "../../includes/my_defender.h"
 
 int my_count_split(char *argv, char char_)
 {
@@ -46,7 +46,8 @@ char **my_split_tab(char *argv, char char_)
     int k = 0;
     int l = 0;
     int i = 0;
-    char **tab = my_malloc_tab(my_count_split(argv, char_), my_strlen(argv) + 1);
+    char **tab = my_malloc_tab(my_count_split(argv, char_), \
+    my_strlen(argv) + 1);
 
     for (; argv[k] != '\0'; k++, l++) {
         if (argv[k] == char_) {

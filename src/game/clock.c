@@ -28,7 +28,6 @@ void update_enemy(global *game)
         moov_enemy(game, game->enemy->enemy_next);
         sfClock_restart(game->clock);
     }
-
     if (game->archer_tower > 300) {
         make_dmg_archer(game, game->first);
         sfClock_restart(game->archer_clock);

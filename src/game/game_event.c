@@ -42,7 +42,8 @@ pos_button)
             game->boole->shop_is_open = 0;
             sfSprite_setPosition(my_shop->button, my_shop->pos_button_open);
             game->other_secs = 0;
-        } else if (game->boole->shop_is_open == 0 && game->other_secs != 0) {
+        }
+        if (game->boole->shop_is_open == 0 && game->other_secs != 0) {
             sfSound_play(game->sounds->click);
             sfSprite_setTexture(my_shop->button, my_shop->t_shop->close, \
             sfFalse);

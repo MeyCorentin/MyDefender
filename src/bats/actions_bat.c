@@ -7,18 +7,6 @@
 
 #include "../../includes/my_defender.h"
 
-int is_only(global *game, int num)
-{
-    char *number = "023456";
-
-    for (int cmpt = 0; number[cmpt] != '\0'; cmpt += 1) {
-        if (game->boole->take == number[cmpt] - 48 && game->boole->take \
-        != num)
-            return (1);
-    }
-    return (0);
-}
-
 void destroy_struct(global *game, batiment *bat)
 {
     batiment *prev = malloc(sizeof(batiment));
@@ -46,7 +34,8 @@ void up_struct(global *game, batiment *bat, grid_cell grid_cell_)
     }
 }
 
-void give_ground(global *game, grid_cell *grid_cell) {
+void give_ground(global *game, grid_cell *grid_cell)
+{
     sfVector2i pos_mouse = sfMouse_getPosition((sfWindow *)game->window);
 
     if ((abs(pos_mouse.x - 60 - grid_cell->p_5.x)) * (abs(pos_mouse.x - 60 - \
@@ -68,10 +57,10 @@ grid_cell grid_cell_)
     bat_->level_up->pos_up.y + 30 && game->event.type ==
     sfEvtMouseButtonReleased)
         up_struct(game, bat_, grid_cell_);
-    if (bat_->on_bat == 0 && pos_mouse.x > bat_->level_up->pos_destroy.x && pos_mouse.x < bat_->\
-    level_up->pos_destroy.x + 30 && pos_mouse.y > bat_->level_up->\
-    pos_destroy.y && pos_mouse.y < bat_->level_up->pos_destroy.y + 30 && \
-    game->event.type == sfEvtMouseButtonReleased) {
+    if (bat_->on_bat == 0 && pos_mouse.x > bat_->level_up->pos_destroy.x && \
+    pos_mouse.x < bat_->level_up->pos_destroy.x + 30 && pos_mouse.y > bat_->\
+    level_up->pos_destroy.y && pos_mouse.y < bat_->level_up->pos_destroy.y + \
+    30 && game->event.type == sfEvtMouseButtonReleased) {
         destroy_struct(game, bat_);
         give_ground(game, &grid_cell_);
     }
@@ -90,9 +79,11 @@ void struct_event(global *game, batiment *bat_, grid_cell grid_cell_)
     if (pos_mouse.x > bat_->pos.x + 30 && pos_mouse.x < bat_->pos.x + 90 && \
     pos_mouse.y > bat_->pos.y + 30 && pos_mouse.y < bat_->pos.y + 90 && game->\
     event.type == sfEvtMouseButtonReleased) {
-        if (bat_->on_bat == 1 && game->secs != 5)
+        if (bat_->on_bat == 1 && game->secs != 5) {
             bat_->on_bat = 0;
-        else if (bat_->on_bat == 0)
+            game->secs = 5;
+        }
+        if (bat_->on_bat == 0 && game->secs != 5)
             bat_->on_bat = 1;
     }
     if (bat_->next != NULL)

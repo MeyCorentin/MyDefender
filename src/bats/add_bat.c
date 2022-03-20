@@ -50,11 +50,8 @@ void add_bat_buttons(global *game, batiment *new_bat)
     add_bat_end(game, new_bat);
 }
 
-batiment *add_bat(global *game, batiment *prev, sfVector2f pos, int name)
+void set_basic_bat(global *game, batiment *new_bat, batiment *prev)
 {
-    batiment *new_bat = malloc(sizeof(batiment));
-
-    new_bat->stats = malloc(sizeof(stats_bat));
     new_bat->first = game->first;
     new_bat->prev = prev;
     new_bat->next = NULL;
@@ -62,6 +59,14 @@ batiment *add_bat(global *game, batiment *prev, sfVector2f pos, int name)
     new_bat->target = NULL;
     new_bat->focus = 0;
     new_bat->temp = malloc(sizeof(char *));
+}
+
+batiment *add_bat(global *game, batiment *prev, sfVector2f pos, int name)
+{
+    batiment *new_bat = malloc(sizeof(batiment));
+
+    new_bat->stats = malloc(sizeof(stats_bat));
+    set_basic_bat(game, new_bat, prev);
     new_bat->bat = sfSprite_create();
     new_bat->t_bat = sfTexture_createFromFile(game->texture, NULL);
     sfSprite_setTexture(new_bat->bat, new_bat->t_bat, sfFalse);
@@ -74,4 +79,27 @@ batiment *add_bat(global *game, batiment *prev, sfVector2f pos, int name)
     game->secs = 5;
     create_bullet(game, new_bat);
     return (new_bat);
+}
+
+void set_texture_hdv(global *game, batiment *hdv)
+{
+    if (hdv->stats->level == 2)
+        hdv->t_bat = sfTexture_createFromFile("pictures/hdv/2.png", NULL);
+    if (hdv->stats->level == 3)
+        hdv->t_bat = sfTexture_createFromFile("pictures/hdv/3.png", NULL);
+    if (hdv->stats->level == 4)
+        hdv->t_bat = sfTexture_createFromFile("pictures/hdv/4.png", NULL);
+    if (hdv->stats->level == 5)
+        hdv->t_bat = sfTexture_createFromFile("pictures/hdv/5.png", NULL);
+    if (hdv->stats->level == 6)
+        hdv->t_bat = sfTexture_createFromFile("pictures/hdv/6.png", NULL);
+    if (hdv->stats->level == 7)
+        hdv->t_bat = sfTexture_createFromFile("pictures/hdv/7.png", NULL);
+    if (hdv->stats->level == 8)
+        hdv->t_bat = sfTexture_createFromFile("pictures/hdv/8.png", NULL);
+    if (hdv->stats->level == 9)
+        hdv->t_bat = sfTexture_createFromFile("pictures/hdv/9.png", NULL);
+    if (hdv->stats->level == 10)
+        hdv->t_bat = sfTexture_createFromFile("pictures/hdv/10.png", NULL);
+    sfSprite_setTexture(hdv->bat, hdv->t_bat, sfFalse);
 }

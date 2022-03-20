@@ -46,17 +46,21 @@ void create_texts_pause(global *game)
 
 void set_textures_pause(global *game)
 {
+    sfVector2f scale_text = {3, 3};
+
     sfSprite_setTexture(game->pause->back, game->pause->t_back, sfFalse);
     sfSprite_setTexture(game->pause->quit, game->pause->button, sfFalse);
     sfSprite_setTexture(game->pause->continu, game->pause->button, sfFalse);
     sfSprite_setTexture(game->pause->restart, game->pause->button, sfFalse);
     set_pos_buttons(game);
+    create_texts_pause(game);
+    game->pause->p_pause->pos_music.x = game->pause->p_pause->pos_back.x + 30;
+    game->pause->p_pause->pos_music.y = game->pause->p_pause->pos_back.y + 70;
+    set_pos_sounds(game, scale_text);
 }
 
 void create_pause(global *game)
 {
-    sfVector2f scale_text = {3, 3};
-
     game->pause = malloc(sizeof(menu_pause));
     game->pause->p_pause = malloc(sizeof(p_pause_t));
     game->pause->back = sfSprite_create();
@@ -70,8 +74,6 @@ void create_pause(global *game)
     game->pause->button = sfTexture_createFromFile\
     ("pictures/buttons/button.png", NULL);
     set_textures_pause(game);
-    create_texts_pause(game);
-    set_pos_sounds(game, scale_text);
     sfText_setPosition(game->pause->c_continu, \
     game->pause->p_pause->pos_c_con);
     sfText_setPosition(game->pause->c_restart,

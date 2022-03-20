@@ -32,8 +32,8 @@ void get_mortar(global *game, shop *my_shop)
     my_shop->pos_mortar.x + 120 && pos_mouse.y >= my_shop->pos_mortar.y && \
     pos_mouse.y <= my_shop->pos_mortar.y + 100) {
         my_shop->stats->mouse->is_mortar = 0;
-        if (sfMouse_isButtonPressed(sfMouseLeft) == sfTrue && is_only(game, 3) \
-        == 0) {
+        if (sfMouse_isButtonPressed(sfMouseLeft) == sfTrue && is_only\
+        (game, 3) == 0) {
             rad_pos.x = pos_mouse.x - 140;
             rad_pos.y = pos_mouse.y - 140;
             set_mortar_reach(game, my_shop, rad_pos);
@@ -71,8 +71,8 @@ void get_air_defence(global *game, shop *my_shop)
     my_shop->pos_air_defence.x + 120 && pos_mouse.y >= my_shop->\
     pos_air_defence.y && pos_mouse.y <= my_shop->pos_air_defence.y + 100) {
         my_shop->stats->mouse->is_air = 0;
-        if (sfMouse_isButtonPressed(sfMouseLeft) == sfTrue && is_only(game, 4) \
-        == 0) {
+        if (sfMouse_isButtonPressed(sfMouseLeft) == sfTrue && is_only\
+        (game, 4) == 0) {
             rad_pos.x = pos_mouse.x - 140;
             rad_pos.y = pos_mouse.y - 140;
             set_air_reach(game, my_shop, rad_pos);
