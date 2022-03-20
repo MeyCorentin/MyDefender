@@ -59,6 +59,8 @@ void make_dmg_archer(global *game, batiment *bat_)
             sfClock_restart(game->clock);
             bat_->bullet->shot = 0;
         }
+        if (bat_->target->pv <= 0)
+            game->endgame->enemy_kill += 1;
     }
     if (bat_->next != NULL)
         make_dmg_archer(game, bat_->next);

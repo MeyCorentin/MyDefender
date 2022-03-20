@@ -85,5 +85,7 @@ void start_game(global *game)
         sfRenderWindow_clear(game->window, sfBlack);
         do_all(game, my_shop, grid_cell, enemy_f);
         sfRenderWindow_display(game->window);
+        if (game->first->stats->pv < 0)
+            on_endgame(game);
     }
 }
