@@ -9,17 +9,14 @@
 
 int get_path_pos_x(int i)
 {
-    struct stat st;
-    stat("src/txt/out.txt", &st);
-    int size = st.st_size;
-    char *buffer = malloc(sizeof(char) * size);
+    char *buffer = malloc(sizeof(char) * 10000);
     int fd = open("src/txt/out.txt", O_RDONLY);
-    char *path_x = malloc(sizeof(char) * size);
+    char *path_x = malloc(sizeof(char) * 10000);
     int cmpt = 0;
     int j = 0;
     int k = 0;
 
-    read(fd, buffer, size);
+    read(fd, buffer, 10000);
     for (; k != i; k++)
         for (; buffer[cmpt++] != '\n';);
     for (; buffer[cmpt] != ','; cmpt++, j++)
@@ -31,17 +28,14 @@ int get_path_pos_x(int i)
 
 int get_path_pos_y(int i)
 {
-    struct stat st;
-    stat("src/txt/out.txt", &st);
-    int size = st.st_size;
-    char *buffer = malloc(sizeof(char) * size);
+    char *buffer = malloc(sizeof(char) * 10000);
     int fd = open("src/txt/out.txt", O_RDONLY);
-    char *path_y = malloc(sizeof(char) * size);
+    char *path_y = malloc(sizeof(char) * 10000);
     int cmpt = 0;
     int j = 0;
     int k = 0;
 
-    read(fd, buffer, size);
+    read(fd, buffer, 10000);
     for (; k != i; k++)
         for (; buffer[cmpt++] != '\n';);
     for (; buffer[cmpt] != ','; cmpt++);
