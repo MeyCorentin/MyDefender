@@ -9,13 +9,13 @@
 
 void stats_barbar(global *game, enemy_ *new)
 {
-    new->pv = 100;
-    new->pv_base = 45;
+    new->pv = 10;
+    new->pv_base = 10;
     new->damage = 8;
     new->level_hdv = 1;
     new->level = 1;
     new->speed = 1;
-    new->reward = 20;
+    new->reward = 10;
     new->type = 1;
     new->offset = 81.5;
     new->max_value = 1050;

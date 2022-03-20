@@ -58,6 +58,9 @@ void update_v2(global *game, batiment *hdv)
     if (hdv->stats->pv <= hdv->stats->pv_max * 0.1 && hdv->stats->pv >= hdv->\
     stats->pv_max * 0)
         hdv->lifebar->rect.top = 271.8;
+    change_rect(hdv->lifebar->rect, 108, 30.2);
+    sfSprite_setTexture(hdv->lifebar->life, hdv->lifebar->t_life, sfFalse);
+    sfSprite_setTextureRect(hdv->lifebar->life, hdv->lifebar->rect);
 }
 
 void update_lifebar_hdv(global *game, batiment *hdv)

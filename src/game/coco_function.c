@@ -62,8 +62,8 @@ void read_something(global *game, struct grid_cell grid_cell, shop *my_shop)
 struct grid_cell set_all(global *game, shop *my_shop, struct grid_cell \
 grid_cell, struct enemy_ *enemy_f)
 {
-    set_enemy(game, enemy_f);
     set_game(game);
+    set_enemy(game, enemy_f);
     create_gold(game);
     grid_cell = init_cell(game, grid_cell, my_shop);
     make_grid(game, &grid_cell, my_shop);

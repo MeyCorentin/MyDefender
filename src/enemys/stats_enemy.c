@@ -11,15 +11,15 @@ void create_enemy(global *game, struct enemy_ *enemy, int i)
 {
     enemy_ *new = malloc(sizeof(enemy_));
 
-    if (i == 1)
+    if (i >= 1 && i <= 2)
         new = create_barbar(game, enemy, i, new);
-    if (i == 2)
+    if (i >= 3 && i <= 4)
         new = create_archer(game, enemy, i, new);
-    if (i == 3)
+    if (i >= 5 && i <= 6)
         new = create_goblin(game, enemy, i, new);
-    if (i == 4)
+    if (i >= 7 && i <= 8)
         new = create_giant(game, enemy, i, new);
-    if (i == 5)
+    if (i >= 9 && i <= 10)
         new = create_dragon(game, enemy, i, new);
     new->pv_max = new->pv;
     new->clock = sfClock_create();
@@ -41,8 +41,12 @@ void moov_enemy(global *game, struct enemy_ *enemy)
             game->first->gold += enemy->reward;
             update_gold(game);
         }
-        if (enemy->loc >= game->split * 30)
+        if (enemy->loc >= game->split * 30) {
             enemy->loc = 0;
+            enemy->pv = enemy->pv_base;
+            game->first->stats->pv -= enemy->damage;
+            update_lifebar_hdv(game, game->first);
+        }
         set_enemy_pos(game, enemy);
     }
     if (enemy->enemy_next != NULL)
