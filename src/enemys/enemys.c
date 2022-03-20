@@ -9,14 +9,17 @@
 
 int get_path_pos_x(int i)
 {
-    char *buffer = malloc(sizeof(char) * 10000);
+    struct stat st;
+    stat("src/txt/out.txt", &st);
+    int size = st.st_size;
+    char *buffer = malloc(sizeof(char) * size);
     int fd = open("src/txt/out.txt", O_RDONLY);
-    char *path_x = malloc(sizeof(char) * 10000);
+    char *path_x = malloc(sizeof(char) * size);
     int cmpt = 0;
     int j = 0;
     int k = 0;
 
-    read(fd, buffer, 10000);
+    read(fd, buffer, size);
     for (; k != i; k++)
         for (; buffer[cmpt++] != '\n';);
     for (; buffer[cmpt] != ','; cmpt++, j++)
@@ -28,14 +31,17 @@ int get_path_pos_x(int i)
 
 int get_path_pos_y(int i)
 {
-    char *buffer = malloc(sizeof(char) * 10000);
+    struct stat st;
+    stat("src/txt/out.txt", &st);
+    int size = st.st_size;
+    char *buffer = malloc(sizeof(char) * size);
     int fd = open("src/txt/out.txt", O_RDONLY);
-    char *path_y = malloc(sizeof(char) * 10000);
+    char *path_y = malloc(sizeof(char) * size);
     int cmpt = 0;
     int j = 0;
     int k = 0;
 
-    read(fd, buffer, 10000);
+    read(fd, buffer, size);
     for (; k != i; k++)
         for (; buffer[cmpt++] != '\n';);
     for (; buffer[cmpt] != ','; cmpt++);
@@ -92,7 +98,7 @@ void set_enemy(global *game, struct enemy_ *enemy_f)
     enemy_f->offset = 0;
     enemy_f->max_value = 0;
     change_game(game, enemy_f);
-    for (int i = 0; i != 15 * game->first->stats->level; i++)
-        create_enemy(game, enemy_f, rand() % game->first->stats->level + 1);
+    for (int i = 0; i != 15; i++)
+        create_enemy(game, enemy_f, rand() % 5 + 1);
     set_enemy_pos(game, enemy_f);
 }
