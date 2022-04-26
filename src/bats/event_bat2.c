@@ -16,9 +16,9 @@ void set_mortar_reach(global *game, shop *my_shop, sfVector2f rad_pos)
     sfCircleShape_setRadius(game->radius, 140);
     game->boole->on_map = 1;
     game->texture = "pictures/defences/mortar/1.png";
-    my_shop->t_shop->mortar = sfTexture_createFromFile(game->texture, \
+    my_shop->t_shop->mortar = sfTexture_createFromFile(game->texture,
     sfFalse);
-    sfSprite_setTexture(my_shop->s_mortar, my_shop->t_shop->mortar, \
+    sfSprite_setTexture(my_shop->s_mortar, my_shop->t_shop->mortar,
     sfFalse);
     sfSprite_setColor(my_shop->s_mortar, opacity_down);
 }
@@ -28,11 +28,11 @@ void get_mortar(global *game, shop *my_shop)
     sfVector2i pos_mouse = sfMouse_getPosition((sfWindow *)game->window);
     sfVector2f rad_pos;
 
-    if (pos_mouse.x >= my_shop->pos_mortar.x && pos_mouse.x <= \
-    my_shop->pos_mortar.x + 120 && pos_mouse.y >= my_shop->pos_mortar.y && \
+    if (pos_mouse.x >= my_shop->pos_mortar.x && pos_mouse.x <=
+    my_shop->pos_mortar.x + 120 && pos_mouse.y >= my_shop->pos_mortar.y &&
     pos_mouse.y <= my_shop->pos_mortar.y + 100) {
         my_shop->stats->mouse->is_mortar = 0;
-        if (sfMouse_isButtonPressed(sfMouseLeft) == sfTrue && is_only\
+        if (sfMouse_isButtonPressed(sfMouseLeft) == sfTrue && is_only
         (game, 3) == 0) {
             rad_pos.x = pos_mouse.x - 140;
             rad_pos.y = pos_mouse.y - 140;

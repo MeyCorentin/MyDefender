@@ -29,7 +29,7 @@ void update_end(global *game)
         sfText_setColor(game->endgame->end, sfRed);
     }
     sfText_setPosition(game->endgame->end, game->endgame->pos_end);
-    sfText_setString(game->endgame->score, my_strcat("ENEMYS KILLED : ", \
+    sfText_setString(game->endgame->score, my_strcat("ENEMYS KILLED : ",
     my_itoa(game->endgame->enemy_kill)));
     sfText_setColor(game->endgame->score, sfYellow);
 }
@@ -86,9 +86,9 @@ void create_end(global *game)
     game->endgame->back = sfSprite_create();
     game->endgame->restart = sfSprite_create();
     game->endgame->quit = sfSprite_create();
-    game->endgame->t_back = sfTexture_createFromFile\
+    game->endgame->t_back = sfTexture_createFromFile
     ("pictures/buttons/leandre2.png", NULL);
-    game->endgame->t_button = sfTexture_createFromFile\
+    game->endgame->t_button = sfTexture_createFromFile
     ("pictures/buttons/button.png", NULL);
     sfSprite_setTexture(game->endgame->back, game->endgame->t_back, sfFalse);
     sfSprite_setTexture\

@@ -21,18 +21,18 @@ void set_volume_music(global *game)
 {
     if (game->boole->is_music == 1 && game->secs != 2) {
         sfSound_play(game->sounds->click);
-        sfSprite_setTexture(game->menus->music, game->menus->t_menu->m_on, \
+        sfSprite_setTexture(game->menus->music, game->menus->t_menu->m_on,
         sfFalse);
-        sfSprite_setTexture(game->pause->music, game->menus->t_menu->m_on, \
+        sfSprite_setTexture(game->pause->music, game->menus->t_menu->m_on,
         sfFalse);
         game->boole->is_music = 0;
         game->secs = 2;
         sfSound_setVolume(game->sounds->ambiance, 100);
     } else if (game->boole->is_music == 0 && game->secs != 2) {
         sfSound_play(game->sounds->click);
-        sfSprite_setTexture(game->menus->music, game->menus->\
+        sfSprite_setTexture(game->menus->music, game->menus->
         t_menu->m_off, sfFalse);
-        sfSprite_setTexture(game->pause->music, game->menus->\
+        sfSprite_setTexture(game->pause->music, game->menus->
         t_menu->m_off, sfFalse);
         game->boole->is_music = 1;
         game->secs = 2;
@@ -42,9 +42,9 @@ void set_volume_music(global *game)
 
 void check_music_pause(global *game, sfVector2i mouse)
 {
-    if (mouse.x >= game->pause->p_pause->pos_music.x && mouse.x <= game->\
-    pause->p_pause->pos_music.x + 100 && mouse.y >= game->pause->p_pause->\
-    pos_music.y && mouse.y <= game->pause->p_pause->pos_music.y + 100 && \
+    if (mouse.x >= game->pause->p_pause->pos_music.x && mouse.x <= game->
+    pause->p_pause->pos_music.x + 100 && mouse.y >= game->pause->p_pause->
+    pos_music.y && mouse.y <= game->pause->p_pause->pos_music.y + 100 &&
     game->event.type == sfEvtMouseButtonReleased)
         set_volume_music(game);
 }
@@ -52,9 +52,9 @@ void check_music_pause(global *game, sfVector2i mouse)
 void set_volume_sounds(global *game)
 {
     sfSound_play(game->sounds->click);
-    sfSprite_setTexture(game->menus->sounds, game->menus->\
+    sfSprite_setTexture(game->menus->sounds, game->menus->
     t_menu->s_off, sfFalse);
-    sfSprite_setTexture(game->pause->sounds, game->menus->\
+    sfSprite_setTexture(game->pause->sounds, game->menus->
     t_menu->s_off, sfFalse);
     game->boole->is_sounds = 1;
     game->secs = 2;
@@ -65,15 +65,15 @@ void set_volume_sounds(global *game)
 
 void check_sounds_pause(global *game, sfVector2i mouse)
 {
-    if (mouse.x >= game->pause->p_pause->pos_sounds.x && mouse.x <= game->\
-    pause->p_pause->pos_sounds.x + 50 && mouse.y >= game->pause->p_pause->\
-    pos_sounds.y && mouse.y <= game->pause->p_pause->pos_sounds.y + 50 && \
+    if (mouse.x >= game->pause->p_pause->pos_sounds.x && mouse.x <= game->
+    pause->p_pause->pos_sounds.x + 50 && mouse.y >= game->pause->p_pause->
+    pos_sounds.y && mouse.y <= game->pause->p_pause->pos_sounds.y + 50 &&
     game->event.type == sfEvtMouseButtonReleased) {
         if (game->boole->is_sounds == 1 && game->secs != 2) {
             sfSound_play(game->sounds->click);
-            sfSprite_setTexture(game->menus->sounds, game->menus->\
+            sfSprite_setTexture(game->menus->sounds, game->menus->
             t_menu->s_on, sfFalse);
-            sfSprite_setTexture(game->pause->sounds, game->menus->\
+            sfSprite_setTexture(game->pause->sounds, game->menus->
             t_menu->s_on, sfFalse);
             game->boole->is_sounds = 0;
             game->secs = 2;

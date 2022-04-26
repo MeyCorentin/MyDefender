@@ -47,17 +47,17 @@ void set_sprite_stats(shop *my_shop)
     my_shop->stats->air = sfSprite_create();
     my_shop->stats->xbow = sfSprite_create();
     my_shop->stats->wizard = sfSprite_create();
-    my_shop->stats->t_cannon = sfTexture_createFromFile\
+    my_shop->stats->t_cannon = sfTexture_createFromFile
     ("pictures/shop/stats/cannon.png", NULL);
-    my_shop->stats->t_archer = sfTexture_createFromFile\
+    my_shop->stats->t_archer = sfTexture_createFromFile
     ("pictures/shop/stats/archer.png", NULL);
-    my_shop->stats->t_mortar = sfTexture_createFromFile\
+    my_shop->stats->t_mortar = sfTexture_createFromFile
     ("pictures/shop/stats/mortar.png", NULL);
-    my_shop->stats->t_air = sfTexture_createFromFile\
+    my_shop->stats->t_air = sfTexture_createFromFile
     ("pictures/shop/stats/air.png", NULL);
-    my_shop->stats->t_xbow = sfTexture_createFromFile\
+    my_shop->stats->t_xbow = sfTexture_createFromFile
     ("pictures/shop/stats/xbow.png", NULL);
-    my_shop->stats->t_wizard = sfTexture_createFromFile\
+    my_shop->stats->t_wizard = sfTexture_createFromFile
     ("pictures/shop/stats/wizard.png", NULL);
 }
 
@@ -66,15 +66,15 @@ void create_stat_shop(shop *my_shop)
     my_shop->stats = malloc(sizeof(stat_shop));
     my_shop->stats->mouse = malloc(sizeof(mouse_t));
     set_sprite_stats(my_shop);
-    sfSprite_setTexture(my_shop->stats->cannon, my_shop->stats->t_cannon, \
+    sfSprite_setTexture(my_shop->stats->cannon, my_shop->stats->t_cannon,
     sfFalse);
-    sfSprite_setTexture(my_shop->stats->archer, my_shop->stats->t_archer, \
+    sfSprite_setTexture(my_shop->stats->archer, my_shop->stats->t_archer,
     sfFalse);
-    sfSprite_setTexture(my_shop->stats->mortar, my_shop->stats->t_mortar, \
+    sfSprite_setTexture(my_shop->stats->mortar, my_shop->stats->t_mortar,
     sfFalse);
     sfSprite_setTexture(my_shop->stats->air, my_shop->stats->t_air, sfFalse);
     sfSprite_setTexture(my_shop->stats->xbow, my_shop->stats->t_xbow, sfFalse);
-    sfSprite_setTexture(my_shop->stats->wizard, my_shop->stats->t_wizard, \
+    sfSprite_setTexture(my_shop->stats->wizard, my_shop->stats->t_wizard,
     sfFalse);
     set_pos_stat_shop(my_shop);
     set_is_stats(my_shop);

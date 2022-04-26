@@ -37,7 +37,7 @@ void read_path(global *game)
     game->map->path_way = split_path;
 }
 
-void create_cell_intermediate(grid_cell *new, FILE *output_file, \
+void create_cell_intermediate(grid_cell *new, FILE *output_file,
 sfVector2f actual, sfVector2f next)
 {
     int temp_x = my_intlen(actual.x) + 1;
@@ -48,47 +48,47 @@ sfVector2f actual, sfVector2f next)
 
     if ((int)actual.x < (int)next.x && (int)actual.y < (int)next.y) {
         for (; boucle != 30; boucle++) {
-            fwrite(my_itoa((int)new->p_5.x + down_x * boucle), 1, temp_x, \
+            fwrite(my_itoa((int)new->p_5.x + down_x * boucle), 1, temp_x,
             output_file);
             fwrite(",", 1, 1, output_file);
-            fwrite(my_itoa((int)new->p_5.y + down_y * boucle), 1, temp_y, \
+            fwrite(my_itoa((int)new->p_5.y + down_y * boucle), 1, temp_y,
             output_file);
             fwrite("\n", 1, 1, output_file);
         }
     }
     if ((int)actual.x > (int)next.x && (int)actual.y > (int)next.y) {
         for (; boucle != 30; boucle++) {
-            fwrite(my_itoa((int)new->p_5.x - down_x * boucle), 1, temp_x, \
+            fwrite(my_itoa((int)new->p_5.x - down_x * boucle), 1, temp_x,
             output_file);
             fwrite(",", 1, 1, output_file);
-            fwrite(my_itoa((int)new->p_5.y - down_y * boucle), 1, temp_y, \
+            fwrite(my_itoa((int)new->p_5.y - down_y * boucle), 1, temp_y,
             output_file);
             fwrite("\n", 1, 1, output_file);
         }
     }
     if ((int)actual.x < (int)next.x && (int)actual.y > (int)next.y) {
         for (; boucle != 30; boucle++) {
-            fwrite(my_itoa((int)new->p_5.x + down_x * boucle), 1, temp_x, \
+            fwrite(my_itoa((int)new->p_5.x + down_x * boucle), 1, temp_x,
             output_file);
             fwrite(",", 1, 1, output_file);
-            fwrite(my_itoa((int)new->p_5.y - down_y * boucle), 1, temp_y, \
+            fwrite(my_itoa((int)new->p_5.y - down_y * boucle), 1, temp_y,
             output_file);
             fwrite("\n", 1, 1, output_file);
         }
     }
     if ((int)actual.x > (int)next.x && (int)actual.y < (int)next.y) {
         for (; boucle != 30; boucle++) {
-            fwrite(my_itoa((int)new->p_5.x - down_x * boucle), 1, temp_x, \
+            fwrite(my_itoa((int)new->p_5.x - down_x * boucle), 1, temp_x,
             output_file);
             fwrite(",", 1, 1, output_file);
-            fwrite(my_itoa((int)new->p_5.y + down_y * boucle), 1, temp_y, \
+            fwrite(my_itoa((int)new->p_5.y + down_y * boucle), 1, temp_y,
             output_file);
             fwrite("\n", 1, 1, output_file);
         }
     }
 }
 
-void add_cell_status(grid_cell *new, grid_cell *next_cell, \
+void add_cell_status(grid_cell *new, grid_cell *next_cell,
 FILE *output_file, char *path)
 {
     int fd = open("src/txt/path", O_RDONLY);
@@ -101,7 +101,7 @@ FILE *output_file, char *path)
         fwrite(my_itoa((int) new->p_5.y), 1, temp_y, output_file);
         fwrite("\n", 1, 1, output_file);
         if (new->g_pos != 196)
-            create_cell_intermediate(new, output_file, new->p_5, \
+            create_cell_intermediate(new, output_file, new->p_5,
             next_cell->p_5);
         new->status = 2;
     }

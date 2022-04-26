@@ -11,8 +11,8 @@ void draw_skill_tree(global *game, chained_skill_t *skill)
 {
     sfVector2i mouse = sfMouse_getPosition((sfWindow *)game->window);
 
-    if (mouse.x > skill->pos_skill.x && mouse.x < skill->pos_skill.x + 100 \
-    && mouse.y > skill->pos_skill.y && mouse.y < skill->pos_skill.y + 100 && \
+    if (mouse.x > skill->pos_skill.x && mouse.x < skill->pos_skill.x + 100
+    && mouse.y > skill->pos_skill.y && mouse.y < skill->pos_skill.y + 100 &&
     skill->active == 1) {
         set_string_skills(game, skill);
         sfRenderWindow_drawText(game->window, skill->infos, sfFalse);
@@ -26,15 +26,15 @@ void draw_skill_tree(global *game, chained_skill_t *skill)
 
 void set_texture_tree(global *game)
 {
-    game->tree->hearth = sfTexture_createFromFile\
+    game->tree->hearth = sfTexture_createFromFile
     ("pictures/buttons/hearth.png", NULL);
-    game->tree->tree = sfTexture_createFromFile\
+    game->tree->tree = sfTexture_createFromFile
     ("pictures/buttons/tree.png", NULL);
-    game->tree->sword = sfTexture_createFromFile\
+    game->tree->sword = sfTexture_createFromFile
     ("pictures/buttons/sword.png", NULL);
-    game->tree->speed = sfTexture_createFromFile\
+    game->tree->speed = sfTexture_createFromFile
     ("pictures/buttons/speed.png", NULL);
-    game->tree->gold = sfTexture_createFromFile\
+    game->tree->gold = sfTexture_createFromFile
     ("pictures/buttons/gold.png", NULL);
 }
 
@@ -52,7 +52,7 @@ void create_tree(global *game)
 {
     game->tree = malloc(sizeof(skill_tree_t));
     game->tree->back = sfSprite_create();
-    game->tree->t_back = sfTexture_createFromFile\
+    game->tree->t_back = sfTexture_createFromFile
     ("pictures/buttons/leandre.png", NULL);
     set_texture_tree(game);
     sfSprite_setTexture(game->tree->back, game->tree->t_back, sfFalse);

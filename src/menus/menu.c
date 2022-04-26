@@ -20,7 +20,7 @@ void draw_menu(global *game, menu *menus)
     sfRenderWindow_drawSprite(game->window, menus->sounds, sfFalse);
     sfRenderWindow_drawText(game->window, game->infos->htp, sfFalse);
     if (game->boole->on_htp == 0)
-        sfRenderWindow_drawSprite(game->window, game->how_to_play->htp, \
+        sfRenderWindow_drawSprite(game->window, game->how_to_play->htp,
         sfFalse);
 }
 
@@ -44,7 +44,7 @@ void set_pos_menu(menu *menus)
     sfSprite_setPosition(menus->restart, menus->pos_restart);
     sfSprite_setScale(menus->map, scale_map);
     sfSprite_setScale(menus->background, scale_back);
-    menus->t_menu->t_background = sfTexture_createFromFile\
+    menus->t_menu->t_background = sfTexture_createFromFile
     ("pictures/background2.png", NULL);
 }
 
@@ -56,7 +56,7 @@ void create_text(menu *menus)
     menus->pos_con.y = menus->pos_continu.y + 75;
     menus->pos_res.x = menus->pos_restart.x + 50;
     menus->pos_res.y = menus->pos_restart.y + 75;
-    menus->t_menu->supercell = sfFont_createFromFile\
+    menus->t_menu->supercell = sfFont_createFromFile
     ("fonts/supercell.x-font-ttf");
     menus->c_continu = sfText_create();
     menus->c_restart = sfText_create();
@@ -74,7 +74,7 @@ void create_text(menu *menus)
 
 void set_textures_menu(menu *menus)
 {
-    sfSprite_setTexture(menus->background, menus->t_menu->t_background, \
+    sfSprite_setTexture(menus->background, menus->t_menu->t_background,
     sfFalse);
     sfSprite_setTexture(menus->restart, menus->t_menu->t_battle, sfFalse);
     sfSprite_setTexture(menus->quit, menus->t_menu->t_quit, sfFalse);
@@ -92,9 +92,9 @@ menu *create_menu(int level)
     menus->map = sfSprite_create();
     menus->restart = sfSprite_create();
     menus->background = sfSprite_create();
-    menus->t_menu->t_battle = sfTexture_createFromFile\
+    menus->t_menu->t_battle = sfTexture_createFromFile
     ("pictures/buttons/button.png", NULL);
-    menus->t_menu->t_quit = sfTexture_createFromFile\
+    menus->t_menu->t_quit = sfTexture_createFromFile
     ("pictures/buttons/quit.png", NULL);
     set_pos_menu(menus);
     create_text(menus);

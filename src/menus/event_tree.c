@@ -39,12 +39,12 @@ void check_mouse_tree(global *game, chained_skill_t *skill)
     sfVector2f scale = {1.5, 1.5};
     sfVector2f scale_basic = {1, 1};
 
-    if (mouse.x > skill->pos_skill.x && mouse.x < skill->pos_skill.x + 100 \
-    && mouse.y > skill->pos_skill.y && mouse.y < skill->pos_skill.y + 100 && \
+    if (mouse.x > skill->pos_skill.x && mouse.x < skill->pos_skill.x + 100
+    && mouse.y > skill->pos_skill.y && mouse.y < skill->pos_skill.y + 100 &&
     skill->active == 1) {
         sfSprite_setPosition(skill->skill, skill->pos_skill2);
         sfSprite_setScale(skill->skill, scale);
-        if (game->event.type == sfEvtMouseButtonReleased && game->first->gold \
+        if (game->event.type == sfEvtMouseButtonReleased && game->first->gold
         >= skill->price && skill->prev->active == 0) {
             sfSound_play(game->sounds->click);
             active_bonus(game, skill);
@@ -64,9 +64,9 @@ void event_tree(global *game)
     while (sfRenderWindow_pollEvent(game->window, &game->event)) {
         if (game->event.type == sfEvtClosed)
             sfRenderWindow_close(game->window);
-        if ((sfKeyboard_isKeyPressed(sfKeyT) && game->other_secs != 0) || \
-        sfKeyboard_isKeyPressed(sfKeyEscape) || (mouse.x > 1790 && mouse.x \
-        < 1890 && mouse.y > 15 && mouse.y < 90 && game->event.type == \
+        if ((sfKeyboard_isKeyPressed(sfKeyT) && game->other_secs != 0) ||
+        sfKeyboard_isKeyPressed(sfKeyEscape) || (mouse.x > 1790 && mouse.x
+        < 1890 && mouse.y > 15 && mouse.y < 90 && game->event.type ==
         sfEvtMouseButtonReleased)) {
             game->boole->in_tree = 1;
             game->other_secs = 0;

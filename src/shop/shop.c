@@ -20,22 +20,22 @@ void open_shop(global *game, shop *my_shop)
 void create_defences(shop *my_shop)
 {
     my_shop->s_cannon = sfSprite_create();
-    my_shop->t_shop->t_cannon = sfTexture_createFromFile\
+    my_shop->t_shop->t_cannon = sfTexture_createFromFile
     ("pictures/defences/cannon/cannon_lvl1.png", NULL);
     my_shop->s_archer = sfSprite_create();
-    my_shop->t_shop->t_archer = sfTexture_createFromFile\
+    my_shop->t_shop->t_archer = sfTexture_createFromFile
     ("pictures/defences/archer_tower/archer_tower_lvl1.png", NULL);
     my_shop->s_mortar = sfSprite_create();
-    my_shop->t_shop->t_mortar = sfTexture_createFromFile\
+    my_shop->t_shop->t_mortar = sfTexture_createFromFile
     ("pictures/defences/mortar/mortar_lvl1.png", NULL);
     my_shop->s_air_defence = sfSprite_create();
-    my_shop->t_shop->t_air_defence = sfTexture_createFromFile\
+    my_shop->t_shop->t_air_defence = sfTexture_createFromFile
     ("pictures/defences/air_defence/air_defence_lvl1.png", NULL);
     my_shop->s_xbow = sfSprite_create();
-    my_shop->t_shop->t_xbow = sfTexture_createFromFile\
+    my_shop->t_shop->t_xbow = sfTexture_createFromFile
     ("pictures/defences/x_bow/x_bow_lvl1.png", NULL);
     my_shop->s_wizard = sfSprite_create();
-    my_shop->t_shop->t_wizard = sfTexture_createFromFile\
+    my_shop->t_shop->t_wizard = sfTexture_createFromFile
     ("pictures/defences/wizard_tower/wizard_tower_lvl1.png", NULL);
 }
 
@@ -68,7 +68,7 @@ void set_texture_shop(shop *my_shop)
     sfSprite_setTexture(my_shop->s_cannon, my_shop->t_shop->t_cannon, sfFalse);
     sfSprite_setTexture(my_shop->s_archer, my_shop->t_shop->t_archer, sfFalse);
     sfSprite_setTexture(my_shop->s_mortar, my_shop->t_shop->t_mortar, sfFalse);
-    sfSprite_setTexture(my_shop->s_air_defence, my_shop->t_shop->\
+    sfSprite_setTexture(my_shop->s_air_defence, my_shop->t_shop->
     t_air_defence, sfFalse);
     sfSprite_setTexture(my_shop->s_xbow, my_shop->t_shop->t_xbow, sfFalse);
     sfSprite_setTexture(my_shop->s_wizard, my_shop->t_shop->t_wizard, sfFalse);
@@ -87,9 +87,9 @@ shop *create_shop(void)
     my_shop->pos_button_open.y = 430;
     my_shop->button = sfSprite_create();
     create_defences(my_shop);
-    my_shop->t_shop->open = sfTexture_createFromFile\
+    my_shop->t_shop->open = sfTexture_createFromFile
     ("pictures/buttons/shop_open.png", NULL);
-    my_shop->t_shop->close = sfTexture_createFromFile\
+    my_shop->t_shop->close = sfTexture_createFromFile
     ("pictures/buttons/shop_close.png", NULL);
     set_texture_shop(my_shop);
     create_stat_shop(my_shop);

@@ -9,13 +9,13 @@
 
 void set_textures(global *game, menu *menus)
 {
-    menus->t_menu->m_on = sfTexture_createFromFile\
+    menus->t_menu->m_on = sfTexture_createFromFile
     ("pictures/buttons/music_on.png", NULL);
-    menus->t_menu->m_off = sfTexture_createFromFile\
+    menus->t_menu->m_off = sfTexture_createFromFile
     ("pictures/buttons/music_off.png", NULL);
-    menus->t_menu->s_on = sfTexture_createFromFile\
+    menus->t_menu->s_on = sfTexture_createFromFile
     ("pictures/buttons/sounds_on.png", NULL);
-    menus->t_menu->s_off = sfTexture_createFromFile\
+    menus->t_menu->s_off = sfTexture_createFromFile
     ("pictures/buttons/sounds_off.png", NULL);
 }
 
@@ -63,23 +63,23 @@ void set_pos_buttons(global *game)
 
 void set_pos_sounds(global *game, sfVector2f scale_text)
 {
-    game->pause->p_pause->pos_sounds.x = \
+    game->pause->p_pause->pos_sounds.x =
     game->pause->p_pause->pos_back.x + 880;
     game->pause->p_pause->pos_sounds.y = game->pause->p_pause->pos_back.y + 70;
     sfSprite_setPosition(game->pause->music, game->pause->p_pause->pos_music);
-    sfSprite_setPosition(game->pause->sounds, \
+    sfSprite_setPosition(game->pause->sounds,
     game->pause->p_pause->pos_sounds);
     if (game->boole->is_music == 0)
-        sfSprite_setTexture(game->pause->music, game->menus->t_menu->m_on, \
+        sfSprite_setTexture(game->pause->music, game->menus->t_menu->m_on,
         sfFalse);
     else
-        sfSprite_setTexture(game->pause->music, game->menus->t_menu->m_off, \
+        sfSprite_setTexture(game->pause->music, game->menus->t_menu->m_off,
         sfFalse);
     if (game->boole->is_sounds == 0)
-        sfSprite_setTexture(game->pause->sounds, game->menus->t_menu->s_on, \
+        sfSprite_setTexture(game->pause->sounds, game->menus->t_menu->s_on,
         sfFalse);
     else
-        sfSprite_setTexture(game->pause->sounds, game->menus->t_menu->s_off, \
+        sfSprite_setTexture(game->pause->sounds, game->menus->t_menu->s_off,
         sfFalse);
     sfText_setScale(game->pause->text, scale_text);
 }

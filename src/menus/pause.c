@@ -69,12 +69,12 @@ void create_pause(global *game)
     game->pause->continu = sfSprite_create();
     game->pause->music = sfSprite_create();
     game->pause->sounds = sfSprite_create();
-    game->pause->t_back = sfTexture_createFromFile\
+    game->pause->t_back = sfTexture_createFromFile
     ("pictures/buttons/leandre.png", NULL);
-    game->pause->button = sfTexture_createFromFile\
+    game->pause->button = sfTexture_createFromFile
     ("pictures/buttons/button.png", NULL);
     set_textures_pause(game);
-    sfText_setPosition(game->pause->c_continu, \
+    sfText_setPosition(game->pause->c_continu,
     game->pause->p_pause->pos_c_con);
     sfText_setPosition(game->pause->c_restart,
     game->pause->p_pause->pos_c_res);
@@ -83,7 +83,7 @@ void create_pause(global *game)
 
 void in_pause(global *game)
 {
-    while (sfRenderWindow_isOpen(game->window) && game->boole->pause_is_open \
+    while (sfRenderWindow_isOpen(game->window) && game->boole->pause_is_open
     == 0) {
         draw_pause(game);
         update_gold(game);

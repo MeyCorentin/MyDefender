@@ -34,13 +34,13 @@ void pos_new(struct grid_cell *new, int i, int r)
     new->p_2.y = new->coords->original_y + (new->coords->dy * (1 + i));
     new->c_3 = sfCircleShape_create();
     new->p_3.x = new->coords->original_x + (new->coords->dx * (1 + i));
-    new->p_3.y = new->coords->original_y - new->coords->dy + (new->coords->dy \
+    new->p_3.y = new->coords->original_y - new->coords->dy + (new->coords->dy
     * (0 + i));
     new->c_4 = sfCircleShape_create();
     new->p_4.x = new->coords->original_x + (new->coords->dx * (2 + i));
     new->p_4.y = new->coords->original_y + (new->coords->dy * (0 + i));
     new->c_5 = sfCircleShape_create();
-    new->p_5.x = new->coords->original_x + (new->coords->dx * (0 + i)) + \
+    new->p_5.x = new->coords->original_x + (new->coords->dx * (0 + i)) +
     new->coords->dx - 25;
 }
 

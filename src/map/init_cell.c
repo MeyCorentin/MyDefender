@@ -21,19 +21,19 @@ grid_cell set_grid_cell(grid_cell grid_cell_)
 
 grid_cell pos_grid_cell2(grid_cell grid_cell_, int i, int r)
 {
-    grid_cell_.p_3.x = grid_cell_.coords->original_x + (grid_cell_.coords->dx \
+    grid_cell_.p_3.x = grid_cell_.coords->original_x + (grid_cell_.coords->dx
     * (1 + i));
-    grid_cell_.p_3.y = grid_cell_.coords->original_y - grid_cell_.coords->dy \
+    grid_cell_.p_3.y = grid_cell_.coords->original_y - grid_cell_.coords->dy
     + (grid_cell_.coords->dy * (0 + i));
     grid_cell_.c_4 = sfCircleShape_create();
-    grid_cell_.p_4.y = grid_cell_.coords->original_x + (grid_cell_.coords->dx \
+    grid_cell_.p_4.y = grid_cell_.coords->original_x + (grid_cell_.coords->dx
     * (2 + i));
-    grid_cell_.p_4.y = grid_cell_.coords->original_y + (grid_cell_.coords->dy \
+    grid_cell_.p_4.y = grid_cell_.coords->original_y + (grid_cell_.coords->dy
     * (0 + i));
     grid_cell_.c_5 = sfCircleShape_create();
-    grid_cell_.p_5.x = grid_cell_.coords->original_x + (grid_cell_.coords->dx \
+    grid_cell_.p_5.x = grid_cell_.coords->original_x + (grid_cell_.coords->dx
     * (0 + i)) + grid_cell_.coords->dx - 25;
-    grid_cell_.p_5.y = grid_cell_.coords->original_y + (grid_cell_.coords->dy \
+    grid_cell_.p_5.y = grid_cell_.coords->original_y + (grid_cell_.coords->dy
     * (0 + i) - 25);
     return (grid_cell_);
 }
@@ -41,17 +41,17 @@ grid_cell pos_grid_cell2(grid_cell grid_cell_, int i, int r)
 grid_cell pos_grid_cell(grid_cell grid_cell_, int i, int r)
 {
     grid_cell_.coords->original_x = 260 - 17 + (grid_cell_.coords->dx * r);
-    grid_cell_.coords->original_y = 540 - 11 + (abs(grid_cell_.coords->dy) \
+    grid_cell_.coords->original_y = 540 - 11 + (abs(grid_cell_.coords->dy)
     * r);
     grid_cell_.c_1 = sfCircleShape_create();
-    grid_cell_.p_1.x = grid_cell_.coords->original_x + (grid_cell_.coords->dx \
+    grid_cell_.p_1.x = grid_cell_.coords->original_x + (grid_cell_.coords->dx
     * (0 + i));
-    grid_cell_.p_1.y = grid_cell_.coords->original_y + (grid_cell_.coords->dy \
+    grid_cell_.p_1.y = grid_cell_.coords->original_y + (grid_cell_.coords->dy
     * (0 + i));
     grid_cell_.c_2 = sfCircleShape_create();
-    grid_cell_.p_2.x = grid_cell_.coords->original_x + (grid_cell_.coords->dx \
+    grid_cell_.p_2.x = grid_cell_.coords->original_x + (grid_cell_.coords->dx
     * (1 + i));
-    grid_cell_.p_2.y = grid_cell_.coords->original_y + (grid_cell_.coords->dy \
+    grid_cell_.p_2.y = grid_cell_.coords->original_y + (grid_cell_.coords->dy
     * (1 + i));
     grid_cell_.c_3 = sfCircleShape_create();
     return (grid_cell_);

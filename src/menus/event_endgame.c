@@ -9,15 +9,15 @@
 
 void check_mouse_qui(global *game, sfVector2i mouse)
 {
-    if (mouse.x > game->endgame->pos_quit.x && mouse.x < game->\
-    endgame->pos_quit.x + 470 && mouse.y > game->endgame->pos_quit.y \
+    if (mouse.x > game->endgame->pos_quit.x && mouse.x < game->
+    endgame->pos_quit.x + 470 && mouse.y > game->endgame->pos_quit.y
     && mouse.y < game->endgame->pos_quit.y + 230) {
         sfText_setColor(game->endgame->qui, sfWhite);
         if (game->event.type == sfEvtMouseButtonPressed) {
             sfText_setColor(game->endgame->qui, sfRed);
             game->other_secs = 0;
         }
-        if (game->event.type == sfEvtMouseButtonReleased && game->other_secs \
+        if (game->event.type == sfEvtMouseButtonReleased && game->other_secs
         != 0) {
             game->secs = 4;
             game->menus->level = game->first->stats->level;
@@ -32,15 +32,15 @@ void check_mouse_res(global *game)
 {
     sfVector2i mouse = sfMouse_getPosition((sfWindow *)game->window);
 
-    if (mouse.x > game->endgame->pos_restart.x && mouse.x < game->endgame->\
-    pos_restart.x + 470 && mouse.y > game->endgame->pos_restart.y && mouse.y \
+    if (mouse.x > game->endgame->pos_restart.x && mouse.x < game->endgame->
+    pos_restart.x + 470 && mouse.y > game->endgame->pos_restart.y && mouse.y
     < game->endgame->pos_restart.y + 230) {
         sfText_setColor(game->endgame->res, sfWhite);
         if (game->event.type == sfEvtMouseButtonPressed) {
             sfText_setColor(game->endgame->res, sfRed);
             game->other_secs = 0;
         }
-        if (game->event.type == sfEvtMouseButtonReleased && game->other_secs \
+        if (game->event.type == sfEvtMouseButtonReleased && game->other_secs
         != 0) {
             sfSound_play(game->sounds->click);
             start_game(game);

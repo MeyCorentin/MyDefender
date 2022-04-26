@@ -13,7 +13,7 @@ void create_sounds(global *game)
     game->sounds->music = sfSoundBuffer_createFromFile("sounds/ambiance.ogg");
     game->sounds->b_anvil = sfSoundBuffer_createFromFile("sounds/anvil.ogg");
     game->sounds->b_click = sfSoundBuffer_createFromFile("sounds/click.ogg");
-    game->sounds->b_destroy = sfSoundBuffer_createFromFile\
+    game->sounds->b_destroy = sfSoundBuffer_createFromFile
     ("sounds/destroy.ogg");
     game->sounds->ambiance = sfSound_create();
     game->sounds->anvil = sfSound_create();
@@ -29,7 +29,7 @@ void create_sounds(global *game)
 void check_event(global *game, menu *menus, sfVector2i mouse)
 {
     while (sfRenderWindow_pollEvent(game->window, &game->event)) {
-        if ((game->event.type == sfEvtClosed || \
+        if ((game->event.type == sfEvtClosed ||
         sfKeyboard_isKeyPressed(sfKeyQ)) && game->secs != 4) {
             write_level(game);
             sfSound_play(game->sounds->click);
@@ -89,7 +89,7 @@ void create_window(int level, int gold)
 
     game->boole = malloc(sizeof(boole_t));
     game->map = malloc(sizeof(map_t));
-    game->window = sfRenderWindow_create\
+    game->window = sfRenderWindow_create
     (mode, "My Defender", sfResize | sfClose, NULL);
     sfRenderWindow_setFramerateLimit(game->window, 120);
     set_basic_game(game, gold, level);

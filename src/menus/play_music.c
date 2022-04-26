@@ -9,8 +9,8 @@
 
 void check_music(global *game, menu *menus, sfVector2i mouse)
 {
-    if (mouse.x >= menus->pos_music.x && mouse.x <= menus->pos_music.x + 100 \
-    && mouse.y >= menus->pos_music.y && mouse.y <= menus->pos_music.y + 100 \
+    if (mouse.x >= menus->pos_music.x && mouse.x <= menus->pos_music.x + 100
+    && mouse.y >= menus->pos_music.y && mouse.y <= menus->pos_music.y + 100
     && game->event.type == sfEvtMouseButtonReleased) {
         if (game->boole->is_music == 1 && game->secs != 2) {
             sfSound_play(game->sounds->click);
@@ -30,8 +30,8 @@ void check_music(global *game, menu *menus, sfVector2i mouse)
 
 void check_sounds(global *game, menu *menus, sfVector2i mouse)
 {
-    if (mouse.x >= menus->pos_sounds.x && mouse.x <= menus->pos_sounds.x + 100\
-    && mouse.y >= menus->pos_sounds.y && mouse.y <= menus->pos_sounds.y +\
+    if (mouse.x >= menus->pos_sounds.x && mouse.x <= menus->pos_sounds.x + 100
+    && mouse.y >= menus->pos_sounds.y && mouse.y <= menus->pos_sounds.y +
     100 && game->event.type == sfEvtMouseButtonReleased) {
         if (game->boole->is_sounds == 1 && game->secs != 2) {
             sfSprite_setTexture(menus->sounds, menus->t_menu->s_on, sfFalse);

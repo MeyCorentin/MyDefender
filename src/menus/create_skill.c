@@ -10,25 +10,25 @@
 void set_string_skills(global *game, chained_skill_t *skill)
 {
     if (skill->type == 1)
-        sfText_setString(skill->infos, my_strcat(my_strcat(new_put_nbr_str\
+        sfText_setString(skill->infos, my_strcat(my_strcat(new_put_nbr_str
         (game->bonus->strenght), " + "), new_put_nbr_str(skill->value)));
     if (skill->type == 2)
-        sfText_setString(skill->infos, my_strcat(my_strcat(new_put_nbr_str\
+        sfText_setString(skill->infos, my_strcat(my_strcat(new_put_nbr_str
         (game->bonus->speed), " + "), new_put_nbr_str(skill->value)));
     if (skill->type == 3)
-        sfText_setString(skill->infos, my_strcat(my_strcat(new_put_nbr_str\
+        sfText_setString(skill->infos, my_strcat(my_strcat(new_put_nbr_str
         (game->bonus->gold), " + "), new_put_nbr_str(skill->value)));
     if (skill->type == -1)
-        sfText_setString(skill->infos, my_strcat(my_strcat(new_put_nbr_str\
+        sfText_setString(skill->infos, my_strcat(my_strcat(new_put_nbr_str
         (game->bonus->all), " + "), new_put_nbr_str(skill->value)));
     if (skill->type == 0)
-        sfText_setString(skill->infos, my_strcat(my_strcat(new_put_nbr_str\
+        sfText_setString(skill->infos, my_strcat(my_strcat(new_put_nbr_str
         (game->bonus->life), " + "), new_put_nbr_str(skill->value)));
-    sfText_setString(skill->cost, \
+    sfText_setString(skill->cost,
     my_strcat(new_put_nbr_str(skill->price), " GOLD"));
 }
 
-void set_stats_skill(global *game, int cmpt, int level, \
+void set_stats_skill(global *game, int cmpt, int level,
 chained_skill_t *new_skill)
 {
     if (cmpt == 0) {

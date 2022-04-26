@@ -36,26 +36,26 @@ void basic_hdv(global *game, batiment *hdv)
     hdv->level_str = sfText_create();
     basic_hdv2(game, hdv);
     hdv->level_up->up = sfSprite_create();
-    hdv->level_up->t_up = sfTexture_createFromFile\
+    hdv->level_up->t_up = sfTexture_createFromFile
     ("pictures/buttons/arrow.png", NULL);
     hdv->level_up->cost = sfText_create();
 }
 
 void update_v2(global *game, batiment *hdv)
 {
-    if (hdv->stats->pv <= hdv->stats->pv_max * 0.5 && hdv->stats->pv >= hdv->\
+    if (hdv->stats->pv <= hdv->stats->pv_max * 0.5 && hdv->stats->pv >= hdv->
     stats->pv_max * 0.4)
         hdv->lifebar->rect.top = 151;
-    if (hdv->stats->pv <= hdv->stats->pv_max * 0.4 && hdv->stats->pv >= hdv->\
+    if (hdv->stats->pv <= hdv->stats->pv_max * 0.4 && hdv->stats->pv >= hdv->
     stats->pv_max * 0.3)
         hdv->lifebar->rect.top = 181.2;
-    if (hdv->stats->pv <= hdv->stats->pv_max * 0.3 && hdv->stats->pv >= hdv->\
+    if (hdv->stats->pv <= hdv->stats->pv_max * 0.3 && hdv->stats->pv >= hdv->
     stats->pv_max * 0.2)
         hdv->lifebar->rect.top = 211.4;
-    if (hdv->stats->pv <= hdv->stats->pv_max * 0.2 && hdv->stats->pv >= hdv->\
+    if (hdv->stats->pv <= hdv->stats->pv_max * 0.2 && hdv->stats->pv >= hdv->
     stats->pv_max * 0.1)
         hdv->lifebar->rect.top = 241.6;
-    if (hdv->stats->pv <= hdv->stats->pv_max * 0.1 && hdv->stats->pv >= hdv->\
+    if (hdv->stats->pv <= hdv->stats->pv_max * 0.1 && hdv->stats->pv >= hdv->
     stats->pv_max * 0)
         hdv->lifebar->rect.top = 271.8;
     change_rect(hdv->lifebar->rect, 108, 30.2);
@@ -65,19 +65,19 @@ void update_v2(global *game, batiment *hdv)
 
 void update_lifebar_hdv(global *game, batiment *hdv)
 {
-    if (hdv->stats->pv <= hdv->stats->pv_max && hdv->stats->pv >= hdv->stats->\
+    if (hdv->stats->pv <= hdv->stats->pv_max && hdv->stats->pv >= hdv->stats->
     pv_max * 0.9)
         hdv->lifebar->rect.top = 0;
-    if (hdv->stats->pv <= hdv->stats->pv_max * 0.9 && hdv->stats->pv >= hdv->\
+    if (hdv->stats->pv <= hdv->stats->pv_max * 0.9 && hdv->stats->pv >= hdv->
     stats->pv_max * 0.8)
         hdv->lifebar->rect.top = 30.2;
-    if (hdv->stats->pv <= hdv->stats->pv_max * 0.8 && hdv->stats->pv >= hdv->\
+    if (hdv->stats->pv <= hdv->stats->pv_max * 0.8 && hdv->stats->pv >= hdv->
     stats->pv_max * 0.7)
         hdv->lifebar->rect.top = 60.4;
-    if (hdv->stats->pv <= hdv->stats->pv_max * 0.7 && hdv->stats->pv >= hdv->\
+    if (hdv->stats->pv <= hdv->stats->pv_max * 0.7 && hdv->stats->pv >= hdv->
     stats->pv_max * 0.6)
         hdv->lifebar->rect.top = 90.6;
-    if (hdv->stats->pv <= hdv->stats->pv_max * 0.6 && hdv->stats->pv >= hdv->\
+    if (hdv->stats->pv <= hdv->stats->pv_max * 0.6 && hdv->stats->pv >= hdv->
     stats->pv_max * 0.5)
         hdv->lifebar->rect.top = 120.8;
     update_v2(game, hdv);

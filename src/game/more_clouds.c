@@ -9,12 +9,12 @@
 
 void set_color_clouds(global *game)
 {
-    sfSprite_setColor(game->transition->clouds, \
+    sfSprite_setColor(game->transition->clouds,
     game->transition->opacity);
-    sfSprite_setColor(game->transition->clouds2, game->transition->\
+    sfSprite_setColor(game->transition->clouds2, game->transition->
     opacity);
-    sfSprite_setColor(game->transition->clouds3, \
+    sfSprite_setColor(game->transition->clouds3,
     game->transition->opacity);
-    sfSprite_setColor(game->transition->clouds4, game->transition->\
+    sfSprite_setColor(game->transition->clouds4, game->transition->
     opacity);
 }
